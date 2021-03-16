@@ -1,3 +1,5 @@
+import { stopIt, limpiador} from './utils';
+
 jQuery(window).load((e) => {
     e.preventDefault();
     document.querySelector('.col-1').append(document.querySelector('.caja-con-facturacion'))
@@ -47,10 +49,10 @@ function observerWrapper() {
 }
 jQuery(document).ready(() => {
     observerWrapper()
-    document.querySelector('.woocommerce-privacy-policy-text p').innerText = '';
-    document.querySelector('.woocommerce-privacy-policy-text p').insertAdjacentHTML('afterbegin', `
-    Sus datos personales se utilizarán para procesar su pedido, apoyar su experiencia a través de este sitio web, y para otros fines descritos en nuestro 
-    <a href="https://netkiub.com/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">política de privacidad</a>`);
+    // document.querySelector('.woocommerce-privacy-policy-text p').innerText = '';
+    // document.querySelector('.woocommerce-privacy-policy-text p').insertAdjacentHTML('afterbegin', `
+    // Sus datos personales se utilizarán para procesar su pedido, apoyar su experiencia a través de este sitio web, y para otros fines descritos en nuestro 
+    // <a href="https://netkiub.com/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">política de privacidad</a>`);
 }) 
 
 
@@ -71,19 +73,6 @@ function validarZelle() {
     } else {
         showError(arrayDeErrores)
         return false
-    }
-}
-
-function stopIt(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
-
-function limpiador(clase) {
-    if (document.getElementsByClassName(clase)) {
-        for (let i = 0; i < document.getElementsByClassName(clase).length; i++) {
-            document.getElementsByClassName(clase)[i].remove();
-        }
     }
 }
 
