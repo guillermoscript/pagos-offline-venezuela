@@ -1,0 +1,159 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ 
+#bararea{
+	width:100%;
+	height:20px;
+    border:2px solid #FFFFFF;
+    margin-top: 7%;
+    display: flex;
+    align-items: center;
+}
+ 
+#bar{
+	width:1%;
+	height:8px;
+	background-color:#32797e;
+}
+
+
+.non2 {
+    display: none !important;
+}
+
+.woocommerce form input[type="number"] {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+form.checkout > .blockUI {
+    position: fixed !important;
+}
+
+.woocommerce-page.woocommerce-checkout form #order_review_heading, .woocommerce-page.woocommerce-checkout form #order_review {
+    width: 49% !important;
+}
+
+.woocommerce-page.woocommerce-checkout form #customer_details.col2-set {
+    width: 46% !important;
+}
+
+#numero_recibo_pago_movil, #email-origen , .woocommerce #payment .form-row select, .woocommerce-page #payment .form-row select {
+    width: 100%;
+}
+
+#fecha_pago_movil {
+    width: 100%;
+    height: 50px;
+}
+
+.caja-con-facturacion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* padding: 4% 5% 1% 2%; */
+}
+
+.contenedor-encima h4 {
+    margin-bottom: 0px;
+}
+
+.non2 {
+    display: none !important;
+}
+
+.caja-con-facturacion p {
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 5px;
+}
+
+
+.caja-pago {
+    background-color: #F4F4F4;
+    padding: 4% 6%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3%;
+}
+
+.caja-pago h2 {
+    width: 100%;
+    color: #27469d;
+}
+
+.caja-con-facturacion h3 {
+    margin-bottom: 15px ;
+}
+
+
+.montos {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+
+.montos.dolar {
+    border-bottom: 0px;
+}
+
+.montos p {
+    margin-bottom: 13px;
+    font-size: 15px;
+    color: black;
+    font-weight: 300;
+}
+
+.total-factura {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 4%;
+}
+
+.dolaress {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 4%;
+}
+
+#fecha_transferencia {
+    width: 100%;
+    height: 50px;
+}
+
+.dolaress p {
+    color: #32797E;
+    font-size: 12px;
+}
+
+#precio-total {
+    color: #57bf6d;
+}
+
+@media only screen and (max-width: 767px) {
+    .woocommerce-page.woocommerce-checkout form #order_review_heading, .woocommerce-page.woocommerce-checkout form #order_review , .woocommerce-page.woocommerce-checkout form #customer_details.col2-set{
+        width: 100% !important;
+    }
+
+    .wc-car-movil {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .width-50 {
+        width: 100% !important;
+    }
+
+    .select-width {
+        width: 100%;
+    }
+    .woocommerce-page.woocommerce-checkout form #order_review {
+        padding: 0 1em;
+    }
+}

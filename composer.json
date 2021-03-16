@@ -1,0 +1,21 @@
+{
+    "name": "oxoft/pagos-offline-venezuela",
+    "description": "Pagos offline venezuela plugin de wordpress compatible para woocomerce",
+    "type": "project",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Guillermoscript",
+            "email": "guillomarindavil@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "base\\": "."
+        }
+    },
+    "require": {
+        "fabpot/goutte": "dev-master"
+    }
+}
