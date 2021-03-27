@@ -95,7 +95,7 @@ class Pagos_Offline_Venezuela_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if ( is_checkout() && ! isset( $_GET['pay_for_order'] ) )  {
+		if (  is_checkout() && ! isset( $_GET['pay_for_order'] ) )  {
 
 			wp_enqueue_script( 'checkOutAjax', plugin_dir_url( __FILE__ ) . 'js/checkOutAjax.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( 'checkOutAjax', 'ajax_var', array(
@@ -103,22 +103,26 @@ class Pagos_Offline_Venezuela_Public {
 				'nonce'  => wp_create_nonce( 'my-ajaxxx-nonce' ),
 				'action' => 'recibir_imagen'
 			) );
-			
+			/**
+			 *Script that import modules must use a script tag with type="module", 
+			* so let's set it for the script.
+			*/
 			add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+
 				switch ( $handle ) {
 					case 'checkOutAjax':
 						return '<script type="module" src="' . esc_url( $src ) . '"></script>';
 						break;
-			
+
 					default:
 						return $tag;
 						break;
 				}
-			},10,3);
 
+			}, 10, 3 );
 		}
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pagos-offline-venezuela-public.js', array( 'jquery' ), $this->version, false );
+		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pagos-offline-venezuela-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

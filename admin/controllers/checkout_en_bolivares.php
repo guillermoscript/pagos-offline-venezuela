@@ -6,26 +6,26 @@ PLUGIN_BASE_PATH2  . 'vendor/autoload.php';
 use Goutte\Client;
 function calcular_total_a_pagar($sub_total_en_dolares) {
     # code...
-        
-
-    $sub_total = 0;
+    
     $moneda = 'Bs.S';
     $tasa_de_bolivares = '';
-    if (get_option( 'tasa_dolar_auto_insert' ) == 'yes') {  
+    if (get_option( 'tasa_dolar_auto_insert' ) === 'yes') {  
         
-        $client = new Client();  
-        // Go to the symfony.com website
-        $crawler = $client->request('GET', 'http://www.bcv.org.ve/search/node/lista%20de%20bancos');
-
-        // Get the latest post in this category and display the titles
-        $helper = $crawler->filter('#dolar strong')->each(function ($node) {
-            return $node->text()."\n";
-            // echo $node->text()."\n";
-        });
-        $tasa_de_bolivares =  $helper[0];
-        
+        $client = new Client();
+        try {
+            // Go to the bcv.com website
+            $crawler = $client->request('GET', URL_BANCO);
+    
+            // Get the dolar
+            $helper = $crawler->filter('#dolar strong')->each(function ($node) {
+                return $node->text()."\n";
+            });
+            $tasa_de_bolivares =  $helper[0];
+        } catch (\Throwable $th) {
+            //throw $th;
+            $tasa_de_bolivares = get_option( 'tasa_dolar_title' );
+        }
     } else {
-
         $tasa_de_bolivares = get_option( 'tasa_dolar_title' );
     }
 

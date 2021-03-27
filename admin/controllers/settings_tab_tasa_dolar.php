@@ -19,7 +19,7 @@ function tasa_dolar_all_settings( $settings, $current_section ) {
 	/**
 	 * Check the current section is what we want
 	 **/
-	if ( $current_section == 'tasa_dolar' ) {
+	if ( $current_section === 'tasa_dolar' ) {
 		$settings_slider = array();
 		// Add Title to the Settings
 		$settings_dolar[] = array( 

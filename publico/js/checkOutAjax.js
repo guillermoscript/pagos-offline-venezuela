@@ -1,16 +1,16 @@
-import { stopIt, limpiador} from './utils';
+import { stopIt, limpiador } from './utils.js';
 
 jQuery(window).load((e) => {
     e.preventDefault();
     document.querySelector('.col-1').append(document.querySelector('.caja-con-facturacion'))
 
-    setInterval(() => {
-        if (document.getElementById('payment_method_pago_movil').checked || document.getElementById('payment_method_transferencia').checked) {
-            document.querySelector('.caja-con-facturacion').classList.remove('non2')
-        } else if (document.getElementById('payment_method_zelle').checked) {
-            document.querySelector('.caja-con-facturacion').classList.add('non2')
-        }
-    },200)
+    // setInterval(() => {
+    //     if (document.getElementById('payment_method_pago_movil').checked || document.getElementById('payment_method_transferencia').checked) {
+    //         document.querySelector('.caja-con-facturacion').classList.remove('non2')
+    //     } else if (document.getElementById('payment_method_zelle').checked) {
+    //         document.querySelector('.caja-con-facturacion').classList.add('non2')
+    //     }
+    // },200)
 })
 
 
@@ -118,7 +118,7 @@ function agregarEventosAlBotonCheckout() {
  
 }
 
-function enviarImagen()  {
+function enviarImagen() {
 
     let btnCheckOut = document.getElementById('place_order');
     let pagoMovilCheckBox = document.getElementById('payment_method_pago_movil');

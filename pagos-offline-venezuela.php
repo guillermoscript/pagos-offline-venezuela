@@ -37,6 +37,7 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
 define('PLUGIN_BASE_PATH2', plugin_dir_path( __FILE__ ));
+define('URL_BANCO', 'http://www.bcv.org.ve/');
 
 use base\includes\Pagos_Offline_Venezuela_Activator;
 use base\includes\Pagos_Offline_Venezuela_Deactivator;
