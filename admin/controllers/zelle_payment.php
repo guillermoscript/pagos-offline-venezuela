@@ -201,40 +201,40 @@ function wc_offline_gateway_init_zelle() {
                 $account_html = '';
                 $has_details  = false;
 
-                foreach ( $zelle_accounts as $zelle_account ) {
-                    $zelle_account = (object) $zelle_account;
+                // foreach ( $zelle_accounts as $zelle_account ) {
+                //     $zelle_account = (object) $zelle_account;
 
-                    if ( $zelle_account->email_cuenta ) {
-                        $account_html .= '<h3 class="wc-zelle-bank-details-account-name">' . wp_kses_post( wp_unslash( $zelle_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
-                    }
+                //     if ( $zelle_account->email_cuenta ) {
+                //         $account_html .= '<h3 class="wc-zelle-bank-details-account-name">' . wp_kses_post( wp_unslash( $zelle_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
+                //     }
 
-                    $account_html .= '<ul class="wc-zelle-bank-details order_details zelle_details">' . PHP_EOL;
+                //     $account_html .= '<ul class="wc-zelle-bank-details order_details zelle_details">' . PHP_EOL;
 
-                    // zelle account fields shown on the thanks page and in emails.
-                    $account_fields = apply_filters(
-                        'woocommerce_zelle_account_fields',
-                        array(
-                            'email_cuenta' => array(
-                                'label' => __( 'Cuenta Zelle', 'woocommerce' ),
-                                'value' => $zelle_account->email_cuenta,
-                            ),
-                            'name_zelle'      => array(
-                                'label' => __( 'Nombre', 'woocommerce' ),
-                                'value' => $zelle_account->name_zelle,
-                            ),
-                        ),
-                        $order_id
-                    );
+                //     // zelle account fields shown on the thanks page and in emails.
+                //     $account_fields = apply_filters(
+                //         'woocommerce_zelle_account_fields',
+                //         array(
+                //             'email_cuenta' => array(
+                //                 'label' => __( 'Cuenta Zelle', 'woocommerce' ),
+                //                 'value' => $zelle_account->email_cuenta,
+                //             ),
+                //             'name_zelle'      => array(
+                //                 'label' => __( 'Nombre', 'woocommerce' ),
+                //                 'value' => $zelle_account->name_zelle,
+                //             ),
+                //         ),
+                //         $order_id
+                //     );
 
-                    foreach ( $account_fields as $field_key => $field ) {
-                        if ( ! empty( $field['value'] ) ) {
-                            $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
-                            $has_details   = true;
-                        }
-                    }
+                //     foreach ( $account_fields as $field_key => $field ) {
+                //         if ( ! empty( $field['value'] ) ) {
+                //             $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
+                //             $has_details   = true;
+                //         }
+                //     }
 
-                    $account_html .= '</ul>';
-                }
+                //     $account_html .= '</ul>';
+                // }
 
                 if ( $has_details ) {
                     echo '<section class="woocommerce-zelle-bank-details"><h2 class="wc-zelle-bank-details-heading">' . esc_html__( 'Our bank details', 'woocommerce' ) . '</h2>' . wp_kses_post( PHP_EOL . $account_html ) . '</section>';

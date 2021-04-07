@@ -219,52 +219,52 @@ function wc_offline_gateway_init_transferencia() {
                 $account_html = '';
                 $has_details  = false;
 
-                foreach ( $transferencia_accounts as $transferencia_account ) {
-                    $transferencia_account = (object) $transferencia_account;
+                // foreach ( $transferencia_accounts as $transferencia_account ) {
+                //     $transferencia_account = (object) $transferencia_account;
 
-                    if ( $transferencia_account->email_cuenta ) {
-                        $account_html .= '<h3 class="wc-transferencia-bank-details-account-name">' . wp_kses_post( wp_unslash( $transferencia_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
-                    }
+                //     if ( $transferencia_account->email_cuenta ) {
+                //         $account_html .= '<h3 class="wc-transferencia-bank-details-account-name">' . wp_kses_post( wp_unslash( $transferencia_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
+                //     }
 
-                    $account_html .= '<ul class="wc-transferencia-bank-details order_details transferencia_details">' . PHP_EOL;
+                //     $account_html .= '<ul class="wc-transferencia-bank-details order_details transferencia_details">' . PHP_EOL;
 
-                    // transferencia account fields shown on the thanks page and in emails.
-                    $account_fields = apply_filters(
-                        'woocommerce_transferencia_account_fields',
-                        array(
-                            'nombre' => array(
-                                'label' => __( 'Nombre', 'woocommerce' ),
-                                'value' => $transferencia_account->nombre,
-                            ),
-                            'apellido'      => array(
-                                'label' => __( 'Apellido', 'woocommerce' ),
-                                'value' => $transferencia_account->apellido,
-                            ),
-                            'cedula'      => array(
-                                'label' => __( 'Cedula', 'woocommerce' ),
-                                'value' => $transferencia_account->cedula,
-                            ),
-                            'banco'      => array(
-                                'label' => __( 'Banco', 'woocommerce' ),
-                                'value' => $transferencia_account->banco,
-                            ),
-                            'cuenta'      => array(
-                                'label' => __( 'N# Cuenta', 'woocommerce' ),
-                                'value' => $transferencia_account->cuenta,
-                            ),
-                        ),
-                        $order_id
-                    );
+                //     // transferencia account fields shown on the thanks page and in emails.
+                //     $account_fields = apply_filters(
+                //         'woocommerce_transferencia_account_fields',
+                //         array(
+                //             'nombre' => array(
+                //                 'label' => __( 'Nombre', 'woocommerce' ),
+                //                 'value' => $transferencia_account->nombre,
+                //             ),
+                //             'apellido'      => array(
+                //                 'label' => __( 'Apellido', 'woocommerce' ),
+                //                 'value' => $transferencia_account->apellido,
+                //             ),
+                //             'cedula'      => array(
+                //                 'label' => __( 'Cedula', 'woocommerce' ),
+                //                 'value' => $transferencia_account->cedula,
+                //             ),
+                //             'banco'      => array(
+                //                 'label' => __( 'Banco', 'woocommerce' ),
+                //                 'value' => $transferencia_account->banco,
+                //             ),
+                //             'cuenta'      => array(
+                //                 'label' => __( 'N# Cuenta', 'woocommerce' ),
+                //                 'value' => $transferencia_account->cuenta,
+                //             ),
+                //         ),
+                //         $order_id
+                //     );
 
-                    foreach ( $account_fields as $field_key => $field ) {
-                        if ( ! empty( $field['value'] ) ) {
-                            $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
-                            $has_details   = true;
-                        }
-                    }
+                //     foreach ( $account_fields as $field_key => $field ) {
+                //         if ( ! empty( $field['value'] ) ) {
+                //             $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
+                //             $has_details   = true;
+                //         }
+                //     }
 
-                    $account_html .= '</ul>';
-                }
+                //     $account_html .= '</ul>';
+                // }
 
                 if ( $has_details ) {
                     echo '<section class="woocommerce-transferencia-bank-details"><h2 class="wc-transferencia-bank-details-heading">' . esc_html__( 'Our bank details', 'woocommerce' ) . '</h2>' . wp_kses_post( PHP_EOL . $account_html ) . '</section>';

@@ -38,6 +38,8 @@ require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
 define('PLUGIN_BASE_PATH2', plugin_dir_path( __FILE__ ));
 define('URL_BANCO', 'http://www.bcv.org.ve/');
+define('REST_API_NAMESPACE', 'pagos-offline-venezuela');
+define('REST_API_V1', 'v1');
 
 use base\includes\Pagos_Offline_Venezuela_Activator;
 use base\includes\Pagos_Offline_Venezuela_Deactivator;

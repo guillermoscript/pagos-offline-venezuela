@@ -225,61 +225,61 @@ function wc_offline_gateway_init_pago_movil() {
 
             $pago_movil_accounts = apply_filters( 'woocommerce_pago_movil_accounts', $this->account_details );
 
-            // if ( ! empty( $pago_movil_accounts ) ) {
-            //     $account_html = '';
-            //     $has_details  = false;
+            if ( ! empty( $pago_movil_accounts ) ) {
+                $account_html = '';
+                $has_details  = false;
 
-            //     foreach ( $pago_movil_accounts as $pago_movil_account ) {
-            //         $pago_movil_account = (object) $pago_movil_account;
+                // foreach ( $pago_movil_accounts as $pago_movil_account ) {
+                //     $pago_movil_account = (object) $pago_movil_account;
 
-            //         if ( $pago_movil_account->email_cuenta ) {
-            //             $account_html .= '<h3 class="wc-pago_movil-bank-details-account-name">' . wp_kses_post( wp_unslash( $pago_movil_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
-            //         }
+                //     if ( $pago_movil_account->email_cuenta ) {
+                //         $account_html .= '<h3 class="wc-pago_movil-bank-details-account-name">' . wp_kses_post( wp_unslash( $pago_movil_account->email_cuenta ) ) . ':</h3>' . PHP_EOL;
+                //     }
 
-            //         $account_html .= '<ul class="wc-pago_movil-bank-details order_details pago_movil_details">' . PHP_EOL;
+                //     $account_html .= '<ul class="wc-pago_movil-bank-details order_details pago_movil_details">' . PHP_EOL;
 
-            //         // pago_movil account fields shown on the thanks page and in emails.
-            //         $account_fields = apply_filters(
-            //             'woocommerce_pago_movil_account_fields',
-            //             array(
-            //                 'nombre' => array(
-            //                     'label' => __( 'Nombre', 'woocommerce' ),
-            //                     'value' => $pago_movil_account->nombre,
-            //                 ),
-            //                 'apellido'      => array(
-            //                     'label' => __( 'Apellido', 'woocommerce' ),
-            //                     'value' => $pago_movil_account->apellido,
-            //                 ),
-            //                 'telefono'      => array(
-            //                     'label' => __( 'Telefono', 'woocommerce' ),
-            //                     'value' => $pago_movil_account->telefono,
-            //                 ),
-            //                 'cedula'      => array(
-            //                     'label' => __( 'Cedula', 'woocommerce' ),
-            //                     'value' => $pago_movil_account->cedula,
-            //                 ),
-            //                 'banco'      => array(
-            //                     'label' => __( 'Banco', 'woocommerce' ),
-            //                     'value' => $pago_movil_account->banco,
-            //                 ),
-            //             ),
-            //             $order_id
-            //         );
+                //     // pago_movil account fields shown on the thanks page and in emails.
+                //     $account_fields = apply_filters(
+                //         'woocommerce_pago_movil_account_fields',
+                //         array(
+                //             'nombre' => array(
+                //                 'label' => __( 'Nombre', 'woocommerce' ),
+                //                 'value' => $pago_movil_account->nombre,
+                //             ),
+                //             'apellido'      => array(
+                //                 'label' => __( 'Apellido', 'woocommerce' ),
+                //                 'value' => $pago_movil_account->apellido,
+                //             ),
+                //             'telefono'      => array(
+                //                 'label' => __( 'Telefono', 'woocommerce' ),
+                //                 'value' => $pago_movil_account->telefono,
+                //             ),
+                //             'cedula'      => array(
+                //                 'label' => __( 'Cedula', 'woocommerce' ),
+                //                 'value' => $pago_movil_account->cedula,
+                //             ),
+                //             'banco'      => array(
+                //                 'label' => __( 'Banco', 'woocommerce' ),
+                //                 'value' => $pago_movil_account->banco,
+                //             ),
+                //         ),
+                //         $order_id
+                //     );
 
-            //         foreach ( $account_fields as $field_key => $field ) {
-            //             if ( ! empty( $field['value'] ) ) {
-            //                 $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
-            //                 $has_details   = true;
-            //             }
-            //         }
+                //     foreach ( $account_fields as $field_key => $field ) {
+                //         if ( ! empty( $field['value'] ) ) {
+                //             $account_html .= '<li class="' . esc_attr( $field_key ) . '">' . wp_kses_post( $field['label'] ) . ': <strong>' . wp_kses_post( wptexturize( $field['value'] ) ) . '</strong></li>' . PHP_EOL;
+                //             $has_details   = true;
+                //         }
+                //     }
 
-            //         $account_html .= '</ul>';
-            //     }
+                //     $account_html .= '</ul>';
+                // }
 
-            //     if ( $has_details ) {
-            //         echo '<section class="woocommerce-pago_movil-bank-details"><h2 class="wc-pago_movil-bank-details-heading">' . esc_html__( 'Our bank details', 'woocommerce' ) . '</h2>' . wp_kses_post( PHP_EOL . $account_html ) . '</section>';
-            //     }
-            // }
+                if ( $has_details ) {
+                    echo '<section class="woocommerce-pago_movil-bank-details"><h2 class="wc-pago_movil-bank-details-heading">' . esc_html__( 'Our bank details', 'woocommerce' ) . '</h2>' . wp_kses_post( PHP_EOL . $account_html ) . '</section>';
+                }
+            }
 
         }
 

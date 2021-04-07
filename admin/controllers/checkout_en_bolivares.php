@@ -53,6 +53,13 @@ function calcular_total_a_pagar($sub_total_en_dolares) {
     );
 }
 
+function register_to_the_rest_api_total_to_pay() {
+    register_rest_route( REST_API_NAMESPACE . REST_API_V1, '/total-to-pay/', array(
+        'methods' => 'GET',
+        'callback' => 'calcular_total_a_pagar',
+    ));
+}
+
 function debounce_add_jscript_checkout() {
 
     $info_de_los_pago = calcular_total_a_pagar(WC()->cart->subtotal);

@@ -65,6 +65,11 @@ final class init
         /* ===================================== tabla de la tasa =================================================*/
 
 
+        /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
+        add_action('woocommerce_after_checkout_form', 'register_to_the_rest_api_total_to_pay');
+        /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
+
+
 
     }
 
@@ -93,16 +98,16 @@ final class init
 
         ?>
             <p class="form-row">
-            <strong>Metodo de pago:</strong>
-            <span><?php echo esc_html( get_post_meta( $post->ID, $payment_method , true ) ) ?></span>
+                <strong>Metodo de pago:</strong>
+                <span><?php echo esc_html( $payment_method  ) ?></span>
             </p>
             <p class="form-row">
-            <strong>Telefono:</strong>
-            <span><?php echo esc_html( get_post_meta( $post->ID, '_billing_phone', true ) ) ?></span>
+                <strong>Telefono:</strong>
+                <span><?php echo esc_html( get_post_meta( $post->ID, '_billing_phone', true ) ) ?></span>
             </p>
             <p class="form-row">
-            <strong>Cedula:</strong>
-            <span><?php echo esc_html( get_post_meta( $post->ID, '_billing_cid', true ) ) ?></span>
+                <strong>Cedula:</strong>
+                <span><?php echo esc_html( get_post_meta( $post->ID, '_billing_cid', true ) ) ?></span>
             </p>
         <?php
         if($payment_method === 'pago_movil') {
@@ -194,7 +199,7 @@ final class init
     }
 
     function mv_add_meta_boxes() {
-        add_meta_box( 'mv_other_fields', __('Datos de Pagos','woocommerce'), 'mv_add_other_fields_for_packaging', 'shop_order', 'side', 'core' );
+        add_meta_box( 'mv_other_fields', __('Datos de Pagos','woocommerce'), array($this,'mv_add_other_fields_for_packaging'), 'shop_order', 'side', 'core' );
     }
 
     function misha_remove_fields( $woo_checkout_fields_array ) {
