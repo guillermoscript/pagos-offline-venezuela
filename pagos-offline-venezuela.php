@@ -19,6 +19,7 @@
  * Version:           1.0.0
  * Author:            Guillermo
  * Author URI:        https://netkiub.com
+ * GitHub Plugin URI: https://github.com/guillermoscript/pagos-offline-venezuela.git
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       pagos-offline-venezuela
