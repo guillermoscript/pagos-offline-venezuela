@@ -377,7 +377,8 @@ function validacionCellphone(id) {
 
     if (cellphone === null) return '';
 
-    if (/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
+    // if (/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
+    if (/(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
         return cellphone.value.replace(/(\s)|([\(,\),-])|(\+)/g,'')
     } else {
         return 'no es un numero valido'

@@ -78,6 +78,7 @@ final class init
             'label'       => __('Cedula', 'woocommerce'),
             'placeholder' => _x('Cedula de indentidad', 'placeholder', 'woocommerce'),
             'required'    => true,
+            'priority'        => 110,
             'class'       => array('form-row-wide'),
             'clear'       => true
         );

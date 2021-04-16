@@ -424,11 +424,16 @@ function wc_offline_gateway_init_pago_movil() {
             $html .=  '</select>
                 </div>
                 <div class="form-row form-row-wide width-50">
-                    <label for="comprobante_pago_movil">Ingresa tú comprobante de pago<span class="required">*</span></label>
-                    <input type="file" class="width-50" accept="application/pdf,image/x-png,image/gif,image/jpeg" name="capture" id="comprobante_pago_movil" required>
-                    <div id="bararea1" class="non2">
-                        <div id="bar1"></div>
-                    </div>
+                    <label id="label-file" for="comprobante">
+                        Adjuntar Comprobante
+                        <div id="jpg-p">
+                            <p id="text-file">jpg,png,pdf</p>
+                            <div id="bararea2" class="non2">
+                                <div id="bar2"></div>
+                            </div>
+                        </div>
+                        <input id="comprobante_pago_movil" required class="input-pago transfer" type="file" accept="application/pdf,image/x-png,image/gif,image/jpeg" name="capture" >
+                    </label>
                 </div>
                 <div class="form-row form-row-first width-50">
                     <label for="fecha_pago_movil">Fecha de Pago <span class="required">*</span></label>

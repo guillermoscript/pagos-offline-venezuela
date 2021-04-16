@@ -419,10 +419,17 @@ function wc_offline_gateway_init_transferencia() {
             $html .=  '</select>
                 </div>
                 <div class="form-row form-row-wide width-50">
-                    <label for="comprobante_transferencia">Ingresa tú comprobante de pago<span class="required">*</span></label>
-                    <input type="file" class="width-50" accept="application/pdf,image/x-png,image/gif,image/jpeg" name="capture" id="comprobante_transferencia" required>
-                    <div id="bararea2" class="non2">
-                        <div id="bar2"></div>
+                    <div class="input-group">
+                        <label id="label-file" for="comprobante_transferencia">
+                            Adjuntar Comprobante
+                            <div id="jpg-p">
+                                <p id="text-file">jpg,png,pdf</p>
+                                <div id="bararea" class="non2">
+                                    <div id="bar"></div>
+                                </div>
+                            </div>
+                            <input id="comprobante_transferencia" required class="input-pago transfer" type="file" accept="application/pdf,image/x-png,image/gif,image/jpeg" name="capture" >
+                        </label>
                     </div>
                 </div>
                 <div class="form-row form-row-first width-50">

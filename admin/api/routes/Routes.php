@@ -19,7 +19,7 @@ class Routes {
     {
         # code...
         /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
-        add_action('woocommerce_after_checkout_form', [$this,'register_to_the_rest_api_total_to_pay']);
+        add_action('rest_api_init', array($this,'register_to_the_rest_api_total_to_pay'));
         /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
     }
 
