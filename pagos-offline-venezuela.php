@@ -16,7 +16,7 @@
  * Plugin Name:       Pagos Offline Venezuela
  * Plugin URI:        https://netkiub.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Guillermo
  * Author URI:        https://netkiub.com
  * GitHub Plugin URI: https://github.com/guillermoscript/pagos-offline-venezuela
