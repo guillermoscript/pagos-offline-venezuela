@@ -1,6 +1,6 @@
 <?php
 
-namespace base\admin\controllers;
+namespace Admin\Controllers;
 use Goutte\Client;
 /**
  * The core plugin Rest Api class.
@@ -8,8 +8,8 @@ use Goutte\Client;
  * This is used to define all the data that will be register in the REST API.
  *
  * @since      1.0.0
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
 class RestApiV1 {

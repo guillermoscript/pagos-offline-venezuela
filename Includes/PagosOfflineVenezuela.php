@@ -1,5 +1,5 @@
 <?php
-namespace base\includes;
+namespace Includes;
 /**
  * The core plugin class.
  *
@@ -10,23 +10,23 @@ namespace base\includes;
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
 
-use base\admin\controllers\api\routes\Routes;
-use base\includes\Pagos_Offline_Venezuela_i18n;
-use base\includes\Pagos_Offline_Venezuela_Loader;
+use Admin\Api\Routes\Routes;
+use Includes\PagosOfflineVenezuelai18n;
+use Includes\PagosOfflineVenezuelaLoader;
 
-use base\admin\Pagos_Offline_Venezuela_Admin;
-use base\publico\Pagos_Offline_Venezuela_Public;
+use Admin\PagosOfflineVenezuelaAdmin;
+use Publico\PagosOfflineVenezuelaPublico;
 
-use base\admin\init;
+use Admin\Init;
 
 
 
-class Pagos_Offline_Venezuela {
+class PagosOfflineVenezuela {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -34,7 +34,7 @@ class Pagos_Offline_Venezuela {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Pagos_Offline_Venezuela_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      PagosOfflineVenezuelaLoader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -85,10 +85,10 @@ class Pagos_Offline_Venezuela {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Pagos_Offline_Venezuela_Loader. Orchestrates the hooks of the plugin.
-	 * - Pagos_Offline_Venezuela_i18n. Defines internationalization functionality.
-	 * - Pagos_Offline_Venezuela_Admin. Defines all hooks for the admin area.
-	 * - Pagos_Offline_Venezuela_Public. Defines all hooks for the public side of the site.
+	 * - PagosOfflineVenezuelaLoader. Orchestrates the hooks of the plugin.
+	 * - PagosOfflineVenezuelai18n. Defines internationalization functionality.
+	 * - PagosOfflineVenezuelaAdmin. Defines all hooks for the admin area.
+	 * - PagosOfflineVenezuelaPublico. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -121,14 +121,14 @@ class Pagos_Offline_Venezuela {
 		 */
 		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'publico/class-pagos-offline-venezuela-public.php';
 
-		$this->loader = new Pagos_Offline_Venezuela_Loader();
+		$this->loader = new PagosOfflineVenezuelaLoader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Pagos_Offline_Venezuela_i18n class in order to set the domain and to register the hook
+	 * Uses the PagosOfflineVenezuelai18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -136,7 +136,7 @@ class Pagos_Offline_Venezuela {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Pagos_Offline_Venezuela_i18n();
+		$plugin_i18n = new PagosOfflineVenezuelai18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -151,7 +151,7 @@ class Pagos_Offline_Venezuela {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Pagos_Offline_Venezuela_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new PagosOfflineVenezuelaAdmin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -167,7 +167,7 @@ class Pagos_Offline_Venezuela {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Pagos_Offline_Venezuela_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new PagosOfflineVenezuelaPublico( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -199,7 +199,7 @@ class Pagos_Offline_Venezuela {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Pagos_Offline_Venezuela_Loader    Orchestrates the hooks of the plugin.
+	 * @return    PagosOfflineVenezuelaLoader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

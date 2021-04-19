@@ -1,5 +1,5 @@
 <?php
-namespace base\includes;
+namespace Includes;
 /**
  * Define the internationalization functionality
  *
@@ -9,8 +9,8 @@ namespace base\includes;
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  */
 
 /**
@@ -20,11 +20,11 @@ namespace base\includes;
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
-class Pagos_Offline_Venezuela_i18n {
+class PagosOfflineVenezuelai18n {
 
 
 	/**

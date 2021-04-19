@@ -1,6 +1,6 @@
 <?php
 
-use base\admin\controllers\ValidationPaymentController;
+use Admin\Controllers\ValidationPaymentController;
 
 function wc_offline_gateway_init_pago_movil() {
 

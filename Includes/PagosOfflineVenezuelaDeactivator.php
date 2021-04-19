@@ -1,13 +1,13 @@
 <?php
-namespace base\includes;
+namespace Includes;
 /**
  * Fired during plugin deactivation
  *
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  */
 
 /**
@@ -16,11 +16,11 @@ namespace base\includes;
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
-class Pagos_Offline_Venezuela_Deactivator {
+class PagosOfflineVenezuelaDeactivator {
 
 	/**
 	 * Short Description. (use period)

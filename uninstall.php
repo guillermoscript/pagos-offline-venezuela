@@ -22,7 +22,7 @@
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
+ * @package    PagosOfflineVenezuela
  */
 
 // If uninstall not called from WordPress, then exit.

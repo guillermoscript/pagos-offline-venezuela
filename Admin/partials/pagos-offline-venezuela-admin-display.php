@@ -8,8 +8,8 @@
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/admin/partials
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/admin/partials
  */
 ?>
 

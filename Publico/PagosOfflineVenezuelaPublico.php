@@ -1,13 +1,13 @@
 <?php
-namespace base\publico;
+namespace Publico;
 /**
  * The public-facing functionality of the plugin.
  *
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/public
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/public
  */
 
 /**
@@ -16,11 +16,11 @@ namespace base\publico;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/public
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/public
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
-class Pagos_Offline_Venezuela_Public {
+class PagosOfflineVenezuelaPublico {
 
 	/**
 	 * The ID of this plugin.
@@ -65,10 +65,10 @@ class Pagos_Offline_Venezuela_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Pagos_Offline_Venezuela_Loader as all of the hooks are defined
+		 * defined in PagosOfflineVenezuelaLoader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Pagos_Offline_Venezuela_Loader will then create the relationship
+		 * The PagosOfflineVenezuelaLoader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -88,10 +88,10 @@ class Pagos_Offline_Venezuela_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Pagos_Offline_Venezuela_Loader as all of the hooks are defined
+		 * defined in PagosOfflineVenezuelaLoader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Pagos_Offline_Venezuela_Loader will then create the relationship
+		 * The PagosOfflineVenezuelaLoader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */

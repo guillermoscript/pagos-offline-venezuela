@@ -1,13 +1,13 @@
 <?php
-namespace base\includes;
+namespace Includes;
 /**
  * Register all actions and filters for the plugin
  *
  * @link       https://netkiub.com
  * @since      1.0.0
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  */
 
 /**
@@ -17,11 +17,11 @@ namespace base\includes;
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
-class Pagos_Offline_Venezuela_Loader {
+class PagosOfflineVenezuelaLoader {
 
 	/**
 	 * The array of actions registered with WordPress.

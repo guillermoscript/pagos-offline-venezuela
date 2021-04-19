@@ -12,7 +12,9 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "base\\": "."
+            "Admin\\": "./Admin/",
+            "Includes\\": "./Includes/",
+            "Publico\\": "./Publico/"
         }
     },
     "require": {

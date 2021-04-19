@@ -1,14 +1,14 @@
 <?php
 
-namespace base\admin\controllers;
+namespace Admin\Controllers;
 /**
  * The core plugin Rest Api class.
  *
  * This is used to validate all the data that will enter in the billing inputs.
  *
  * @since      1.0.0
- * @package    Pagos_Offline_Venezuela
- * @subpackage Pagos_Offline_Venezuela/includes
+ * @package    PagosOfflineVenezuela
+ * @subpackage PagosOfflineVenezuela/includes
  * @author     Guillermo <guillomarindavila@gmail.com>
  */
 class ValidationPaymentController

@@ -1,18 +1,18 @@
 <?php
 
-namespace base\admin;
+namespace Admin;
 
-final class init 
+final class Init 
 {
     public function register() 
     {
         /* ========================= PAGP MOVIL ======================================= */
                 
-        require_once PLUGIN_BASE_PATH2 . '/admin/controllers/pago_movil_payment.php';
-        require_once PLUGIN_BASE_PATH2 . '/admin/controllers/zelle_payment.php';
-        require_once PLUGIN_BASE_PATH2 . '/admin/controllers/transferencia_payment.php';
-        require_once PLUGIN_BASE_PATH2 . '/admin/controllers/settings_tab_tasa_dolar.php';
-        require_once PLUGIN_BASE_PATH2 . '/admin/controllers/checkout_en_bolivares.php';
+        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/pago_movil_payment.php';
+        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/zelle_payment.php';
+        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/transferencia_payment.php';
+        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/settings_tab_tasa_dolar.php';
+        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/checkout_en_bolivares.php';
 
         add_filter( 'woocommerce_payment_gateways', array($this,'add_pago_movil_class') );
         add_action( 'plugins_loaded', 'wc_offline_gateway_init_pago_movil', 11 );
