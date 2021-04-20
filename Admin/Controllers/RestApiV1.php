@@ -28,9 +28,10 @@ class RestApiV1 {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-    static function get_tasa() {
+    static function get_rate_of_bf($sub_total_en_dolares) {
         # code...
         
+        $moneda = 'Bs.S';
         $tasa_de_bolivares = '';
         if (get_option( 'tasa_dolar_auto_insert' ) === 'yes') {  
             
@@ -52,9 +53,20 @@ class RestApiV1 {
             $tasa_de_bolivares = get_option( 'tasa_dolar_title' );
         }
 
+        $precio_en_bolivares = $sub_total_en_dolares * floatval($tasa_de_bolivares);
+
+        $precio_sin_iva = floatval($precio_en_bolivares / 1.16);
+        $porcentaje_de_impuestos = floatval($precio_en_bolivares - $precio_sin_iva);
+
+        $total = $precio_en_bolivares;
+
         return array(
+            'total' => number_format($total,2,',','.'),
+            'moneda' => $moneda,
             'tasa_dolar' => $tasa_de_bolivares,
+            'sub_total_en_dolares' => $sub_total_en_dolares,
+            'precio_sin_iva' => number_format($precio_sin_iva,2,',','.'),
+            'porcentaje_de_impuestos' => number_format($porcentaje_de_impuestos,2,',','.')
         );
     }
-
 }

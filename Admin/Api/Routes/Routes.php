@@ -24,9 +24,15 @@ class Routes {
     }
 
     public function register_to_the_rest_api_total_to_pay() {
-        register_rest_route( REST_API_NAMESPACE . REST_API_V1, '/total-to-pay/', array(
+        register_rest_route( REST_API_NAMESPACE . '/' . REST_API_V1, '/total-to-pay/', array(
             'methods' => 'GET',
-            'callback' => RestApiV1::get_tasa(WC()->cart->subtotal),
+            'callback' => array($this,'get_rate'),
         ));
+    }
+
+    public function get_rate()
+    {
+        # code...
+        return RestApiV1::get_tasa();
     }
 }
