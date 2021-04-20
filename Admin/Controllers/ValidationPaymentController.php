@@ -38,8 +38,7 @@ class ValidationPaymentController
             $array_errores[] = false;
         }
 
-        // if( !preg_match('/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
-        if( !preg_match('/(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
+        if( !preg_match('/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
             // if( !preg_match('/\d/',  $_POST[ 'billing_phone' ] ) && strlen($_POST['billing_phone']) > 7 || strlen($_POST['billing_phone']) < 7 ) {
             wc_add_notice(  'El Numero no esta en el formato aceptado', 'error' );
             $array_errores[] = false;

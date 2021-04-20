@@ -1,14 +1,10 @@
 <?php
 
-PLUGIN_BASE_PATH2  . 'vendor/autoload.php';
-
 use Admin\Controllers\RestApiV1;
-use Goutte\Client;
-
 
 function debounce_add_jscript_checkout() {
 
-    $info_de_los_pago = RestApiV1::get_rate_of_bf(WC()->cart->subtotal);
+    $info_de_los_pago = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
 
     ?>
     <div class="caja-con-facturacion non2">

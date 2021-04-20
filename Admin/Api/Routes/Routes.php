@@ -19,14 +19,19 @@ class Routes {
     {
         # code...
         /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
-        add_action('rest_api_init', array($this,'register_to_the_rest_api_total_to_pay'));
+        add_action('rest_api_init', array($this,'register_to_the_rest_api'));
         /* ===================================== REST API CUSTOM ENDPOINTS =================================================*/
     }
 
-    public function register_to_the_rest_api_total_to_pay() {
-        register_rest_route( REST_API_NAMESPACE . '/' . REST_API_V1, '/total-to-pay/', array(
+    public function register_to_the_rest_api() {
+        register_rest_route( REST_API_NAMESPACE . '/' . REST_API_V1, '/rate-of-bf/', array(
             'methods' => 'GET',
             'callback' => array($this,'get_rate'),
+        ));
+
+        register_rest_route( REST_API_NAMESPACE . '/' . REST_API_V1, '/total-to-pay/', array(
+            'methods' => 'GET',
+            'callback' => array($this,'get_rate_of_bf'),
         ));
     }
 
@@ -34,5 +39,11 @@ class Routes {
     {
         # code...
         return RestApiV1::get_tasa();
+    }
+
+    public function get_rate_of_bf()
+    {
+        # code...
+        return RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
     }
 }

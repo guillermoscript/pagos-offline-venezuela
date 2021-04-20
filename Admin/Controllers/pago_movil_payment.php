@@ -424,15 +424,15 @@ function wc_offline_gateway_init_pago_movil() {
             $html .=  '</select>
                 </div>
                 <div class="form-row form-row-wide width-50">
-                    <label id="label-file" for="comprobante">
+                    <label class="label-file" for="comprobante_pago_movil">
                         Adjuntar Comprobante
-                        <div id="jpg-p">
-                            <p id="text-file">jpg,png,pdf</p>
+                        <div class="jpg-p">
+                            <p class="text-file">jpg,png,pdf</p>
                             <div id="bararea2" class="non2">
                                 <div id="bar2"></div>
                             </div>
                         </div>
-                        <input id="comprobante_pago_movil" required class="input-pago transfer" type="file" accept="application/pdf,image/x-png,image/gif,image/jpeg" name="capture" >
+                        <input id="comprobante_pago_movil" required class="input-pago-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
                     </label>
                 </div>
                 <div class="form-row form-row-first width-50">

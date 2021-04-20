@@ -100,7 +100,7 @@ function validacionesContainer() {
 
     if (validacionCheckOut() === true) {
         if (validacionFormEspeciales(claseValidar) === true) {
-            // btnCheckOut.removeEventListener('click',enviarImagen);
+            // btnCheckOut.removeEventListener('click',enviarImagen);            
             btnCheckOut.addEventListener('click', enviarImagen );
         } else {
             return
@@ -123,39 +123,15 @@ function enviarImagen() {
     let btnCheckOut = document.getElementById('place_order');
     let pagoMovilCheckBox = document.getElementById('payment_method_pago_movil');
     let transferenciaCheckBox = document.getElementById('payment_method_transferencia');
-    let allowedExtensions = /(\.jpg|\.jpeg|\.pdf|\.png|\.gif)$/i;
     let clase = '';
     let num = '';
-    let arrayDeErrores = [];
     
     if (pagoMovilCheckBox.checked === true) {
         clase = 'comprobante_pago_movil'
-        num = '1'
+        num = '2'
     } else if (transferenciaCheckBox.checked === true) {
         clase = 'comprobante_transferencia'
-        num = '2'
-    }
-
-    let fileInput = document.getElementById(clase);
-    let filePath = fileInput.value;        
-
-    if (jQuery('#' + clase)[0].files[0] === undefined) {
-        arrayDeErrores.push(['Hace falta el Capture, por favor ingrese la imagen'])
-        return;
-    }
-
-    if (!allowedExtensions.test(filePath)){
-        arrayDeErrores.push('No es un tipo de archivo aceptado, por favor use un con alguna de las extenciones: .jpg|.jpeg|.pdf|.png|.gif')
-    } 
-    
-    if (jQuery('#' + clase)[0].files[0].size > 3000000) {
-        arrayDeErrores.push('Error el capture es mayor a 3 Megas, por favor corrijalo')
-        showError(arrayDeErrores)
-        return
-    }
-    
-    if (fileInput.value === '') {
-        arrayDeErrores.push('Error No a puesto nada en el capture, por favor corrijalo')
+        num = '1'
     }
 
     let fdata = new FormData();
@@ -178,7 +154,7 @@ function enviarImagen() {
                     let percentComplete = evt.loaded / evt.total;
                     percentComplete = parseInt(percentComplete * 100);
                     console.log(percentComplete);
-                    jQuery('#bar').width(percentComplete + '%');
+                    jQuery('#bar' + num).width(percentComplete + '%');
             
                     if (percentComplete === 100) {
                         console.log('completado');
@@ -219,6 +195,21 @@ function enviarImagen() {
 
 function validacionFormEspeciales(claseValidar) {
     let arrayDeErrores = [];
+    let allowedExtensions = /(\.jpg|\.jpeg|\.pdf|\.png|\.gif)$/i;
+    let clase = '';
+    let num = '';
+
+    if (claseValidar === 'pago_movil') {
+        clase = 'comprobante_pago_movil'
+        num = '2'
+    } else {
+        clase = 'comprobante_transferencia'
+        num = '1'
+    }
+
+    let fileInput = document.getElementById(clase);
+    let filePath = fileInput.value;
+    
 
     if (validacionFechaTrans('fecha_' + claseValidar) === 'fecha menor') {
         arrayDeErrores.push('Error la fecha pago es 20 dias menor a la de hoy, por favor corrijalo, el limite es 20 dias antes de hoy')
@@ -244,6 +235,20 @@ function validacionFormEspeciales(claseValidar) {
         arrayDeErrores.push('Error no es un banco de origen disponible, por favor corrijalo');
     }
 
+    if (fileInput.value === '') {
+        arrayDeErrores.push('Error No a puesto nada en el capture, por favor corrijalo')
+        showError(arrayDeErrores)
+        return false
+    }
+
+    if (!allowedExtensions.test(filePath)){
+        arrayDeErrores.push('No es un tipo de archivo aceptado, por favor use un con alguna de las extenciones: .jpg|.jpeg|.pdf|.png|.gif')
+    } 
+    
+    if (jQuery('#' + clase)[0].files[0].size > 3000000) {
+        arrayDeErrores.push('Error el capture es mayor a 3 Megas, por favor corrijalo')
+    }
+
 
     if (arrayDeErrores.length === 0) {
         return true;
@@ -251,13 +256,6 @@ function validacionFormEspeciales(claseValidar) {
         showError(arrayDeErrores)
         return false
     }
-}
-
-
-function validacionBancoFinal(id) {
-    let input = document.getElementById(id);
-    if (input.value === '') return 'no hay nada';
-    return input.value
 }
 
 function showError(mensaje) {
@@ -377,8 +375,7 @@ function validacionCellphone(id) {
 
     if (cellphone === null) return '';
 
-    // if (/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
-    if (/(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
+    if (/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
         return cellphone.value.replace(/(\s)|([\(,\),-])|(\+)/g,'')
     } else {
         return 'no es un numero valido'
@@ -514,15 +511,15 @@ function validacionCheckOut() {
         
     } 
 
-    if (validacionCorreo('billing_email') === 'no hay nada') {
-        arrayDeErrores.push('Error No hay nada en el Correo, por favor ingrese su correo')
+    // if (validacionCorreo('billing_email') === 'no hay nada') {
+    //     arrayDeErrores.push('Error No hay nada en el Correo, por favor ingrese su correo')
         
-    } 
+    // } 
 
-    if (validacionCorreo('billing_email') === 'no aceptado') {
-        arrayDeErrores.push('Error No es aceptado el Correo, por favor ingrese su correo')
+    // if (validacionCorreo('billing_email') === 'no aceptado') {
+    //     arrayDeErrores.push('Error No es aceptado el Correo, por favor ingrese su correo')
         
-    } 
+    // } 
 
     if (arrayDeErrores.length === 0) {
         return true

@@ -95,7 +95,8 @@ class PagosOfflineVenezuelaPublico {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if (  is_checkout() && ! isset( $_GET['pay_for_order'] ) )  {
+		$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		if ( $actual_link === home_url( ). '/checout/' && ! isset( $_GET['pay_for_order'] ) )  {
 
 			wp_enqueue_script( 'checkOutAjax', plugin_dir_url( __FILE__ ) . 'js/checkOutAjax.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( 'checkOutAjax', 'ajax_var', array(
