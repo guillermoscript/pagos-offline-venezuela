@@ -11,7 +11,26 @@ function limpiador(clase) {
     }
 }
 
+
+function showError(mensaje) {
+    
+    limpiador('woocommerce-notices-wrapper')
+    
+    jQuery('.woocommerce-notices-wrapper').prepend(`
+        <div class="woocommerce-NoticeGroup woocommerce-NoticeGroup-checkout">
+            <ul class="woocommerce-error" role="alert">
+            </ul>
+        </div>
+    `);
+    mensaje.forEach(elem => {
+        document.getElementsByClassName('woocommerce-error')[0].insertAdjacentHTML('afterbegin','<li>' + elem +'</li>')
+    })
+    jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+
+}
+
 export {
     stopIt,
-    limpiador
+    limpiador,
+    showError
 }

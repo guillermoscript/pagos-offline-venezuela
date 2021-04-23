@@ -1,6 +1,6 @@
 <?php
 
-use admin\controllers\ValidationPaymentController;
+use Admin\Controllers\ValidationPaymentController;
 
 function wc_offline_gateway_init_zelle() {
 
@@ -335,9 +335,9 @@ function wc_offline_gateway_init_zelle() {
 
         public function validate_fields()
         {
- 
-            ValidationPaymentController::validate_fields();
-         
+            if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
+                ValidationPaymentController::validate_fields();
+            }
         }
 
         public function process_payment( $order_id )

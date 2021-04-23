@@ -1,5 +1,6 @@
 <?php
 
+use Admin\Controllers\RestApiV1;
 use Admin\Controllers\ValidationPaymentController;
 
 function wc_offline_gateway_init_pago_movil() {
@@ -60,7 +61,12 @@ function wc_offline_gateway_init_pago_movil() {
             // registramos para el ajax
             add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ),11 );
 
-           
+            // Add the fields to order email
+            add_action('woocommerce_email_order_details', array($this,'pago_movil_action_after_email_order_details'), 25, 4 );
+
+            
+            // Display field value on the order edit page
+            add_action( 'woocommerce_admin_order_data_after_billing_address', array($this, 'pago_movil_my_custom_checkout_field_display_admin_order_meta'), 10, 1 );
         
             // You can also register a webhook here
             // add_action( 'woocommerce_api_{webhook name}', array( $this, 'webhook' ) );
@@ -470,7 +476,9 @@ function wc_offline_gateway_init_pago_movil() {
 
         public function validate_fields()
         {
-           ValidationPaymentController::validate_fields();
+            if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
+                ValidationPaymentController::validate_fields();
+            } 
         }
 
         public function payment_scripts() 
@@ -503,13 +511,15 @@ function wc_offline_gateway_init_pago_movil() {
             
             $order = wc_get_order( $order_id );
             
-                if ( isset($_POST['id-pago-movil-capture']) && isset($_POST['pago_movil_select']) && isset($_POST['fecha-pago-movil']) && isset($_POST['numero_recibo_movil']) && isset($_POST['pago_movil_banco_select']) ) {
+            if ( isset($_POST['id-pago-movil-capture']) && isset($_POST['pago_movil_select']) && isset($_POST['fecha-pago-movil']) && isset($_POST['numero_recibo_movil']) && isset($_POST['pago_movil_banco_select']) ) {
 
+                $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
                 $order->update_meta_data( '_thumbnail_id', $_POST['id-pago-movil-capture'] );
                 $order->update_meta_data( 'pago_movil_seleccionado', $_POST['pago_movil_select'] );
                 $order->update_meta_data( 'pago_movil_banco_select', $_POST['pago_movil_banco_select'] );
                 $order->update_meta_data( 'numero_recibo_movil', $_POST['numero_recibo_movil'] );
                 $order->update_meta_data( 'fecha-pago-movil', $_POST['fecha-pago-movil'] );
+                $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
             }
                     
             // Mark as on-hold (we're awaiting the payment)
@@ -540,6 +550,36 @@ function wc_offline_gateway_init_pago_movil() {
                 
             if ( $this->instructions && ! $sent_to_admin && 'offline' === $order->payment_method && $order->has_status( 'on-hold' ) ) {
                 echo wpautop( wptexturize( $this->instructions ) ) . PHP_EOL;
+            }
+        }
+
+        public function pago_movil_action_after_email_order_details( $order, $sent_to_admin, $plain_text, $email ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                // The data
+                $label = __('Total en bolivares');
+        
+                // The HTML Structure
+                $html_output = '<h2>' . __('Extra data') . '</h2>
+                <div class="discount-info"><table cellspacing="0" cellpadding="6"><tr>
+                <th>' . $label . '</th><td>' . $tasa . '</td>
+                </tr></tbody></table></div><br>';
+        
+                // The CSS styling
+                $styles = '<style>
+                    .discount-info table{width: 100%; font-family: \'Helvetica Neue\', Helvetica, Roboto, Arial, sans-serif;
+                        color: #737373; border: 2px solid #e4e4e4; margin-bottom:8px;}
+                    .discount-info table th, table.tracking-info td{ text-align: left; color: #737373; border: none; padding: 12px;}
+                    .discount-info table td{ text-align: left; color: #737373; border: none; padding: 12px; }
+                </style>';
+        
+                // The Output CSS + HTML
+                echo $styles . $html_output;
+            }
+        }
+       
+        public function pago_movil_my_custom_checkout_field_display_admin_order_meta( $order ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
             }
         }
 

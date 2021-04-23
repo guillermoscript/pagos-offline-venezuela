@@ -44,15 +44,14 @@ class ValidationPaymentController
             $array_errores[] = false;
         }
 
+        if( empty( $_POST[ 'billing_cid' ]) ) {
+            wc_add_notice(  'La cedula es requerida', 'error' );
+            $array_errores[] = false;
+        }
+
         if( !preg_match('/^\d+$/',  $_POST[ 'billing_cid' ] ) ) {
             
             wc_add_notice(  'La cedula no esta en el formato aceptado', 'error' );
-            $array_errores[] = false;
-        }
-        
-
-        if( empty( $_POST[ 'billing_cid' ]) ) {
-            wc_add_notice(  'La cedula es requerida', 'error' );
             $array_errores[] = false;
         }
 

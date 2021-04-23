@@ -102,18 +102,34 @@ function run_pagos_offline_venezuela() {
 }
 run_pagos_offline_venezuela();
 
-add_action( 'wp_ajax_nopriv_recibir_imagen', 'recibir_imagen');
-add_action( 'wp_ajax_recibir_imagen', 'recibir_imagen');
+add_action( 'wp_ajax_nopriv_get_image_from_checkout', 'get_image_from_checkout');
+add_action( 'wp_ajax_get_image_from_checkout', 'get_image_from_checkout');
 
-function recibir_imagen() {
-    # code...
+add_action( 'wp_ajax_nopriv_get_image_from_pay_order', 'get_image_from_pay_order');
+add_action( 'wp_ajax_get_image_from_pay_order', 'get_image_from_pay_order');
+
+function get_image_from_checkout() {
     // comprobando el nonce 
     $nonce = sanitize_text_field( $_POST['nonce'] );
 
     if ( ! wp_verify_nonce( $nonce, 'my-ajaxxx-nonce' ) ) {
         die ( 'Busted!!!');
     }
+    recibir_imagen();
+}
 
+function get_image_from_pay_order() {
+    // comprobando el nonce 
+    $nonce = sanitize_text_field( $_POST['nonce'] );
+
+    if ( ! wp_verify_nonce( $nonce, 'my-ajaxxx-nonce2' ) ) {
+        die ( 'Busted!!!');
+    }
+    recibir_imagen();
+}
+
+function recibir_imagen() {
+    # code...
     // estas cosas se requieren,lo vi en internet
     if ( ! function_exists( 'wp_handle_upload' ) ) {
         require_once( ABSPATH . 'wp-admin/includes/file.php' );

@@ -95,14 +95,17 @@ class PagosOfflineVenezuelaPublico {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		if ( $actual_link === home_url( ). '/checout/' && ! isset( $_GET['pay_for_order'] ) )  {
+		
+		if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) ) {
 
-			wp_enqueue_script( 'checkOutAjax', plugin_dir_url( __FILE__ ) . 'js/checkOutAjax.js', array( 'jquery' ), $this->version, false );
-			wp_localize_script( 'checkOutAjax', 'ajax_var', array(
+			wp_enqueue_script( 'checkoutAjax', plugin_dir_url( __FILE__ ) . 'js/checkoutAjax.js', array( 'jquery' ), $this->version, false );
+
+			wp_enqueue_script( 'myCheckout', plugin_dir_url( __FILE__ ) . 'js/myCheckout.js', array( 'jquery' ), $this->version, false );
+
+			wp_localize_script( 'myCheckout', 'ajax_var', array(
 				'url'    => admin_url( 'admin-ajax.php' ),
 				'nonce'  => wp_create_nonce( 'my-ajaxxx-nonce' ),
-				'action' => 'recibir_imagen'
+				'action' => 'get_image_from_checkout'
 			) );
 			/**
 			 *Script that import modules must use a script tag with type="module", 
@@ -111,7 +114,10 @@ class PagosOfflineVenezuelaPublico {
 			add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
 
 				switch ( $handle ) {
-					case 'checkOutAjax':
+					case 'checkoutAjax':
+						return '<script type="module" src="' . esc_url( $src ) . '"></script>';
+						break;
+					case 'myCheckout':
 						return '<script type="module" src="' . esc_url( $src ) . '"></script>';
 						break;
 
@@ -121,6 +127,34 @@ class PagosOfflineVenezuelaPublico {
 				}
 
 			}, 10, 3 );
+		} elseif ( is_wc_endpoint_url( 'order-pay' )) {
+			# code...
+			/**
+			 *Script that import modules must use a script tag with type="module", 
+			* so let's set it for the script.
+			*/
+			wp_enqueue_script( 'myOrderPay', plugin_dir_url( __FILE__ ) . 'js/myOrderPay.js', array( 'jquery' ), $this->version, false );
+
+			wp_localize_script( 'myOrderPay', 'ajax_var2', array(
+				'url'    => admin_url( 'admin-ajax.php' ),
+				'nonce'  => wp_create_nonce( 'my-ajaxxx-nonce2' ),
+				'action' => 'get_image_from_pay_order'
+			) );
+
+			add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+
+				switch ( $handle ) {
+					case 'myOrderPay':
+						return '<script type="module" src="' . esc_url( $src ) . '"></script>';
+						break;
+
+					default:
+						return $tag;
+						break;
+				}
+
+			}, 10, 3 );
+
 		}
 
 		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pagos-offline-venezuela-public.js', array( 'jquery' ), $this->version, false );

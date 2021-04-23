@@ -1,5 +1,6 @@
 <?php
 
+use Admin\Controllers\RestApiV1;
 use Admin\Controllers\ValidationPaymentController;
 
 function wc_offline_gateway_init_transferencia() {
@@ -57,6 +58,14 @@ function wc_offline_gateway_init_transferencia() {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'save_account_details' ) );
             add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
             add_action( 'woocommerce_thankyou_transferencia', array( $this, 'thankyou_page' ) );
+
+            // Add the fields to order email
+            add_action('woocommerce_email_order_details', array($this,'transferencia_action_after_email_order_details'), 25, 4 );
+
+        
+            // Display field value on the order edit page
+            add_action( 'woocommerce_admin_order_data_after_billing_address', array($this, 'transferencia_my_custom_checkout_field_display_admin_order_meta'), 10, 1 );
+        
         
             // You can also register a webhook here
             // add_action( 'woocommerce_api_{webhook name}', array( $this, 'webhook' ) );
@@ -454,7 +463,7 @@ function wc_offline_gateway_init_transferencia() {
 
                 $html .= '
                     </select>
-                <input type="hidden" id="capture-comprobante_transferencia" name="id-transfeencia-capture">
+                <input type="hidden" id="capture-comprobante_transferencia" name="id-transferencia-capture">
                 <div class="clear"></div>';
         
             do_action( 'woocommerce_transferencia_form_end', $this->id );
@@ -465,7 +474,9 @@ function wc_offline_gateway_init_transferencia() {
 
         public function validate_fields()
         {
-            ValidationPaymentController::validate_fields();
+            if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
+                ValidationPaymentController::validate_fields();
+            }
         }
 
         public function process_payment( $order_id )
@@ -473,13 +484,15 @@ function wc_offline_gateway_init_transferencia() {
     
             $order = wc_get_order( $order_id );
 
-            if( isset($_POST['id-transfeencia-capture']) && isset($_POST['transferencia-select']) &&  isset($_POST['fecha-transferencia']) && isset($_POST['numero_recibo_transferencia']) && isset($_POST['transferencia_banco_select']) ) {
+            if( isset($_POST['id-transferencia-capture']) && isset($_POST['transferencia-select']) &&  isset($_POST['fecha-transferencia']) && isset($_POST['numero_recibo_transferencia']) && isset($_POST['transferencia_banco_select']) ) {
 
-                $order->update_meta_data( '_thumbnail_id', $_POST['id-transfeencia-capture'] );
+                $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
+                $order->update_meta_data( '_thumbnail_id', $_POST['id-transferencia-capture'] );
                 $order->update_meta_data( 'transferencia_seleccionado', $_POST['transferencia-select'] );
                 $order->update_meta_data( 'numero_recibo_transferencia', $_POST['numero_recibo_transferencia'] );
                 $order->update_meta_data( 'transferencia_banco_select', $_POST['transferencia_banco_select'] );
                 $order->update_meta_data( 'fecha-transferencia', $_POST['fecha-transferencia'] );
+                $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
             }
                     
             // Mark as on-hold (we're awaiting the payment)
@@ -510,6 +523,36 @@ function wc_offline_gateway_init_transferencia() {
                 
             if ( $this->instructions && ! $sent_to_admin && 'offline' === $order->payment_method && $order->has_status( 'on-hold' ) ) {
                 echo wpautop( wptexturize( $this->instructions ) ) . PHP_EOL;
+            }
+        }
+
+        public function transferencia_action_after_email_order_details( $order, $sent_to_admin, $plain_text, $email ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                // The data
+                $label = __('Total en bolivares');
+        
+                // The HTML Structure
+                $html_output = '<h2>' . __('Extra data') . '</h2>
+                <div class="discount-info"><table cellspacing="0" cellpadding="6"><tr>
+                <th>' . $label . '</th><td>' . $tasa . '</td>
+                </tr></tbody></table></div><br>';
+        
+                // The CSS styling
+                $styles = '<style>
+                    .discount-info table{width: 100%; font-family: \'Helvetica Neue\', Helvetica, Roboto, Arial, sans-serif;
+                        color: #737373; border: 2px solid #e4e4e4; margin-bottom:8px;}
+                    .discount-info table th, table.tracking-info td{ text-align: left; color: #737373; border: none; padding: 12px;}
+                    .discount-info table td{ text-align: left; color: #737373; border: none; padding: 12px; }
+                </style>';
+        
+                // The Output CSS + HTML
+                echo $styles . $html_output;
+            }
+        }
+       
+        public function transferencia_my_custom_checkout_field_display_admin_order_meta( $order ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
             }
         }
 

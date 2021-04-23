@@ -90,7 +90,7 @@ final class Init
         
         global $post;
 
-        $url = wp_get_attachment_image_src(get_post_meta( $post->ID, '_thumbnail_id', true ));
+        $url = (get_the_post_thumbnail_url( $post->ID, 'full', true ));
         $payment_method = get_post_meta( $post->ID, '_payment_method', true );
 
         ?>
@@ -137,8 +137,8 @@ final class Init
                 </p>
                 <p class="form-row">
                     <strong>Capture:</strong>
-                    <a href="<?php echo esc_html( $url[0] ) ?>">
-                        <img src="<?php echo esc_html( $url[0] ) ?>" alt="" srcset="">
+                    <a href="<?php echo esc_html( $url ) ?>">
+                        <img src="<?php echo esc_html( $url ) ?>" alt="" srcset="">
                     </a>
                 </p>
             <?php
@@ -187,8 +187,8 @@ final class Init
                 </p>
                 <p class="form-row">
                     <strong>Capture:</strong>
-                    <a href="<?php echo esc_html( $url[0] ) ?>">
-                        <img src="<?php echo esc_html( $url[0] ) ?>" alt="" srcset="">
+                    <a href="<?php echo esc_html( $url ) ?>">
+                        <img src="<?php echo esc_html( $url ) ?>" alt="" srcset="">
                     </a>
                 </p>
             <?php
@@ -213,8 +213,8 @@ final class Init
         // unset( $woo_checkout_fields_array['billing']['billing_country'] );
         // unset( $woo_checkout_fields_array['billing']['billing_address_1'] );
         unset( $woo_checkout_fields_array['billing']['billing_address_2'] );
-        unset( $woo_checkout_fields_array['billing']['billing_city'] );
-        unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
+        // unset( $woo_checkout_fields_array['billing']['billing_city'] );
+        // unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
         unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
      
         return $woo_checkout_fields_array;
@@ -224,6 +224,9 @@ final class Init
  
         $f['billing']['billing_email']['class'][0] = 'form-row-wide';
         $f['billing']['billing_phone']['class'][0] = 'form-row-wide';
+ 
+        $f['billing']['billing_city']['class'][0] = 'form-row-last';
+        $f['billing']['billing_state']['class'][0] = 'form-row-first';
      
         return $f;
      
