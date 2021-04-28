@@ -98,9 +98,9 @@ class PagosOfflineVenezuelaPublico {
 		
 		if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) ) {
 
-			wp_enqueue_script( 'checkoutAjax', plugin_dir_url( __FILE__ ) . 'js/checkoutAjax.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'checkoutAjax', plugin_dir_url( __FILE__ ) . 'js/checkoutAjax.js', array( 'jquery' ), $this->version, true );
 
-			wp_enqueue_script( 'myCheckout', plugin_dir_url( __FILE__ ) . 'js/myCheckout.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'myCheckout', plugin_dir_url( __FILE__ ) . 'js/myCheckout.js', array( 'jquery' ), $this->version, true );
 
 			wp_localize_script( 'myCheckout', 'ajax_var', array(
 				'url'    => admin_url( 'admin-ajax.php' ),
@@ -133,7 +133,7 @@ class PagosOfflineVenezuelaPublico {
 			 *Script that import modules must use a script tag with type="module", 
 			* so let's set it for the script.
 			*/
-			wp_enqueue_script( 'myOrderPay', plugin_dir_url( __FILE__ ) . 'js/myOrderPay.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'myOrderPay', plugin_dir_url( __FILE__ ) . 'js/myOrderPay.js', array( 'jquery' ), $this->version, true );
 
 			wp_localize_script( 'myOrderPay', 'ajax_var2', array(
 				'url'    => admin_url( 'admin-ajax.php' ),

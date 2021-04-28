@@ -196,80 +196,13 @@ function validacionCorreo(id) {
 
 }
 
-function validacionCheckOut() {
-
-    let arrayDeErrores = [];
-
-    if (validacionCedula('billing_cid') === 'cantidad no aceptada') {
-        arrayDeErrores.push('Error la cantidad de digitos no es aceptada en la Cedula, por favor corrijalo')
-        
-    } 
-    if (validacionCedula('billing_cid') === 'no hay nada') {
-        arrayDeErrores.push('Error no hay nada en la cedula, por favor corrijalo')
-        
-    } 
-    if (validacionCedula('billing_cid') === 'hay una letra') {
-        arrayDeErrores.push('Error hay letras en la Cedula, por favor corrijalo')
-        
-    } 
-
-    if (validacionNombre('billing_first_name') === 'hay un Numero') {
-        arrayDeErrores.push('Error Hay un Numero en el Nombre')
-        
-    } 
-    if (validacionNombre('billing_first_name') === 'maximo de caracteres permitido') {
-        arrayDeErrores.push('Error hay mas caracteres de lo permitido en el nombre')
-        
-    } 
-    if (validacionNombre('billing_first_name') === 'no hay nada') {
-        arrayDeErrores.push('Error No hay nada en el Nombre, por favor ingrese su nombre')
-    } 
-
-    if (validacionCellphone('billing_phone') === 'no es un numero valido') {
-        arrayDeErrores.push('Error No es un numero valido, por favor ingrese un numero de venezuela valido, Ejemplo: 0424 123 4567');
-    }
-    
-    if (validacionCellphone('billing_phone') === 'no estan en los metodos de pago'){
-        arrayDeErrores.push('Error No es un metodo disponible el que puso, por favor ingrese uno de los disponibles')
-    } 
-
-    if (validacionNombre('billing_last_name') === 'hay un Numero') {
-        arrayDeErrores.push('Error Hay un Numero en el Apellido')
-        
-    } 
-    if (validacionNombre('billing_last_name') === 'maximo de caracteres permitido') {
-        arrayDeErrores.push('Error hay mas caracteres de lo permitido en el apellido')
-        
-    } 
-    if (validacionNombre('billing_last_name') === 'no hay nada') {
-        arrayDeErrores.push('Error No hay nada en el apellido, por favor ingrese su apellido')
-        
-    } 
-
-    // if (validacionCorreo('billing_email') === 'no hay nada') {
-    //     arrayDeErrores.push('Error No hay nada en el Correo, por favor ingrese su correo')
-        
-    // } 
-
-    // if (validacionCorreo('billing_email') === 'no aceptado') {
-    //     arrayDeErrores.push('Error No es aceptado el Correo, por favor ingrese su correo')
-        
-    // } 
-
-    if (arrayDeErrores.length === 0) {
-        return true
-    } else {
-        showError(arrayDeErrores)
-        return false
-    }
-}
 
 export {
     validacionBancoFinal,
     validacionBancosDisponibles,
     validacionCedula,
     validacionCellphone,
-    validacionCheckOut,
+    // validacionCheckOut,
     validacionCorreo,
     validacionFecha,
     validacionFechaTrans,

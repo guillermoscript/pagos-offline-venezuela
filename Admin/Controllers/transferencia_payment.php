@@ -476,6 +476,7 @@ function wc_offline_gateway_init_transferencia() {
         {
             if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
                 ValidationPaymentController::validate_fields();
+                ValidationPaymentController::validate_pago_or_transaction('Transferencia', ['id-transferencia-capture','transferencia-select','transferencia_banco_select','numero_recibo_transferencia','fecha-transferencia']);
             }
         }
 

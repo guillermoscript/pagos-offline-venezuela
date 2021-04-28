@@ -5,19 +5,16 @@ import {
 import {
     addTextToInputFileWhenUserClick,
     validacionesContainer,
+    validacionCheckOut,
 } from './checkoutAjax.js';
 
-
-import {
-    validacionCheckOut,
-} from './validationsCheckout.js';
-
+// console.log('AAAAAAAAAAAAAAAAAAAAAA FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
 
 jQuery(document).ready(() => {
     observerWrapper()
 }) 
 
-function finishCheckout (e){
+function finishCheckout (){
   if(!validacionCheckOut()) return;
     validacionesContainer(ajax_var)
 }
@@ -36,10 +33,11 @@ function observerWrapper() {
     // subscriber function
     function subscriber(mutations) {
         mutations.forEach( mutation => {
-            console.log(mutation);
+            // console.log(mutation);
             if (mutation.target === document.getElementById('place_order')) {
                 if (mutation.addedNodes.length > 0) {
-                    agregarEventosAlBotonCheckout()
+                    // console.log('aaa');
+                    addEventsToCheckoutButon()
                     addTextToInputFileWhenUserClick()
                 }
             }
@@ -57,7 +55,7 @@ function observerWrapper() {
     observer.observe(target, config);
 }
 
-function agregarEventosAlBotonCheckout() {
+function addEventsToCheckoutButon() {
 
     let btnCheckOut = document.getElementById('place_order');
     btnCheckOut.addEventListener('click',stopIt )

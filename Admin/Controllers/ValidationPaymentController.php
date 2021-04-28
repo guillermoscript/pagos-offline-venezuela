@@ -60,6 +60,148 @@ class ValidationPaymentController
         } else {
             return false;
         }
-        
+    }
+
+    public function validate_zelle()
+    {
+        # code...
+        $array_errores = [];
+        $inputs = ['email_origen','zelle-select'];
+        if (!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) {
+            wc_add_notice(  '¡Error! El campo del correo esta vacio, por favor ingrese un correo.', 'error' );
+            $array_errores[] = false;
+        } 
+        if (!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) {
+            wc_add_notice(  '¡Error! No selecciono un correo zelle, por favor seleccione uno.', 'error' );
+            $array_errores[] = false;
+        } 
+
+        if (filter_var($_POST[$inputs[0]],FILTER_VALIDATE_EMAIL) === false) {
+            wc_add_notice(  '¡Error! El correo de origen no es valido, por favor ingrese uno valido.', 'error' );
+            $array_errores[] = false;
+        }
+
+        $zelle_info = get_option( 'woocommerce_zelle_accounts' );
+
+        foreach ($zelle_info as $key => $account) {
+            # code...
+            $email_cuenta = esc_attr( wp_unslash( $account['email_cuenta'] ) );
+            // $name_zelle = esc_attr( wp_unslash( $account['name_zelle'] ) );
+            if ($_POST[$inputs[1]] !== $email_cuenta) {
+                wc_add_notice(  'Error el email que selecciono no es uno de los mostrados', 'error' );
+                $array_errores[] = false;
+            }
+        }  
+
+        if (empty($array_errores)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function validate_pago_or_transaction($class,$inputs)
+    {
+        # code...
+        $array_errores = [];
+        $bancos_value = [
+            "Venezuela",
+            "Banesco",
+            "Provincial",
+            "Mercantil",
+            "Bod",
+            "Bicentenario",
+            "DelTesoro",
+            "Bancaribe",
+            "AgrícoladeVzla",
+            "MiBanco",
+            "BancoActivo",
+            "BancoCaroní",
+            "BancoExterior",
+            "BancoPlaza",
+            "BancoSofitasa",
+            "BancoVenezolanodeCrédito",
+            "Bancrecer",
+            "BanFANB",
+            "Bangente",
+            "Banplus",
+            "BFCBancoFondoComún",
+            "DELSUR",
+            "100%Banco",
+            "MiBanco",
+            "NacionaldeCrédito"
+        ];
+    
+
+        if ((!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) || $_POST[$inputs[0]] === '' ) {
+            wc_add_notice(  '¡Error! Adjunte el comprobante, por favor.', 'error' );
+            $array_errores[] = false;
+        }
+
+        if ((!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) || $_POST[$inputs[1]] === '' ) {
+            wc_add_notice(  '¡Error! Seleccione el banco de destino, por favor.', 'error' );
+            $array_errores[] = false;
+        }
+
+        if ((!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) || $_POST[$inputs[2]] === '' ) {
+            wc_add_notice(  '¡Error! Seleccione el banco de origen, por favor.', 'error' );
+            $array_errores[] = false;
+        }
+
+        if ((!isset($_POST[$inputs[3]]) && !empty($_POST[$inputs[3]])) || $_POST[$inputs[3]] === '' ) {
+            wc_add_notice(  '¡Error! Agrege solo numeros en el recibo, por favor.', 'error' );
+            $array_errores[] = false;
+        }
+
+        if ((!isset($_POST[$inputs[4]]) && !empty($_POST[$inputs[4]])) || $_POST[$inputs[4]] === '' ) {
+            wc_add_notice(  '¡Error! Seleccione una fecha de pago, por favor.', 'error' );
+            $array_errores[] = false;
+        }
+
+
+        $count_de_cuenta = 0;
+
+        if ($class === 'Pago Movil') {
+            $pago_movil_info = get_option( 'woocommerce_pago_movil_accounts' );
+            
+            foreach ($pago_movil_info as $key => $account) {
+                # code...
+                if ( $_POST[$inputs[1]] === strval($key) ) {
+                    $count_de_cuenta++;
+                }
+            }  
+            if ($count_de_cuenta === 0) {
+                wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class, 'error' );
+                $array_errores[] = false;
+            }
+        } else {
+            $transferencia_info = get_option( 'woocommerce_transferencia_accounts' );
+    
+            foreach ($transferencia_info as $key => $account) {
+                # code...
+                
+                if ( $_POST[$inputs[1]] === strval($key) ) {
+                    $count_de_cuenta++;
+                }
+            } 
+    
+            if ($count_de_cuenta === 0) {
+                wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class , 'error' );
+                $array_errores[] = false;
+            }
+        }
+
+
+        if ( array_search($_POST[$inputs[2]],$bancos_value) === false ) {
+            wc_add_notice(  'Error el banco que selecciono no es uno de los disponibles', 'error' );
+            $array_errores[] = false;
+        }
+
+        if (empty($array_errores)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

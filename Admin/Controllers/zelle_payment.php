@@ -337,6 +337,7 @@ function wc_offline_gateway_init_zelle() {
         {
             if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
                 ValidationPaymentController::validate_fields();
+                ValidationPaymentController::validate_zelle();
             }
         }
 
