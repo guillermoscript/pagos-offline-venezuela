@@ -1,5 +1,5 @@
 
-function validacionFecha(id) {
+function validationDate(id) {
 
     let input = document.getElementById(id)
     let date = new Date();
@@ -17,7 +17,7 @@ function validacionFecha(id) {
 }
 
 
-function validacionFechaTrans(id) {
+function validationDateTrans(id) {
 
     let input = document.getElementById(id)
     let date = new Date();
@@ -42,7 +42,7 @@ function validacionFechaTrans(id) {
 }
 
 
-function validacionNumeroReferencia(id) {
+function validationNumberOfTransfer(id) {
     let input = document.getElementById(id);
    
     if (/^\d+$/gi.test(input.value)) {
@@ -59,7 +59,7 @@ function validacionNumeroReferencia(id) {
 }
 
 
-function validacionBancosDisponibles(id) {
+function validationAvailebleBanks(id) {
     let bancos = [
         "Venezuela",
         "Banesco",
@@ -109,7 +109,7 @@ function validacionCellphone(id) {
 }
 
 
-function validacionCedula(id) {
+function validationIdn(id) {
     let input = document.getElementById(id);
         
     if (input === null) return '';
@@ -150,7 +150,7 @@ function validacionNumeroDeCuenta(id) {
     }
 }
 
-function validacionNombre(id) {
+function validationName(id) {
     let name = document.getElementById(id);
     
     if (name === null) return '';
@@ -165,7 +165,7 @@ function validacionNombre(id) {
 }
 
 
-function validacionBancoFinal(id) {
+function validationFinalBank(id) {
     let input = document.getElementById(id);
 
     if (input.value === '') return 'no hay nada';
@@ -183,7 +183,7 @@ function validacionOtros(id) {
 }
 
 
-function validacionCorreo(id) {
+function validationEmail(id) {
     let correo = document.getElementById(id);
 
     if (correo.value === '') return 'no hay nada';
@@ -198,16 +198,16 @@ function validacionCorreo(id) {
 
 
 export {
-    validacionBancoFinal,
-    validacionBancosDisponibles,
-    validacionCedula,
+    validationFinalBank,
+    validationAvailebleBanks,
+    validationIdn,
     validacionCellphone,
-    // validacionCheckOut,
-    validacionCorreo,
-    validacionFecha,
-    validacionFechaTrans,
-    validacionNombre,
+    // validationCheckout,
+    validationEmail,
+    validationDate,
+    validationDateTrans,
+    validationName,
     validacionNumeroDeCuenta,
-    validacionNumeroReferencia,
+    validationNumberOfTransfer,
     validacionOtros
 }

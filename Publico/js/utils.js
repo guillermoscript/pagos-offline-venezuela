@@ -3,7 +3,7 @@ function stopIt(e) {
     e.stopPropagation();
 }
 
-function limpiador(clase) {
+function removeAllHtmlWithThisClass(clase) {
     if (document.getElementsByClassName(clase)) {
         for (let i = 0; i < document.getElementsByClassName(clase).length; i++) {
             document.getElementsByClassName(clase)[i].remove();
@@ -30,6 +30,6 @@ function showError(mensaje) {
 
 export {
     stopIt,
-    limpiador,
+    removeAllHtmlWithThisClass,
     showError
 }

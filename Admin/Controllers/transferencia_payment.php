@@ -399,7 +399,7 @@ function wc_offline_gateway_init_transferencia() {
         
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
             $html .=  '<div class="form-row form-row-wide width-50">
-            <label for="info_transferencia">Info De los bancos a los cuales transferir <span class="required">*</span>
+            <label for="info_transferencia">Datos bancarios<span class="required">*</span>
             </label>
             
             <select id="info_transferencia" class="select-width" name="transferencia-select" required>

@@ -502,7 +502,7 @@ function wc_offline_gateway_init_pago_movil() {
             // wp_localize_script( 'pagoMovilAjax', 'ajax_var', array(
             //     'url'    => admin_url( 'admin-ajax.php' ),
             //     'nonce'  => wp_create_nonce( 'my-ajaxxx-nonce' ),
-            //     'action' => 'recibir_imagen'
+            //     'action' => 'get_image'
             // ) );
 
         }

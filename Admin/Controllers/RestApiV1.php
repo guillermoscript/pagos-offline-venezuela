@@ -28,62 +28,62 @@ class RestApiV1 {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-    static function get_rate_of_bf($sub_total_en_dolares, $taxes) {
+    static function get_rate_of_bf($sub_total_in_dolars, $taxes) {
         # code...
         
-        $moneda = 'Bs.S';
+        $currency = 'Bs.S';
         
-        $tasa_de_bolivares = RestApiV1::get_tasa();
+        $rate_in_bolivares = RestApiV1::get_tasa();
         
         $total_taxes_with_discount = 0;
         // Add each taxes to $total_taxes_with_discount
         foreach($taxes as $tax) $total_taxes_with_discount += $tax;
 
-        $sub_total_en_dolares += $total_taxes_with_discount;
+        $sub_total_in_dolars += $total_taxes_with_discount;
 
-        $precio_en_bolivares = $sub_total_en_dolares * floatval(str_replace('.','',$tasa_de_bolivares['tasa_dolar']));
+        $price_in_bolivares = $sub_total_in_dolars * floatval(str_replace('.','',$rate_in_bolivares['rate_of_dolar']));
 
-        $precio_sin_iva = floatval($precio_en_bolivares / 1.16);
-        $porcentaje_de_impuestos = floatval($precio_en_bolivares - $precio_sin_iva);
+        $price_without_iva = floatval($price_in_bolivares / 1.16);
+        $percentage_of_iva = floatval($price_in_bolivares - $price_without_iva);
 
-        $total = $precio_en_bolivares;
+        $total = $price_in_bolivares;
 
         return array(
             'total' => number_format($total,2,',','.'),
-            'moneda' => $moneda,
-            'tasa_dolar' => $tasa_de_bolivares['tasa_dolar'],
-            'sub_total_en_dolares' => $sub_total_en_dolares,
-            'precio_sin_iva' => number_format($precio_sin_iva,2,',','.'),
-            'porcentaje_de_impuestos' => number_format($porcentaje_de_impuestos,2,',','.')
+            'currency' => $currency,
+            'rate_of_dolar' => $rate_in_bolivares['rate_of_dolar'],
+            'sub_total_in_dolars' => $sub_total_in_dolars,
+            'price_without_iva' => number_format($price_without_iva,2,',','.'),
+            'percentage_of_iva' => number_format($percentage_of_iva,2,',','.')
         );
     }
 
     static function get_tasa() {
         # code...
         
-        $tasa_de_bolivares = '';
-        if (get_option( 'tasa_dolar_auto_insert' ) === 'yes') {  
+        $rate_in_bolivares = '';
+        if (get_option( 'rate_of_dolar_auto_insert' ) === 'yes') {  
             
             $client = new Client();
             try {
                 // Go to the bcv.com website
-                $crawler = $client->request('GET', URL_BANCO);
+                $crawler = $client->request('GET', BANK_URL);
         
                 // Get the dolar
                 $helper = $crawler->filter('#dolar strong')->each(function ($node) {
                     return $node->text()."\n";
                 });
-                $tasa_de_bolivares =  $helper[0];
+                $rate_in_bolivares =  $helper[0];
             } catch (\Throwable $th) {
                 //throw $th;
-                $tasa_de_bolivares = get_option( 'tasa_dolar_title' );
+                $rate_in_bolivares = get_option( 'rate_of_dolar_title' );
             }
         } else {
-            $tasa_de_bolivares = get_option( 'tasa_dolar_title' );
+            $rate_in_bolivares = get_option( 'rate_of_dolar_title' );
         }
 
         return array(
-            'tasa_dolar' => $tasa_de_bolivares,
+            'rate_of_dolar' => $rate_in_bolivares,
         );
     }
 }

@@ -1,26 +1,26 @@
 import {
     addTextToInputFileWhenUserClick,
-    validacionesContainer,
+    validationContainer,
     // observerWrapper,
 } from './checkoutAjax.js';
 
 
 import { 
     stopIt, 
-    // limpiador,
+    // removeAllHtmlWithThisClass,
     // showError,
 } from './utils.js';
 
 jQuery(document).ready(() => {
-    agregarEventosAlBotonCheckout()
+    addEventsToCheckoutButton()
     addTextToInputFileWhenUserClick()
 }) 
 
 function getNonceAndRunValidation() {
-    validacionesContainer(ajax_var2)
+    validationContainer(ajax_var2)
 }
 
-function agregarEventosAlBotonCheckout() {
+function addEventsToCheckoutButton() {
 
     let btnCheckOut = document.getElementById('place_order');
     btnCheckOut.addEventListener('click',stopIt )

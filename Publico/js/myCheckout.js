@@ -1,24 +1,29 @@
-import { 
-    stopIt, 
+import {
+    stopIt,
 } from './utils.js';
 
 import {
     addTextToInputFileWhenUserClick,
-    validacionesContainer,
-    validacionCheckOut,
+    validationContainer,
+    validationCheckout,
 } from './checkoutAjax.js';
 
 // console.log('AAAAAAAAAAAAAAAAAAAAAA FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
 
 jQuery(document).ready(() => {
     observerWrapper()
-}) 
+})
 
-function finishCheckout (){
-  if(!validacionCheckOut()) return;
-    validacionesContainer(ajax_var)
+function finishCheckout() {
+    if (!validationCheckout()) return;
+    validationContainer(ajax_var)
 }
 
+/**
+* Check if the DOM have been modified by woocommerce (the checkout button) by an ajax call
+* and if thats true then add events to the checout button.
+* 
+*/
 function observerWrapper() {
     // target element that we will observe
     const target = document.getElementsByClassName('checkout')[0];
@@ -32,7 +37,7 @@ function observerWrapper() {
 
     // subscriber function
     function subscriber(mutations) {
-        mutations.forEach( mutation => {
+        mutations.forEach(mutation => {
             // console.log(mutation);
             if (mutation.target === document.getElementById('place_order')) {
                 if (mutation.addedNodes.length > 0) {
@@ -44,8 +49,8 @@ function observerWrapper() {
             if (mutation.addedNodes[0] === document.querySelector('.woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout')) {
                 document.querySelector('.blockUI.blockOverlay').remove()
             }
-        })      
-        
+        })
+
     }
 
     // instantiating observer
@@ -58,7 +63,7 @@ function observerWrapper() {
 function addEventsToCheckoutButon() {
 
     let btnCheckOut = document.getElementById('place_order');
-    btnCheckOut.addEventListener('click',stopIt )
+    btnCheckOut.addEventListener('click', stopIt)
     btnCheckOut.addEventListener('click', finishCheckout)
- 
+
 }

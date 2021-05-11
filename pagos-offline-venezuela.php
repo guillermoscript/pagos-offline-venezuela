@@ -40,13 +40,12 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-define('PLUGIN_BASE_PATH2', plugin_dir_path( __FILE__ ));
-define('URL_BANCO', 'http://www.bcv.org.ve/');
+define('PLUGIN_BASE_PATH', plugin_dir_path( __FILE__ ));
+define('BANK_URL', 'http://www.bcv.org.ve/');
 define('REST_API_NAMESPACE', 'pagos-offline-venezuela');
 define('REST_API_V1', 'v1');
-define('REST_API_V2', 'v2');
 
-use Admin\Init;
+// use Admin\Init;
 use Includes\PagosOfflineVenezuelaActivator;
 use Includes\PagosOfflineVenezuelaDeactivator;
 use Includes\PagosOfflineVenezuela;
@@ -115,7 +114,7 @@ function get_image_from_checkout() {
     if ( ! wp_verify_nonce( $nonce, 'my-ajaxxx-nonce' ) ) {
         die ( 'Busted!!!');
     }
-    recibir_imagen();
+    get_image();
 }
 
 function get_image_from_pay_order() {
@@ -125,10 +124,10 @@ function get_image_from_pay_order() {
     if ( ! wp_verify_nonce( $nonce, 'my-ajaxxx-nonce2' ) ) {
         die ( 'Busted!!!');
     }
-    recibir_imagen();
+    get_image();
 }
 
-function recibir_imagen() {
+function get_image() {
     # code...
     // estas cosas se requieren,lo vi en internet
     if ( ! function_exists( 'wp_handle_upload' ) ) {

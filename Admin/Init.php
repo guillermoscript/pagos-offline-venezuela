@@ -2,17 +2,22 @@
 
 namespace Admin;
 
+/**
+* Make all the custom logic from controllers work with this final class.
+*
+* 
+*/
 final class Init 
 {
     public function register() 
     {
         /* ========================= PAGP MOVIL ======================================= */
                 
-        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/pago_movil_payment.php';
-        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/zelle_payment.php';
-        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/transferencia_payment.php';
-        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/settings_tab_tasa_dolar.php';
-        require_once PLUGIN_BASE_PATH2 . 'Admin/Controllers/checkout_en_bolivares.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/pago_movil_payment.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/zelle_payment.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/transferencia_payment.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/settings_tab_rate_of_dolar.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/checkout_en_bolivares.php';
 
         add_filter( 'woocommerce_payment_gateways', array($this,'add_pago_movil_class') );
         add_action( 'plugins_loaded', 'wc_offline_gateway_init_pago_movil', 11 );
@@ -52,9 +57,9 @@ final class Init
         /* ========================= OTROS ======================================= */
         
         /* ===================================== SETTIGNS para la tasa =================================================*/
-        add_filter( 'woocommerce_get_settings_products', 'tasa_dolar_all_settings', 10, 2 );
+        add_filter( 'woocommerce_get_settings_products', 'rate_of_dolar_all_settings', 10, 2 );
 
-        add_filter( 'woocommerce_get_sections_products', 'tasa_dolar_add_section' );
+        add_filter( 'woocommerce_get_sections_products', 'rate_of_dolar_add_section' );
         /* ===================================== SETTIGNS para la tasa =================================================*/
 
 
