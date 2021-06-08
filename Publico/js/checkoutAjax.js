@@ -140,7 +140,7 @@ function validationContainer(nonce) {
         }
     }
 
-    // probando
+    // probando 2
     if (validationOfSpecialInputsInForm(claseToValidate) === true) {
         sendImage(nonce)
     } else {
