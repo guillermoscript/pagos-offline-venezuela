@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'e19591aafe6f1d2f694c37b6b1718ba019358096',
+    'reference' => '08498960e957df34533a9423316c38837f8d0151',
     'name' => 'oxoft/pagos-offline-venezuela',
   ),
   'versions' => 
@@ -51,7 +51,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'e19591aafe6f1d2f694c37b6b1718ba019358096',
+      'reference' => '08498960e957df34533a9423316c38837f8d0151',
     ),
     'php-http/async-client-implementation' => 
     array (
@@ -91,27 +91,27 @@ private static $installed = array (
       array (
         0 => '1.1.x-dev',
       ),
-      'reference' => 'a18c1e692e02b84abbafe4856c3cd7cc6903908c',
+      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
     ),
     'symfony/browser-kit' => 
     array (
-      'pretty_version' => '5.x-dev',
-      'version' => '5.9999999.9999999.9999999-dev',
+      'pretty_version' => '5.4.x-dev',
+      'version' => '5.4.9999999.9999999-dev',
       'aliases' => 
       array (
         0 => '9999999-dev',
       ),
-      'reference' => 'd6034732ee75aa06c1a28cbbd94a767abed88ae4',
+      'reference' => '4ec25538fdba87442ad043231f4d208cac6eda77',
     ),
     'symfony/css-selector' => 
     array (
-      'pretty_version' => '5.x-dev',
-      'version' => '5.9999999.9999999.9999999-dev',
+      'pretty_version' => '5.4.x-dev',
+      'version' => '5.4.9999999.9999999-dev',
       'aliases' => 
       array (
         0 => '9999999-dev',
       ),
-      'reference' => '59a684f5ac454f066ecbe6daecce6719aed283fb',
+      'reference' => '5d5f97809015102116208b976eb2edb44b689560',
     ),
     'symfony/deprecation-contracts' => 
     array (
@@ -125,23 +125,22 @@ private static $installed = array (
     ),
     'symfony/dom-crawler' => 
     array (
-      'pretty_version' => '5.x-dev',
-      'version' => '5.9999999.9999999.9999999-dev',
+      'pretty_version' => '5.4.x-dev',
+      'version' => '5.4.9999999.9999999-dev',
       'aliases' => 
       array (
         0 => '9999999-dev',
       ),
-      'reference' => 'b4a437deddc6a8aac4144461b93a15236a55cc57',
+      'reference' => '194246b6c6481985963b641d1540f757913782c0',
     ),
     'symfony/http-client' => 
     array (
-      'pretty_version' => '5.x-dev',
-      'version' => '5.9999999.9999999.9999999-dev',
+      'pretty_version' => '5.4.x-dev',
+      'version' => '5.4.9999999.9999999-dev',
       'aliases' => 
       array (
-        0 => '9999999-dev',
       ),
-      'reference' => 'a408c485b61874e77b678ffb5c2d0fc30377c6eb',
+      'reference' => '4d1be6d8409ecddb9d8955e791bf12b1b5b8f42f',
     ),
     'symfony/http-client-contracts' => 
     array (
@@ -151,7 +150,7 @@ private static $installed = array (
       array (
         0 => '2.4.x-dev',
       ),
-      'reference' => '7e82f6084d7cae521a75ef2cb5c9457bbda785f4',
+      'reference' => '978a3f4036777215ced8bade9cc080c2e089cdf3',
     ),
     'symfony/http-client-implementation' => 
     array (
@@ -162,13 +161,12 @@ private static $installed = array (
     ),
     'symfony/mime' => 
     array (
-      'pretty_version' => '5.x-dev',
-      'version' => '5.9999999.9999999.9999999-dev',
+      'pretty_version' => '5.4.x-dev',
+      'version' => '5.4.9999999.9999999-dev',
       'aliases' => 
       array (
-        0 => '9999999-dev',
       ),
-      'reference' => '80690182cbcd32ddbd3e2f1f4d1f3628f3ac1326',
+      'reference' => '622caafd536b6ee7d481bd6292e40f588a967307',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -188,7 +186,7 @@ private static $installed = array (
       array (
         0 => '1.23.x-dev',
       ),
-      'reference' => '780e28060e530479bf1e4a303ccf185e537f8d66',
+      'reference' => '65bd267525e82759e7d8c4e8ceea44f398838e65',
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
@@ -208,7 +206,7 @@ private static $installed = array (
       array (
         0 => '1.23.x-dev',
       ),
-      'reference' => '9ad2f3c9de0273812c616fdf96070a129c3defcb',
+      'reference' => '9174a3d80210dca8daa7f31fec659150bbeabfc6',
     ),
     'symfony/polyfill-php72' => 
     array (
@@ -218,7 +216,7 @@ private static $installed = array (
       array (
         0 => '1.23.x-dev',
       ),
-      'reference' => '95695b83b8ecb15450a6cabfc2e352beb17cce6b',
+      'reference' => '9a142215a36a3888e30d0a9eeea9766764e96976',
     ),
     'symfony/polyfill-php73' => 
     array (
@@ -248,7 +246,7 @@ private static $installed = array (
       array (
         0 => '2.4.x-dev',
       ),
-      'reference' => 'f040a30e04b57fbcc9c6cbcf4dbaa96bd318b9bb',
+      'reference' => '09c60683a07506fea0a43211969cf6b361919c1b',
     ),
   ),
 );
