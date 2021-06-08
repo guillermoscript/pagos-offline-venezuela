@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '08498960e957df34533a9423316c38837f8d0151',
+    'reference' => '737850cd3b856c4122751eb8e482d4b0e316602d',
     'name' => 'oxoft/pagos-offline-venezuela',
   ),
   'versions' => 
@@ -51,7 +51,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '08498960e957df34533a9423316c38837f8d0151',
+      'reference' => '737850cd3b856c4122751eb8e482d4b0e316602d',
     ),
     'php-http/async-client-implementation' => 
     array (
