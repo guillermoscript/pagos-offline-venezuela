@@ -40,7 +40,7 @@ class ValidationPaymentController
 
         if( !preg_match('/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
             // if( !preg_match('/\d/',  $_POST[ 'billing_phone' ] ) && strlen($_POST['billing_phone']) > 7 || strlen($_POST['billing_phone']) < 7 ) {
-            wc_add_notice(  'El Numero no esta en el formato aceptado', 'error' );
+            wc_add_notice(  'El Número no esta en el formato aceptado', 'error' );
             $array_errors[] = false;
         }
 
@@ -66,13 +66,23 @@ class ValidationPaymentController
     {
         # code...
         $array_errors = [];
-        $inputs = ['email_origen','zelle-select'];
+        $inputs = ['email_origen','zelle-select','reference_number'];
         if (!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) {
             wc_add_notice(  '¡Error! El campo del correo esta vacio, por favor ingrese un correo.', 'error' );
             $array_errors[] = false;
         } 
         if (!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) {
             wc_add_notice(  '¡Error! No selecciono un correo zelle, por favor seleccione uno.', 'error' );
+            $array_errors[] = false;
+        } 
+
+        if (!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) {
+            wc_add_notice(  '¡Error! Coloco no el numero de referencia, por favor seleccione uno.', 'error' );
+            $array_errors[] = false;
+        } 
+        
+        if (!is_numeric($_POST[$inputs[2]])) {
+            wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         } 
 

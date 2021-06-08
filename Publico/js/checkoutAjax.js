@@ -14,7 +14,7 @@ import {
     validationDate,
     validationDateTrans,
     validationName,
-    // validacionNumeroDeCuenta,
+    validacionNumeroDeCuenta,
     validationNumberOfTransfer,
     // validacionOtros
 } from './validationsCheckout.js';
@@ -167,6 +167,10 @@ function validationZelle() {
         arrayOfErrors.push('¡Error! El correo de origen no es valido, por favor ingrese uno valido.')
     }
 
+    if (validacionNumeroDeCuenta('reference_number') === 'hay caracteres invalidos') {
+        arrayOfErrors.push('¡Error! El numero de referencia no es valido, por favor ingrese uno valido.')
+    }
+
     if (arrayOfErrors.length === 0) {
         return true;
     } else {
@@ -257,8 +261,8 @@ function validationCheckout() {
 
     }
 
-    if (validationName('billing_first_name') === 'hay un Numero') {
-        arrayOfErrors.push('Error Hay un Numero en el Nombre')
+    if (validationName('billing_first_name') === 'hay un Nmero') {
+        arrayOfErrors.push('Error Hay un Número en el Nombre')
 
     }
     if (validationName('billing_first_name') === 'maximo de caracteres permitido') {
@@ -278,7 +282,7 @@ function validationCheckout() {
     }
 
     if (validationName('billing_last_name') === 'hay un Numero') {
-        arrayOfErrors.push('Error Hay un Numero en el Apellido')
+        arrayOfErrors.push('Error Hay un Número en el Apellido')
 
     }
     if (validationName('billing_last_name') === 'maximo de caracteres permitido') {

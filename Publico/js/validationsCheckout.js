@@ -29,9 +29,11 @@ function validationDateTrans(id) {
         let diff = Math.abs(d1.getTime() - d2.getTime());
         return diff / (1000 * 60 * 60 * 24);
     }
-    if (input.value === '') {
-        return 'no hay nada'
-    }
+
+    if (input.value === null) return 'no hay nada';
+
+    if (input.value === '') return 'no hay nada';
+
     if ( numDaysBetween(new Date(input.value.split('-')),new Date(`${year}-${month}-${today}`.split('-'))) > 20 ) {
         return 'fecha menor'
     } else if (new Date(input.value.split('-')) > new Date(`${year}-${month}-${today}`.split('-'))) {

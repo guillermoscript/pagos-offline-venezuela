@@ -80,7 +80,7 @@ final class Init
         // Our hooked in function – $fields is passed via the filter!
     function custom_override_checkout_fields( $fields ) {
         $fields['billing']['billing_cid'] = array(
-            'label'       => __('Cedula', 'woocommerce'),
+            'label'       => __('Cedula de identidad', 'woocommerce'),
             'placeholder' => _x('Cedula de indentidad', 'placeholder', 'woocommerce'),
             'required'    => true,
             'priority'        => 110,
@@ -129,7 +129,7 @@ final class Init
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'fecha-pago-movil', true ) ) ?></span>
                 </p>
                 <p class="form-row">
-                    <strong>Numero recibo:</strong>
+                    <strong>Número recibo:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'numero_recibo_movil', true ) ) ?></span>
                 </p>
                 <p class="form-row">
@@ -162,6 +162,10 @@ final class Init
                     <strong>Email Destino:</strong>
                     <span><?php echo esc_html( $email ) ?></span>
                 </p>
+                <p class="form-row">
+                    <strong>Número de referemcia:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'reference_number', true ) ) ?></span>
+                </p>
             <?php
         } else if ($payment_method === 'transferencia') {
 
@@ -179,7 +183,7 @@ final class Init
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'fecha-transferencia', true ) ) ?></span>
                 </p>
                 <p class="form-row">
-                    <strong>Numero recibo:</strong>
+                    <strong>Número recibo:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'numero_recibo_transferencia', true ) ) ?></span>
                 </p>
                 <p class="form-row">
