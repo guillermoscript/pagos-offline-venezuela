@@ -140,10 +140,9 @@ function validationContainer(nonce) {
         }
     }
 
-    if (validationOfSpecialInputsInForm(claseToValidate) === true) {
-        // btnCheckOut.removeEventListener('click',sendImage);            
-        // btnCheckOut.addEventListener('click', sendImage );
+    // probando
 
+    if (validationOfSpecialInputsInForm(claseToValidate) === true) {
         sendImage(nonce)
     } else {
         return

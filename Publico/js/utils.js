@@ -11,7 +11,6 @@ function removeAllHtmlWithThisClass(clase) {
     }
 }
 
-
 function showError(mensaje) {
     
     jQuery('.woocommerce-notices-wrapper').prepend(`
