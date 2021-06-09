@@ -15,6 +15,7 @@ import {
     validationDateTrans,
     validationName,
     validacionNumeroDeCuenta,
+    validationReferenceNumberZelle,
     validationNumberOfTransfer,
     // validacionOtros
 } from './validationsCheckout.js';
@@ -165,7 +166,11 @@ function validationZelle() {
         arrayOfErrors.push('¡Error! El correo de origen no es valido, por favor ingrese uno valido.')
     }
 
-    if (validacionNumeroDeCuenta('reference_number') === 'hay caracteres invalidos') {
+    if (validationReferenceNumberZelle('reference_number') === 'no hay nada' || validationReferenceNumberZelle('reference_number') === '') {
+        arrayOfErrors.push('¡Error! No hay nada en el numero de referencia, por favor ingrese uno.')
+    }
+
+    if (validationReferenceNumberZelle('reference_number') === 'no aceptado') {
         arrayOfErrors.push('¡Error! El numero de referencia no es valido, por favor ingrese uno valido.')
     }
 

@@ -198,6 +198,21 @@ function validationEmail(id) {
 
 }
 
+function validationReferenceNumberZelle(id) {
+
+    let input = document.getElementById(id);
+
+    if (input === null) return '';
+
+    if (input.value === '') return 'no hay nada';
+
+    if (/(\w)|(\s)/ig.test(input.value)) {
+        return input.value
+    } else {
+        return 'no aceptado'
+    }
+}
+
 
 export {
     validationFinalBank,
@@ -207,6 +222,7 @@ export {
     // validationCheckout,
     validationEmail,
     validationDate,
+    validationReferenceNumberZelle,
     validationDateTrans,
     validationName,
     validacionNumeroDeCuenta,

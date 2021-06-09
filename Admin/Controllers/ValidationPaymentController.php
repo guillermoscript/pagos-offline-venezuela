@@ -81,7 +81,7 @@ class ValidationPaymentController
             $array_errors[] = false;
         } 
         
-        if (!is_numeric($_POST[$inputs[2]])) {
+        if (!ctype_alnum($_POST[$inputs[2]])) {
             wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         } 

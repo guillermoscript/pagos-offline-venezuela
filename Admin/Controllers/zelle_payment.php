@@ -325,7 +325,7 @@ function wc_offline_gateway_init_zelle()
                 </div>
                 <div class="form-row form-row-wide">
                     <label for="reference_number">Número de Referencia<span class="required">*</span></label>
-                    <input type="number" name="reference_number" id="reference_number" min="1" required>
+                    <input type="text" name="reference_number" id="reference_number" min="1" required>
                 </div>
                 
                 <div class="clear"></div>';
