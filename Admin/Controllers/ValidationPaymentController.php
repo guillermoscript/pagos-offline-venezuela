@@ -38,7 +38,7 @@ class ValidationPaymentController
             $array_errors[] = false;
         }
 
-        if( !preg_match('/(^(\+58\s?)?(\(\d{3}\)|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
+        if( !preg_match('/(^(\+58\s?)?(\d{3}|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ 'billing_phone' ] ) ) {
             // if( !preg_match('/\d/',  $_POST[ 'billing_phone' ] ) && strlen($_POST['billing_phone']) > 7 || strlen($_POST['billing_phone']) < 7 ) {
             wc_add_notice(  'El Número no esta en el formato aceptado', 'error' );
             $array_errors[] = false;
@@ -62,7 +62,7 @@ class ValidationPaymentController
         }
     }
 
-    public function validate_zelle()
+    public static function validate_zelle()
     {
         # code...
         $array_errors = [];
@@ -112,7 +112,29 @@ class ValidationPaymentController
         }
     }
 
-    public function validate_pago_or_transaction($class,$inputs)
+    public static function validate_pago_movil()
+    {
+        $array_errors = [];
+        $inputs = ['telefono_movil'];
+        if (!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) {
+            wc_add_notice(  '¡Error! El campo del telefono esta vacio, por favor ingrese un correo.', 'error' );
+            $array_errors[] = false;
+        }
+
+        if( !preg_match('/(^(\+58\s?)?(\d{3}|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/',  $_POST[ $inputs[0] ] ) ) {
+            // if( !preg_match('/\d/',  $_POST[ 'billing_phone' ] ) && strlen($_POST['billing_phone']) > 7 || strlen($_POST['billing_phone']) < 7 ) {
+            wc_add_notice(  'El Número del pago movil no esta en el formato aceptado', 'error' );
+            $array_errors[] = false;
+        }
+
+        if (empty($array_errors)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function validate_pago_or_transaction($class,$inputs)
     {
         # code...
         $array_errors = [];
@@ -162,11 +184,6 @@ class ValidationPaymentController
 
         if ((!isset($_POST[$inputs[3]]) && !empty($_POST[$inputs[3]])) || $_POST[$inputs[3]] === '' ) {
             wc_add_notice(  '¡Error! Agrege solo numeros en el recibo, por favor.', 'error' );
-            $array_errors[] = false;
-        }
-
-        if ((!isset($_POST[$inputs[4]]) && !empty($_POST[$inputs[4]])) || $_POST[$inputs[4]] === '' ) {
-            wc_add_notice(  '¡Error! Seleccione una fecha de pago, por favor.', 'error' );
             $array_errors[] = false;
         }
 

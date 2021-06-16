@@ -98,7 +98,7 @@ class PagosOfflineVenezuelaPublico {
 		
 		if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) ) {
 
-			wp_enqueue_script( 'checkoutAjax', plugin_dir_url( __FILE__ ) . 'js/checkoutAjax.js', array( 'jquery' ), $this->version, true );
+			// wp_enqueue_script( 'checkoutAjax', plugin_dir_url( __FILE__ ) . 'js/checkoutAjax.js', array( 'jquery' ), $this->version, true );
 
 			wp_enqueue_script( 'myCheckout', plugin_dir_url( __FILE__ ) . 'js/myCheckout.js', array( 'jquery' ), $this->version, true );
 

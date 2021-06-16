@@ -125,12 +125,12 @@ final class Init
             
             ?>
                 <p class="form-row">
-                    <strong>Fecha de pago:</strong>
-                    <span><?php echo esc_html( get_post_meta( $post->ID, 'fecha-pago-movil', true ) ) ?></span>
-                </p>
-                <p class="form-row">
                     <strong>Número recibo:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'numero_recibo_movil', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Número de telefono del pago movil:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'telefono_movil', true ) ) ?></span>
                 </p>
                 <p class="form-row">
                     <strong>Banco Origen:</strong>
@@ -178,10 +178,6 @@ final class Init
             $banco2 = esc_attr( wp_unslash( $transferencia_info[$key2]['banco'] ) );
 
             ?>
-                <p class="form-row">
-                    <strong>Fecha de pago:</strong>
-                    <span><?php echo esc_html( get_post_meta( $post->ID, 'fecha-transferencia', true ) ) ?></span>
-                </p>
                 <p class="form-row">
                     <strong>Número recibo:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'numero_recibo_transferencia', true ) ) ?></span>

@@ -16,8 +16,11 @@ jQuery(document).ready(() => {
 
 function finishCheckout() {
     if (!validationCheckout()) return;
-    validationContainer(ajax_var)
+    if (validationContainer(ajax_var)) {
+        document.getElementById('place_order').removeEventListener('click',finishCheckout)
+    }
 }
+
 
 /**
 * Check if the DOM have been modified by woocommerce (the checkout button) by an ajax call

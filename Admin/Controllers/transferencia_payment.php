@@ -441,11 +441,7 @@ function wc_offline_gateway_init_transferencia() {
                         </label>
                     </div>
                 </div>
-                <div class="form-row form-row-first width-50">
-                    <label for="fecha_transferencia">Fecha de Pago <span class="required">*</span></label>
-                    <input type="date" placeholder="yyyy-mm-dd" name="fecha-transferencia" id="fecha_transferencia" >
-                </div>
-                <div class="form-row form-row-last width-50">
+                <div class="form-row form-row-wide width-50">
                     <label for="numero_recibo_transferencia">Número del Recibo <span class="required">*</span></label>
                     <input  min="1" type="number" name="numero_recibo_transferencia" id="numero_recibo_transferencia" >
                 </div>
@@ -476,7 +472,7 @@ function wc_offline_gateway_init_transferencia() {
         {
             if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
                 ValidationPaymentController::validate_fields();
-                ValidationPaymentController::validate_pago_or_transaction('Transferencia', ['id-transferencia-capture','transferencia-select','transferencia_banco_select','numero_recibo_transferencia','fecha-transferencia']);
+                ValidationPaymentController::validate_pago_or_transaction('Transferencia', ['id-transferencia-capture','transferencia-select','transferencia_banco_select','numero_recibo_transferencia']);
             }
         }
 
@@ -485,14 +481,16 @@ function wc_offline_gateway_init_transferencia() {
     
             $order = wc_get_order( $order_id );
 
-            if( isset($_POST['id-transferencia-capture']) && isset($_POST['transferencia-select']) &&  isset($_POST['fecha-transferencia']) && isset($_POST['numero_recibo_transferencia']) && isset($_POST['transferencia_banco_select']) ) {
+            if( isset($_POST['id-transferencia-capture']) && isset($_POST['transferencia-select']) 
+            // &&  isset($_POST['fecha-transferencia'])
+             && isset($_POST['numero_recibo_transferencia']) && isset($_POST['transferencia_banco_select']) ) {
 
                 $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
                 $order->update_meta_data( '_thumbnail_id', $_POST['id-transferencia-capture'] );
                 $order->update_meta_data( 'transferencia_seleccionado', $_POST['transferencia-select'] );
                 $order->update_meta_data( 'numero_recibo_transferencia', $_POST['numero_recibo_transferencia'] );
                 $order->update_meta_data( 'transferencia_banco_select', $_POST['transferencia_banco_select'] );
-                $order->update_meta_data( 'fecha-transferencia', $_POST['fecha-transferencia'] );
+                // $order->update_meta_data( 'fecha-transferencia', $_POST['fecha-transferencia'] );
                 $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
             }
                     

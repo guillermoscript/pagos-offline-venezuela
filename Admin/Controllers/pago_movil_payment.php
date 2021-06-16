@@ -442,8 +442,8 @@ function wc_offline_gateway_init_pago_movil() {
                     </label>
                 </div>
                 <div class="form-row form-row-first width-50">
-                    <label for="fecha_pago_movil">Fecha de Pago <span class="required">*</span></label>
-                    <input type="date" placeholder="yyyy-mm-dd" name="fecha-pago-movil" id="fecha_pago_movil" >
+                    <label for="telefono_pago_movil">Número de telefono <span class="required">*</span></label>
+                    <input type="tel" name="telefono_movil" id="telefono_pago_movil" >
                 </div>
                 <div class="form-row form-row-last width-50">
                     <label for="numero_recibo_pago_movil">Número del Recibo <span class="required">*</span></label>
@@ -478,7 +478,8 @@ function wc_offline_gateway_init_pago_movil() {
         {
             if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
                 ValidationPaymentController::validate_fields();
-                ValidationPaymentController::validate_pago_or_transaction('Pago movil',['id-pago-movil-capture','pago_movil_select','pago_movil_banco_select','numero_recibo_movil','fecha-pago-movil']);
+                ValidationPaymentController::validate_pago_movil();
+                ValidationPaymentController::validate_pago_or_transaction('Pago movil',['id-pago-movil-capture','pago_movil_select','pago_movil_banco_select','numero_recibo_movil']);
             } 
         }
 
@@ -512,14 +513,18 @@ function wc_offline_gateway_init_pago_movil() {
             
             $order = wc_get_order( $order_id );
             
-            if ( isset($_POST['id-pago-movil-capture']) && isset($_POST['pago_movil_select']) && isset($_POST['fecha-pago-movil']) && isset($_POST['numero_recibo_movil']) && isset($_POST['pago_movil_banco_select']) ) {
+            if ( isset($_POST['id-pago-movil-capture']) && isset($_POST['pago_movil_select']) 
+            // && isset($_POST['fecha-pago-movil']) 
+            && isset($_POST['telefono_movil']) 
+            && isset($_POST['numero_recibo_movil']) && isset($_POST['pago_movil_banco_select']) ) {
 
                 $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
                 $order->update_meta_data( '_thumbnail_id', $_POST['id-pago-movil-capture'] );
                 $order->update_meta_data( 'pago_movil_seleccionado', $_POST['pago_movil_select'] );
                 $order->update_meta_data( 'numero_recibo_movil', $_POST['numero_recibo_movil'] );
                 $order->update_meta_data( 'pago_movil_banco_select', $_POST['pago_movil_banco_select'] );
-                $order->update_meta_data( 'fecha-pago-movil', $_POST['fecha-pago-movil'] );
+                // $order->update_meta_data( 'fecha-pago-movil', $_POST['fecha-pago-movil'] );
+                $order->update_meta_data( 'telefono_movil', $_POST['telefono_movil'] );
                 $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
             }
                     

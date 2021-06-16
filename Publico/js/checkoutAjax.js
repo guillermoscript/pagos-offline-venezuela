@@ -11,10 +11,10 @@ import {
     validacionCellphone,
     // validationCheckout,
     validationEmail,
-    validationDate,
-    validationDateTrans,
+    // validationDate,
+    // validationDateTrans,
     validationName,
-    validacionNumeroDeCuenta,
+    // validacionNumeroDeCuenta,
     validationReferenceNumberZelle,
     validationNumberOfTransfer,
     // validacionOtros
@@ -89,29 +89,27 @@ function sendImage(nonce) {
         processData: false,
         contentType: false,
         data: fdata
-    })
-        .done(function (data) {
+    }).done(function (data) {
 
-            let response = JSON.parse(data)
+        let response = JSON.parse(data)
 
-            if (response.error) {
-                if (response.type) {
-                    console.log(response.type);
-                }
-                showError(response.error)
-                return;
+        if (response.error) {
+            if (response.type) {
+                console.log(response.type);
             }
-            console.log('Successful AJAX Call! perrooooo / Return Data: ' + response.id);
-            btnCheckOut.removeEventListener('click', stopIt)
-            // btnCheckOut.removeEventListener('click',sendImage )
-            document.getElementById('capture-' + clase).value = response.id
-            btnCheckOut.click()
-        })
-        .fail(function (data) {
-            // let err = JSON.parse(data);
-            console.log(data);
-            console.log('Failed AJAX Call :( / Return Data: ' + data);
-        });
+            showError(response.error)
+            return;
+        }
+        console.log('Successful AJAX Call! perrooooo / Return Data: ' + response.id);
+        btnCheckOut.removeEventListener('click', stopIt)
+        // btnCheckOut.removeEventListener('click',sendImage )
+        document.getElementById('capture-' + clase).value = response.id
+        btnCheckOut.click()
+    }).fail(function (data) {
+        // let err = JSON.parse(data);
+        console.log(data);
+        console.log('Failed AJAX Call :( / Return Data: ' + data);
+    });
 }
 
 /**
@@ -137,17 +135,44 @@ function validationContainer(nonce) {
         if (validationZelle() === true) {
             btnCheckOut.removeEventListener('click', stopIt)
             btnCheckOut.click()
-            return
+            return true
         }
     }
 
     // probando 2
     if (validationOfSpecialInputsInForm(claseToValidate) === true) {
+        if (claseToValidate === 'pago_movil') {
+            if (validatePagoMovil() === false) {
+                return
+            }
+        }
+        // btnCheckOut.addEventListener('click', enviarImagen );
         sendImage(nonce)
+        return true
     } else {
         return
     }
 
+}
+
+function validatePagoMovil() {
+
+    let arrayOfErrors = [];
+
+    if (validacionCellphone('telefono_pago_movil') === 'no es un numero valido') {
+        arrayOfErrors.push('Error No es un numero valido, por favor ingrese un numero de venezuela valido, Ejemplo: 0424 123 4567');
+    }
+
+    if (validacionCellphone('telefono_pago_movil') === 'no estan en los metodos de pago') {
+        arrayOfErrors.push('Error No es un metodo disponible el que puso, por favor ingrese uno de los disponibles')
+    }
+
+    if (arrayOfErrors.length === 0) {
+        return true
+    } else {
+        showError(arrayOfErrors)
+        return false
+    }
 }
 
 
@@ -200,17 +225,17 @@ function validationOfSpecialInputsInForm(claseToValidate) {
     let filePath = fileInput.value;
 
 
-    if (validationDateTrans('fecha_' + claseToValidate) === 'fecha menor') {
-        arrayOfErrors.push('Error la fecha pago es 20 dias menor a la de hoy, por favor corrijalo, el limite es 20 dias antes de hoy')
-    }
+    // if (validationDateTrans('fecha_' + claseToValidate) === 'fecha menor') {
+    //     arrayOfErrors.push('Error la fecha pago es 20 dias menor a la de hoy, por favor corrijalo, el limite es 20 dias antes de hoy')
+    // }
 
-    if (validationDateTrans('fecha_' + claseToValidate) === 'fecha mayor') {
-        arrayOfErrors.push('Error la fecha pago es mayor a la de hoy, por favor corrijalo');
-    }
+    // if (validationDateTrans('fecha_' + claseToValidate) === 'fecha mayor') {
+    //     arrayOfErrors.push('Error la fecha pago es mayor a la de hoy, por favor corrijalo');
+    // }
 
-    if (validationDate('fecha_' + claseToValidate) === 'no hay nada') {
-        arrayOfErrors.push('¡Error! Seleccione una fecha de pago, por favor.');
-    }
+    // if (validationDate('fecha_' + claseToValidate) === 'no hay nada') {
+    //     arrayOfErrors.push('¡Error! Seleccione una fecha de pago, por favor.');
+    // }
 
     if (validationNumberOfTransfer('numero_recibo_' + claseToValidate) === 'caracteres no validos') {
         arrayOfErrors.push('¡Error! Agrege solo numeros en el recibo, por favor.');
@@ -319,7 +344,6 @@ function validationCheckout() {
 
 export {
     addTextToInputFileWhenUserClick,
-    sendImage,
     validationCheckout,
     validationContainer,
 }

@@ -17,7 +17,11 @@ jQuery(document).ready(() => {
 }) 
 
 function getNonceAndRunValidation() {
-    validationContainer(ajax_var2)
+    if (!validationCheckout()) return;
+    if (validationContainer(ajax_var2)) {
+        document.getElementById('place_order').removeEventListener('click',finishCheckout)
+    }
+    // validationContainer(ajax_var2)
 }
 
 function addEventsToCheckoutButton() {
