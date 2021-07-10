@@ -49,6 +49,7 @@ define('REST_API_V1', 'v1');
 use Includes\PagosOfflineVenezuelaActivator;
 use Includes\PagosOfflineVenezuelaDeactivator;
 use Includes\PagosOfflineVenezuela;
+// use Puc_v4_Factory;
 
 /**
  * Currently plugin version.
@@ -190,7 +191,9 @@ function get_image() {
     }
 }
 
-// require  dirname( __FILE__ ) . 'plugin-update-checker/plugin-update-checker.php';
+// funciono PERROOO
+
+require  dirname( __FILE__ ) . '/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://e-commerce.apolloacbahamas.com/info.json',
 	__FILE__, //Full path to the main plugin file or functions.php.
