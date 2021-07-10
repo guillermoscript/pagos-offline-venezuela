@@ -189,3 +189,32 @@ function get_image() {
         }
     }
 }
+
+// require  dirname( __FILE__ ) . 'plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://e-commerce.apolloacbahamas.com/info.json',
+	__FILE__, //Full path to the main plugin file or functions.php.
+	'pagos-offline-venezuela'
+);
+
+// add_filter ('pre_set_site_transient_update_plugins', 'display_transient_update_plugins');
+// function display_transient_update_plugins ($transient)
+// {
+//     $obj = new stdClass();
+//     $obj->slug = 'pagos-offline-venezuela.php';
+//     $obj->new_version = '2.0';
+//     $obj->url = 'https://e-commerce.apolloacbahamas.com';
+//     $obj->package = 'https://e-commerce.apolloacbahamas.com';
+//     $transient[plugin_directory/plugin_file.php] -> $obj;
+//     return $transient;
+// }
+
+// add_action('init', 'wptuts_activate_au');
+// function wptuts_activate_au()
+// {
+//     require_once ('wp_autoupdate.php');
+//     $wptuts_plugin_current_version = '1.0';
+//     $wptuts_plugin_remote_path = 'https://e-commerce.apolloacbahamas.com/update.php';
+//     $wptuts_plugin_slug = plugin_basename(__FILE__);
+//     new wp_auto_update ($wptuts_plugin_current_version, $wptuts_plugin_remote_path, $wptuts_plugin_slug);
+// }

@@ -62,11 +62,13 @@ function wc_offline_gateway_init_pago_movil() {
             add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ),11 );
 
             // Add the fields to order email
-            // add_action('woocommerce_email_order_details', array($this,'pago_movil_action_after_email_order_details'), 25, 4 );
+            add_action('woocommerce_email_order_details', array($this,'pago_movil_action_after_email_order_details'), 25, 4 );
 
             
             // Display field value on the order edit page
             add_action( 'woocommerce_admin_order_data_after_billing_address', array($this, 'pago_movil_my_custom_checkout_field_display_admin_order_meta'), 10, 1 );
+
+            // add_action( 'woocommerce_order_details_after_order_table', [$this,'tasa_in_order_page'] );
         
             // You can also register a webhook here
             // add_action( 'woocommerce_api_{webhook name}', array( $this, 'webhook' ) );
@@ -87,14 +89,14 @@ function wc_offline_gateway_init_pago_movil() {
                     'title'       => 'Title',
                     'type'        => 'text',
                     'description' => 'Esto controla lo que el usuario ve de titulo en el checkout.',
-                    'default'     => 'pago_movil',
+                    'default'     => 'Pago Movil',
                     'desc_tip'    => true,
                 ),
                 'description' => array(
                     'title'       => 'Description',
                     'type'        => 'textarea',
                     'description' => 'Esto controla la descripcion que el usuario ve en el checkout.',
-                    'default'     => 'Pagos usando pago_movil.',
+                    'default'     => 'Pagos usando Pago Movil.',
                 ),                  
                 'account_details' => array(
                     'type' => 'account_details',
@@ -559,31 +561,37 @@ function wc_offline_gateway_init_pago_movil() {
             }
         }
 
-        // public function pago_movil_action_after_email_order_details( $order, $sent_to_admin, $plain_text, $email ) {
-        //     if( $tasa = $order->get_meta('tasa-bolivares') ) {
-        //         // The data
-        //         $label = __('Total en bolivares');
+        public function pago_movil_action_after_email_order_details( $order, $sent_to_admin, $plain_text, $email ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                // The data
+                $label = __('Total en bolivares');
         
-        //         // The HTML Structure
-        //         $html_output = '<h2>' . __('Extra data') . '</h2>
-        //         <div class="discount-info"><table cellspacing="0" cellpadding="6"><tr>
-        //         <th>' . $label . '</th><td>' . $tasa . '</td>
-        //         </tr></tbody></table></div><br>';
+                // The HTML Structure
+                $html_output = '<h2>' . __('Extra data') . '</h2>
+                <div class="discount-info"><table cellspacing="0" cellpadding="6"><tr>
+                <th>' . $label . '</th><td>' . $tasa . '</td>
+                </tr></tbody></table></div><br>';
         
-        //         // The CSS styling
-        //         $styles = '<style>
-        //             .discount-info table{width: 100%; font-family: \'Helvetica Neue\', Helvetica, Roboto, Arial, sans-serif;
-        //                 color: #737373; border: 2px solid #e4e4e4; margin-bottom:8px;}
-        //             .discount-info table th, table.tracking-info td{ text-align: left; color: #737373; border: none; padding: 12px;}
-        //             .discount-info table td{ text-align: left; color: #737373; border: none; padding: 12px; }
-        //         </style>';
+                // The CSS styling
+                $styles = '<style>
+                    .discount-info table{width: 100%; font-family: \'Helvetica Neue\', Helvetica, Roboto, Arial, sans-serif;
+                        color: #737373; border: 2px solid #e4e4e4; margin-bottom:8px;}
+                    .discount-info table th, table.tracking-info td{ text-align: left; color: #737373; border: none; padding: 12px;}
+                    .discount-info table td{ text-align: left; color: #737373; border: none; padding: 12px; }
+                </style>';
         
-        //         // The Output CSS + HTML
-        //         echo $styles . $html_output;
-        //     }
-        // }
+                // The Output CSS + HTML
+                echo $styles . $html_output;
+            }
+        }
        
         public function pago_movil_my_custom_checkout_field_display_admin_order_meta( $order ) {
+            if( $tasa = $order->get_meta('tasa-bolivares') ) {
+                echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
+            }
+        }
+
+        public function tasa_in_order_page($order) {
             if( $tasa = $order->get_meta('tasa-bolivares') ) {
                 echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
             }

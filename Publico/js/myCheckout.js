@@ -12,6 +12,7 @@ import {
 
 jQuery(document).ready(() => {
     observerWrapper()
+    // showTotalInBs()
 })
 
 function finishCheckout() {
@@ -62,6 +63,22 @@ function observerWrapper() {
     // observing target
     observer.observe(target, config);
 }
+
+// funcion que tla vez ponga pero por ahora no 
+// function showTotalInBs() {
+//     let pagoMovilCheckBox = document.getElementById('payment_method_pago_movil');
+//     let transferenciaCheckBox = document.getElementById('payment_method_transferencia');
+//     let zelleCheckBox = document.getElementById('payment_method_zelle');
+//     pagoMovilCheckBox.addEventListener('click', () => {
+//         document.querySelector('.caja-con-facturacion').classList.remove('non2')
+//     })
+//     transferenciaCheckBox.addEventListener('click', () => {
+//         document.querySelector('.caja-con-facturacion').classList.remove('non2')
+//     })
+//     zelleCheckBox.addEventListener('click', () => {
+//         document.querySelector('.caja-con-facturacion').classList.add('non2')
+//     })
+// }
 
 function addEventsToCheckoutButon() {
 
