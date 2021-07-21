@@ -163,7 +163,7 @@ final class Init
                     <span><?php echo esc_html( $email ) ?></span>
                 </p>
                 <p class="form-row">
-                    <strong>Número de referemcia:</strong>
+                    <strong>Número de referencia:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'reference_number', true ) ) ?></span>
                 </p>
             <?php

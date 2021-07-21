@@ -16,7 +16,7 @@
  * Plugin Name:       Pagos Offline Venezuela
  * Plugin URI:        https://netkiub.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Version:           3.0
  * Author:            Guillermo
  * Author URI:        https://netkiub.com
  * GitHub Plugin URI: https://github.com/guillermoscript/pagos-offline-venezuela
@@ -37,7 +37,7 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 
 
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+	require_once dirname( iMember360__FILE__ ) . '/vendor/autoload.php';
 }
 
 define('PLUGIN_BASE_PATH', plugin_dir_path( __FILE__ ));
@@ -191,7 +191,7 @@ function get_image() {
     }
 }
 
-// funciono PERROOO
+// echo" funciono 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222";
 
 require  dirname( __FILE__ ) . '/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
@@ -199,25 +199,3 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	__FILE__, //Full path to the main plugin file or functions.php.
 	'pagos-offline-venezuela'
 );
-
-// add_filter ('pre_set_site_transient_update_plugins', 'display_transient_update_plugins');
-// function display_transient_update_plugins ($transient)
-// {
-//     $obj = new stdClass();
-//     $obj->slug = 'pagos-offline-venezuela.php';
-//     $obj->new_version = '2.0';
-//     $obj->url = 'https://e-commerce.apolloacbahamas.com';
-//     $obj->package = 'https://e-commerce.apolloacbahamas.com';
-//     $transient[plugin_directory/plugin_file.php] -> $obj;
-//     return $transient;
-// }
-
-// add_action('init', 'wptuts_activate_au');
-// function wptuts_activate_au()
-// {
-//     require_once ('wp_autoupdate.php');
-//     $wptuts_plugin_current_version = '1.0';
-//     $wptuts_plugin_remote_path = 'https://e-commerce.apolloacbahamas.com/update.php';
-//     $wptuts_plugin_slug = plugin_basename(__FILE__);
-//     new wp_auto_update ($wptuts_plugin_current_version, $wptuts_plugin_remote_path, $wptuts_plugin_slug);
-// }

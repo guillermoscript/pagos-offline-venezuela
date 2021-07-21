@@ -118,7 +118,8 @@ function validationIdn(id) {
     if (/[a-zA-Z]/gi.test(input.value)) {
         return 'hay una letra'
     }
-    if (input.value.length === 10 || input.value.length === 8 ) {
+    if (input.value.length >= 7) {
+    // if (input.value.length === 10 || input.value.length === 8 ) {
         // if (/(\d{1,2})|(\.\d{3})/gi.test(input.value)) {
         if (/^\d+$/gi.test(input.value)) {
             return input.value
