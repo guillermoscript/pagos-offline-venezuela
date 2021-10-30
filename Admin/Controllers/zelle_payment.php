@@ -298,7 +298,7 @@ function wc_offline_gateway_init_zelle()
             do_action('woocommerce_zelle_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide"><label for="zelle_email">Email Zelle <span class="required">*</span></label>
+            $html .=  '<div class="form-row form-row-wide"><label for="zelle_email">Correo Zelle <span class="required">*</span></label>
             
             <select id="zelle_email" name="zelle-select" required>
             <option value="" selected disabled hidden> 
@@ -320,6 +320,10 @@ function wc_offline_gateway_init_zelle()
             $html .=  '</select>
                 </div>
                 <div class="form-row form-row-wide">
+                    <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
+                    <input type="text" name="zelle_sender_name" id="zelle_sender_name" required>
+                </div>
+                <div class="form-row form-row-wide">
                     <label for="email-origen">Correo origen<span class="required">*</span></label>
                     <input type="email" name="email_origen" id="email-origen" required>
                 </div>
@@ -327,7 +331,7 @@ function wc_offline_gateway_init_zelle()
                     <label for="reference_number">Número de Referencia<span class="required">*</span></label>
                     <input type="text" name="reference_number" id="reference_number" required>
                 </div>
-                
+            
                 <div class="clear"></div>';
 
             do_action('woocommerce_zelle_form_end', $this->id);
@@ -349,10 +353,11 @@ function wc_offline_gateway_init_zelle()
 
             $order = wc_get_order($order_id);
 
-            if (isset($_POST['zelle-select']) && isset($_POST['email_origen']) && isset($_POST['reference_number'])) {
+            if (isset($_POST['zelle-select']) && isset($_POST['email_origen']) && isset($_POST['reference_number']) && isset($_POST['zelle_sender_name'])) {
                 $order->update_meta_data('zelle_seleccionado', $_POST['zelle-select']);
                 $order->update_meta_data('email_origen', $_POST['email_origen']);
                 $order->update_meta_data('reference_number', $_POST['reference_number']);
+                $order->update_meta_data('zelle_sender_name', $_POST['zelle_sender_name']);
             }
 
             // Mark as on-hold (we're awaiting the payment)

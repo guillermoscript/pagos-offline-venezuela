@@ -62,7 +62,7 @@ function wc_offline_gateway_init_pago_movil() {
             add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ),11 );
 
             // Add the fields to order email
-            add_action('woocommerce_email_order_details', array($this,'pago_movil_action_after_email_order_details'), 25, 4 );
+            // add_action('woocommerce_email_order_details', array($this,'pago_movil_action_after_email_order_details'), 25, 4 );
 
             
             // Display field value on the order edit page
@@ -119,7 +119,7 @@ function wc_offline_gateway_init_pago_movil() {
                                     <th class="sort">&nbsp;</th>
                                     <th><?php esc_html_e( 'Nombre', 'woocommerce' ); ?></th>
                                     <th><?php esc_html_e( 'Apellido', 'woocommerce' ); ?></th>
-                                    <th><?php esc_html_e( 'Cedula', 'woocommerce' ); ?></th>
+                                    <th><?php esc_html_e( 'Cédula', 'woocommerce' ); ?></th>
                                     <th><?php esc_html_e( 'Telefono', 'woocommerce' ); ?></th>
                                     <th><?php esc_html_e( 'Banco', 'woocommerce' ); ?></th>
                                     <th><?php esc_html_e( 'N# Cuenta', 'woocommerce' ); ?></th>
@@ -528,6 +528,7 @@ function wc_offline_gateway_init_pago_movil() {
                 // $order->update_meta_data( 'fecha-pago-movil', $_POST['fecha-pago-movil'] );
                 $order->update_meta_data( 'telefono_movil', $_POST['telefono_movil'] );
                 $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
+                $order->update_meta_data('rate_of_dolar', $total_en_bolivares['rate_of_dolar']);
             }
                     
             // Mark as on-hold (we're awaiting the payment)
@@ -594,6 +595,9 @@ function wc_offline_gateway_init_pago_movil() {
         public function tasa_in_order_page($order) {
             if( $tasa = $order->get_meta('tasa-bolivares') ) {
                 echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
+            }
+            if( $tasa = $order->get_meta('rate_of_dolar') ) {
+                echo '<p><strong>'.__('tasa del bcv').'</strong> ' . $tasa . '</p>';
             }
         }
 

@@ -45,13 +45,13 @@ class ValidationPaymentController
         }
 
         if( empty( $_POST[ 'billing_cid' ]) ) {
-            wc_add_notice(  'La cedula es requerida', 'error' );
+            wc_add_notice(  'La Cédula es requerida', 'error' );
             $array_errors[] = false;
         }
 
         if( !preg_match('/^\d+$/',  $_POST[ 'billing_cid' ] ) ) {
             
-            wc_add_notice(  'La cedula no esta en el formato aceptado', 'error' );
+            wc_add_notice(  'La Cédula no esta en el formato aceptado', 'error' );
             $array_errors[] = false;
         }
 
@@ -66,7 +66,7 @@ class ValidationPaymentController
     {
         # code...
         $array_errors = [];
-        $inputs = ['email_origen','zelle-select','reference_number'];
+        $inputs = ['email_origen','zelle-select','reference_number','zelle_sender_name'];
         if (!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) {
             wc_add_notice(  '¡Error! El campo del correo esta vacio, por favor ingrese un correo.', 'error' );
             $array_errors[] = false;
@@ -77,7 +77,7 @@ class ValidationPaymentController
         } 
 
         if (!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) {
-            wc_add_notice(  '¡Error! Coloco no el numero de referencia, por favor seleccione uno.', 'error' );
+            wc_add_notice(  '¡Error! No Coloco el numero de referencia, por favor seleccione uno.', 'error' );
             $array_errors[] = false;
         } 
         
@@ -85,6 +85,16 @@ class ValidationPaymentController
             wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         } 
+
+        if (!isset($_POST[$inputs[3]]) && !empty($_POST[$inputs[3]])) {
+            wc_add_notice(  '¡Error! No Coloco el nombre, por favor seleccione uno.', 'error' );
+            $array_errors[] = false;
+        } 
+
+        if (!preg_match("/^([a-zA-Z' ]+)$/",$_POST[$inputs[3]])) {
+            wc_add_notice(  '¡Error! El nombre de origen no es valido, por favor ingrese uno valido.', 'error' );
+            $array_errors[] = false;
+        }
 
         if (filter_var($_POST[$inputs[0]],FILTER_VALIDATE_EMAIL) === false) {
             wc_add_notice(  '¡Error! El correo de origen no es valido, por favor ingrese uno valido.', 'error' );

@@ -199,6 +199,18 @@ function validationZelle() {
         arrayOfErrors.push('¡Error! El numero de referencia no es valido, por favor ingrese uno valido.')
     }
 
+    if (validationName('zelle_sender_name') === 'no hay nada') {
+        arrayOfErrors.push('¡Error! El campo del nombre del zelle esta vacio, por favor ingrese un nombre.')
+    }
+
+    if (validationName('zelle_sender_name') === 'maximo de caracteres permitido') {
+        arrayOfErrors.push('¡Error! El campo del nombre del zelle hay mas caracteres de los permitidos, por favor ingrese uno correcto.')
+    }
+
+    if (validationName('zelle_sender_name') === 'hay un Numero') {
+        arrayOfErrors.push('¡Error! El campo del nombre del zelle hay un numero, por favor ingrese uno correcto.')
+    }
+
     if (arrayOfErrors.length === 0) {
         return true;
     } else {
@@ -277,15 +289,15 @@ function validationCheckout() {
     let arrayOfErrors = [];
 
     if (validationIdn('billing_cid') === 'cantidad no aceptada') {
-        arrayOfErrors.push('Error la cantidad de digitos no es aceptada en la Cedula, por favor corrijalo')
+        arrayOfErrors.push('Error la cantidad de digitos no es aceptada en la Cédula, por favor corrijalo')
 
     }
     if (validationIdn('billing_cid') === 'no hay nada') {
-        arrayOfErrors.push('Error no hay nada en la cedula, por favor corrijalo')
+        arrayOfErrors.push('Error no hay nada en la Cédula, por favor corrijalo')
 
     }
     if (validationIdn('billing_cid') === 'hay una letra') {
-        arrayOfErrors.push('Error hay letras en la Cedula, por favor corrijalo')
+        arrayOfErrors.push('Error hay letras en la Cédula, por favor corrijalo')
 
     }
 

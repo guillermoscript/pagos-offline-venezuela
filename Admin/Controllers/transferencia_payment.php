@@ -493,6 +493,7 @@ function wc_offline_gateway_init_transferencia()
                 $order->update_meta_data('transferencia_banco_select', $_POST['transferencia_banco_select']);
                 // $order->update_meta_data( 'fecha-transferencia', $_POST['fecha-transferencia'] );
                 $order->update_meta_data('tasa-bolivares', $total_en_bolivares['total']);
+                $order->update_meta_data('rate_of_dolar', $total_en_bolivares['rate_of_dolar']);
             }
 
             // Mark as on-hold (we're awaiting the payment)
@@ -529,15 +530,19 @@ function wc_offline_gateway_init_transferencia()
 
         public function transferencia_action_after_email_order_details($order, $sent_to_admin, $plain_text, $email)
         {
-            if ($tasa = $order->get_meta('tasa-bolivares')) {
+            if ($tasa = $order->get_meta('tasa-bolivares') && $rate = $order->get_meta('rate_of_dolar')) {
                 // The data
                 $label = __('Total en bolivares');
+                $label2 = __('Tasa en bolivares');
 
                 // The HTML Structure
                 $html_output = '<h2>' . __('Extra data') . '</h2>
-                <div class="discount-info"><table cellspacing="0" cellpadding="6"><tr>
+                <div class="discount-info"><table cellspacing="0" cellpadding="6">
+                <tr>
                 <th>' . $label . '</th><td>' . $tasa . '</td>
-                </tr></tbody></table></div><br>';
+                <th>' . $label2 . '</th><td>' . $rate . '</td>
+                </tr>
+                </tbody></table></div><br>';
 
                 // The CSS styling
                 $styles = '<style>
@@ -563,13 +568,19 @@ function wc_offline_gateway_init_transferencia()
         {
             if ($tasa = $order->get_meta('tasa-bolivares')) {
 
-                $total_rows['recurr_not'] = array(
+                $total_rows['recurr_not1'] = array(
                     'label' => __('Total en Bolivares:', 'woocommerce'),
-                    'value'   => $tasa . ' Bs'
+                    'value'   => 'Bs ' . $tasa 
                 );
-
-                return $total_rows;
             }
+            if ($rate = $order->get_meta('rate_of_dolar')) {
+
+                $total_rows['recurr_not'] = array(
+                    'label' => __('Tasa en Bolivares:', 'woocommerce'),
+                    'value'   => 'Bs ' . $rate 
+                );
+            }
+            return $total_rows;
         }
     } // end \WC_Gateway_Offline class
 }

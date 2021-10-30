@@ -44,7 +44,7 @@ final class Init
 
         /* ========================= ZELLE ======================================= */
         
-        
+
         /* ========================= OTROS ======================================= */
 
         add_filter( 'woocommerce_checkout_fields', array($this,'misha_remove_fields'), 9999 );
@@ -75,13 +75,13 @@ final class Init
     }
 
     function my_custom_checkout_field_display_admin_order_meta($order){
-        echo '<p><strong>'.__('Cedula del checkout').':</strong> ' . get_post_meta( $order->get_id(), '_billing_cid', true ) . '</p>';
+        echo '<p><strong>'.__('Cédula del checkout').':</strong> ' . get_post_meta( $order->get_id(), '_billing_cid', true ) . '</p>';
     }
         // Our hooked in function – $fields is passed via the filter!
     function custom_override_checkout_fields( $fields ) {
         $fields['billing']['billing_cid'] = array(
-            'label'       => __('Cedula de identidad', 'woocommerce'),
-            'placeholder' => _x('Cedula de indentidad', 'placeholder', 'woocommerce'),
+            'label'       => __('Cédula de identidad', 'woocommerce'),
+            'placeholder' => _x('Cédula de indentidad', 'placeholder', 'woocommerce'),
             'required'    => true,
             'priority'        => 110,
             'class'       => array('form-row-wide'),
@@ -166,6 +166,10 @@ final class Init
                     <strong>Número de referencia:</strong>
                     <span><?php echo esc_html( get_post_meta( $post->ID, 'reference_number', true ) ) ?></span>
                 </p>
+                <p class="form-row">
+                    <strong>Nombre del titular:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'zelle_sender_name', true ) ) ?></span>
+                </p>
             <?php
         } else if ($payment_method === 'transferencia') {
 
@@ -220,7 +224,7 @@ final class Init
         unset( $woo_checkout_fields_array['billing']['billing_address_2'] );
         // unset( $woo_checkout_fields_array['billing']['billing_city'] );
         // unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
-        unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
+        // unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
      
         return $woo_checkout_fields_array;
     }

@@ -11,7 +11,11 @@ import {
 // console.log('AAAAAAAAAAAAAAAAAAAAAA FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
 
 jQuery(document).ready(() => {
-    observerWrapper()
+    // observerWrapper()
+    jQuery('body').on('updated_checkout', () => {
+        addEventsToCheckoutButon()
+        addTextToInputFileWhenUserClick()
+    })
     // showTotalInBs()
 })
 

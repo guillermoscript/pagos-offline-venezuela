@@ -37,7 +37,7 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 
 
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( iMember360__FILE__ ) . '/vendor/autoload.php';
+	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
 define('PLUGIN_BASE_PATH', plugin_dir_path( __FILE__ ));
