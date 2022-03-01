@@ -41,7 +41,7 @@ class RestApiV1 {
 
         $sub_total_in_dolars += $total_taxes_with_discount;
 
-        $price_in_bolivares = $sub_total_in_dolars * floatval(str_replace('.','',$rate_in_bolivares['rate_of_dolar']));
+        $price_in_bolivares = $sub_total_in_dolars * floatval($rate_in_bolivares['rate_of_dolar']);
 
         $price_without_iva = floatval($price_in_bolivares / 1.16);
         $percentage_of_iva = floatval($price_in_bolivares - $price_without_iva);
