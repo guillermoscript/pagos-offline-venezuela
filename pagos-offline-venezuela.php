@@ -33,9 +33,6 @@ if ( ! defined( 'WPINC' ) ) {
 
 if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) return;
 
-
-
-
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
@@ -136,7 +133,6 @@ function get_image() {
     }
     require_once( ABSPATH . 'wp-admin/includes/image.php' );
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
-    // $i = 0;
 
     foreach ( $_FILES as $image ) {
         // $image = $_FILES['file'];
@@ -191,11 +187,9 @@ function get_image() {
     }
 }
 
-// echo" funciono 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222";
-
 require  dirname( __FILE__ ) . '/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://e-commerce.apolloacbahamas.com/info.json',
+    'https://github.com/guillermoscript/pagos-offline-venezuela',
 	__FILE__, //Full path to the main plugin file or functions.php.
 	'pagos-offline-venezuela'
 );
