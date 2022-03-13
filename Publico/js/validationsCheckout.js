@@ -1,4 +1,3 @@
-
 function validationDate(id) {
 
     let input = document.getElementById(id)
@@ -11,8 +10,6 @@ function validationDate(id) {
     }
     if (new Date(input.value.split('-')) < new Date(`${year}-${month}-${today}`)) {
         return 'fecha menor'
-    } else {
-        return input.value
     }
 }
 
@@ -38,8 +35,6 @@ function validationDateTrans(id) {
         return 'fecha menor'
     } else if (new Date(input.value.split('-')) > new Date(`${year}-${month}-${today}`.split('-'))) {
         return 'fecha mayor'
-    } else {
-        return input.value
     }
 }
 
@@ -47,15 +42,7 @@ function validationDateTrans(id) {
 function validationNumberOfTransfer(id) {
     let input = document.getElementById(id);
    
-    if (/^\d+$/gi.test(input.value)) {
-        // if (input.value.length === 20) {
-
-            return input.value
-        // } else {
-        //     return 'no tiene 20'    
-        // }
-        
-    } else {
+    if (!/^\d+$/gi.test(input.value)) {
         return 'caracteres no validos'
     }
 }
@@ -90,9 +77,7 @@ function validationAvailebleBanks(id) {
         "NacionaldeCrédito"
     ];
     let input = document.getElementById(id);
-    if (bancos.includes(input.value)) {
-        return input.value
-    } else {
+    if (!bancos.includes(input.value)) {
         return 'no estan en los bancos'
     }
 }
@@ -103,9 +88,7 @@ function validacionCellphone(id) {
 
     if (cellphone === null) return '';
 
-    if (/(^(\+58\s?)?(\d{3}|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
-        return cellphone.value.replace(/(\s)|([\(,\),-])|(\+)/g,'')
-    } else {
+    if (!/(^(\+58\s?)?(\d{3}|\d{4})([\s\-]?\d{3})([\s\-]?\d{4})$)/g.test(cellphone.value)) {
         return 'no es un numero valido'
     }
 }
@@ -118,16 +101,10 @@ function validationIdn(id) {
     if (/[a-zA-Z]/gi.test(input.value)) {
         return 'hay una letra'
     }
-    if (input.value.length >= 7) {
-    // if (input.value.length === 10 || input.value.length === 8 ) {
-        // if (/(\d{1,2})|(\.\d{3})/gi.test(input.value)) {
-        if (/^\d+$/gi.test(input.value)) {
-            return input.value
-        } 
+    if (input.value.length < 7) {
+        return 'cantidad no aceptada'
     } else if (input.value.length === 0) {
         return 'no hay nada'
-    } else {
-        return 'cantidad no aceptada'
     } 
 }
 
@@ -138,17 +115,7 @@ function validacionNumeroDeCuenta(id) {
     
     if (input === null) return '';
 
-    if (/^\d+$/ig.test(input.value)) {
-        // if (parseInt(input.value.length) > 20) {
-        //     return 'mas numeros de lo debidos'
-        // }
-        // if (parseInt(input.value.length) < 20) {
-        //     return 'menos numeros de los debidos'
-        // }
-        // if (parseInt(input.value.length) === 20) {
-            return input.value
-        // }
-    } else {
+    if (!/^\d+$/ig.test(input.value)) {
         return 'hay caracteres invalidos'
     }
 }
@@ -164,7 +131,7 @@ function validationName(id) {
     
     if (/[0-9]/ig.test(name.value)) return 'hay un Numero';
 
-    if (/[a-zA-Z]/gi.test(name.value)) return name.value
+    // if (/[a-zA-Z]/gi.test(name.value)) return name.value
 }
 
 
@@ -173,7 +140,7 @@ function validationFinalBank(id) {
 
     if (input.value === '') return 'no hay nada';
 
-    if (input.value) return input.value
+    // if (input.value) return input.value
 }
 
 
@@ -182,7 +149,7 @@ function validacionOtros(id) {
 
     if (input === null) return '';
 
-    if (/(\w)|(\s)|([\.,\,,\(,\)])/ig.test(input.value)) return input.value
+    // if (/(\w)|(\s)|([\.,\,,\(,\)])/ig.test(input.value)) return input.value
 }
 
 
@@ -191,9 +158,7 @@ function validationEmail(id) {
 
     if (correo.value === '') return 'no hay nada';
 
-    if (/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/ig.test(correo.value)) {
-        return correo.value
-    } else {
+    if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/ig.test(correo.value)) {
         return 'no aceptado'
     }
 
@@ -208,8 +173,6 @@ function validationReferenceNumberZelle(id) {
     if (input.value === '') return 'no hay nada';
 
     if (/^\w+$/ig.test(input.value)) {
-        return input.value
-    } else {
         return 'no aceptado'
     }
 }
