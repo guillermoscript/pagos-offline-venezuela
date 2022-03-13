@@ -298,9 +298,10 @@ function wc_offline_gateway_init_zelle()
             do_action('woocommerce_zelle_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide"><label for="zelle_email">Correo Zelle <span class="required">*</span></label>
+            $html .=  '<div class="form-row form-row-wide">
+            <label for="zelle_email">Correo Zelle <span class="required">*</span></label>
             
-            <select id="zelle_email" name="zelle-select" required>
+            <select class="offline-input" id="zelle_email" name="zelle-select" required>
             <option value="" selected disabled hidden> 
                 Seleccionar 
             </option> ';
@@ -321,11 +322,11 @@ function wc_offline_gateway_init_zelle()
                 </div>
                 <div class="form-row form-row-wide">
                     <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
-                    <input type="text" name="zelle_sender_name" id="zelle_sender_name" required>
+                    <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
                 </div>
                 <div class="form-row form-row-wide">
                     <label for="email-origen">Correo origen<span class="required">*</span></label>
-                    <input type="email" name="email_origen" id="email-origen" required>
+                    <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
                 </div>
                 <div class="form-row form-row-wide">
                     <label for="reference_number">Número de Referencia<span class="required">*</span></label>
