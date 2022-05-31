@@ -18,6 +18,8 @@ final class Init
         require_once PLUGIN_BASE_PATH . 'Admin/Controllers/transferencia_payment.php';
         require_once PLUGIN_BASE_PATH . 'Admin/Controllers/settings_tab_rate_of_dolar.php';
         require_once PLUGIN_BASE_PATH . 'Admin/Controllers/checkout_en_bolivares.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/reserve.php';
+        require_once PLUGIN_BASE_PATH . 'Admin/Controllers/binance.php';
 
         add_filter( 'woocommerce_payment_gateways', array($this,'add_pago_movil_class') );
         add_action( 'plugins_loaded', 'wc_offline_gateway_init_pago_movil', 11 );
@@ -44,6 +46,20 @@ final class Init
 
         /* ========================= ZELLE ======================================= */
         
+
+        /* ========================= RESERVE ======================================= */
+
+        add_filter( 'woocommerce_payment_gateways', array($this,'add_reserve_class') );
+        add_action( 'plugins_loaded', 'wc_offline_gateway_init_reserve', 11 );
+
+        /* ========================= RESERVE ======================================= */
+
+        /* ========================= BINANCE ======================================= */
+
+        add_filter( 'woocommerce_payment_gateways', array($this,'add_binance_class') );
+        add_action( 'plugins_loaded', 'wc_offline_gateway_init_binance', 11 );
+
+        /* ========================= RESERVE ======================================= */
 
         /* ========================= OTROS ======================================= */
 
@@ -201,6 +217,42 @@ final class Init
                     </a>
                 </p>
             <?php
+        } else if ($payment_method === 'reserve') {
+
+            $reserve_info = get_option( 'woocommerce_reserve_accounts' );
+            $key4 = get_post_meta( $post->ID, 'reserve_seleccionado', true );
+            // $sender_user = esc_attr( wp_unslash( $reserve_info[$key4]['reserve_sender_user'] ) );
+
+            ?>
+                <p class="form-row">
+                    <strong>Reserve de Usuario:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'reserve_sender_user', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Capture:</strong>
+                    <a href="<?php echo esc_html( $url ) ?>">
+                        <img src="<?php echo esc_html( $url ) ?>" alt="" srcset="">
+                    </a>
+                </p>
+            <?php
+        } else if ($payment_method === 'binance') {
+
+            $binance_info = get_option( 'woocommerce_binance_accounts' );
+            $key4 = get_post_meta( $post->ID, 'binance_seleccionado', true );
+            // $sender_user = esc_attr( wp_unslash( $binance_info[$key4]['binance_sender_user'] ) );
+
+            ?>
+                <p class="form-row">
+                    <strong>Binance de Usuario:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'binance_sender_user', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Capture:</strong>
+                    <a href="<?php echo esc_html( $url ) ?>">
+                        <img src="<?php echo esc_html( $url ) ?>" alt="" srcset="">
+                    </a>
+                </p>
+            <?php
         }
     }
 
@@ -262,6 +314,16 @@ final class Init
 
     function add_pago_movil_class( $methods ) {
         $methods[] = 'WC_Gateway_Offline_Pago_Movil'; 
+        return $methods;
+    }
+
+    function add_reserve_class( $methods ) {
+        $methods[] = 'WC_Gateway_Offline_reserve'; 
+        return $methods;
+    }
+    
+    function add_binance_class( $methods ) {
+        $methods[] = 'WC_Gateway_Offline_binance'; 
         return $methods;
     }
 }
