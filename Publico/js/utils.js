@@ -50,7 +50,8 @@ function changeImageIfUSerSelectOtherQrBinance() {
 function copyToClipboart(e) {
     const idToCopy = e.target.getAttribute('data-id');
     const htmlInput = document.getElementById(idToCopy)
-    const value = htmlInput.options[htmlInput.selectedIndex].innerText.trim()
+    // const value = htmlInput.options[htmlInput.selectedIndex].innerText.trim()
+    const value = htmlInput.value.trim()
     // htmlInput.select();
     // htmlInput.setSelectionRange(0, 99999); /* For mobile devices */
     /* Copy selected text into clipboard */
