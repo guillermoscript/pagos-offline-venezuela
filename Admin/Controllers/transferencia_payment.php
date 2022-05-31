@@ -12,7 +12,7 @@ function wc_offline_gateway_init_transferencia()
         {
             // The meat and potatoes of our gateway will go here
             $this->id = 'transferencia'; // payment gateway plugin ID
-            $this->icon = ''; // URL of the icon that will be displayed on checkout page near your gateway name
+            $this->icon = home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/bcv.png"); // URL of the icon that will be displayed on checkout page near your gateway name
             $this->has_fields = true; // in case you need a custom credit card form
             $this->method_title = 'Transferencia Payment';
             $this->method_description = 'Descripcion del transferencia'; // will be displayed on the options page
@@ -399,6 +399,7 @@ function wc_offline_gateway_init_transferencia()
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
             $html .=  '<div class="form-row form-row-wide width-50">
             <label for="info_transferencia">Datos bancarios<span class="required">*</span>
+            <img class="copy" data-id="info_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
             </label>
             
             <select id="info_transferencia" class="select-width" name="transferencia-select" required>

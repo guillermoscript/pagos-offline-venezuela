@@ -11,7 +11,7 @@ function wc_offline_gateway_init_pago_movil() {
         {
             // The meat and potatoes of our gateway will go here
             $this->id = 'pago_movil'; // payment gateway plugin ID
-            $this->icon = ''; // URL of the icon that will be displayed on checkout page near your gateway name
+            $this->icon = home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/bcv.png"); // URL of the icon that will be displayed on checkout page near your gateway name
             $this->has_fields = true; // in case you need a custom credit card form
             $this->method_title = 'Pago Movil Payment';
             $this->method_description = 'Descripcion del pago movil'; // will be displayed on the options page
@@ -406,7 +406,10 @@ function wc_offline_gateway_init_pago_movil() {
             do_action( 'woocommerce_pago_movil_form_start', $this->id );
         
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide width-50"><label for="info_pago_movil">Cuentas Pago Movil disponibles <span class="required">*</span></label>
+            $html .=  '<div class="form-row form-row-wide width-50">
+            <label for="info_pago_movil">Cuentas Pago Movil disponibles <span class="required">*</span>
+            <img class="copy" data-id="info_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+            </label>
             
             <select id="info_pago_movil" class="select-width" name="pago_movil_select" required>
             <option value="" selected disabled hidden> 

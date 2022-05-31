@@ -11,7 +11,7 @@ function wc_offline_gateway_init_zelle()
         {
             // The meat and potatoes of our gateway will go here
             $this->id = 'zelle'; // payment gateway plugin ID
-            $this->icon = ''; // URL of the icon that will be displayed on checkout page near your gateway name
+            $this->icon = home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/zelle.png"); // URL of the icon that will be displayed on checkout page near your gateway name
             $this->has_fields = true; // in case you need a custom credit card form
             $this->method_title = 'Zelle Payment';
             $this->method_description = 'Descripcion del pago zelle'; // will be displayed on the options page
@@ -173,10 +173,10 @@ function wc_offline_gateway_init_zelle()
                         'name_zelle'      => $name_zelles[$i],
                     );
                 }
+                update_option('woocommerce_zelle_accounts', $accounts);
             }
             // phpcs:enable
 
-            update_option('woocommerce_zelle_accounts', $accounts);
         }
 
         private function zelle_details($order_id = '')
@@ -299,7 +299,9 @@ function wc_offline_gateway_init_zelle()
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
             $html .=  '<div class="form-row form-row-wide">
-            <label for="zelle_email">Correo Zelle <span class="required">*</span></label>
+            <label for="zelle_email">Correo Zelle <span class="required">*</span>
+                <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+            </label>
             
             <select class="offline-input" id="zelle_email" name="zelle-select" required>
             <option value="" selected disabled hidden> 
@@ -311,10 +313,10 @@ function wc_offline_gateway_init_zelle()
             foreach ($zelle_info as $key => $account) {
                 # code...
                 $email_cuenta = esc_attr(wp_unslash($account['email_cuenta']));
-                // $name_zelle = esc_attr( wp_unslash( $account['name_zelle'] ) );
+                $name_zelle = esc_attr(wp_unslash($account['name_zelle']));
                 $html .= '
                     <option value="' . $key . '"> 
-                        ' . $email_cuenta . ' 
+                        ' . $email_cuenta . ' -- Nombre: ' . $name_zelle  . '
                     </option> 
                 ';
             }
