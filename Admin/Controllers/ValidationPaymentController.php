@@ -264,38 +264,37 @@ class ValidationPaymentController
             $array_errors[] = false;
         }
 
+        // $count_de_cuenta = 0;
 
-        $count_de_cuenta = 0;
-
-        if ($class === 'Pago Movil') {
-            $pago_movil_info = get_option( 'woocommerce_pago_movil_accounts' );
+        // if ($class === 'Pago Movil') {
+        //     $pago_movil_info = get_option( 'woocommerce_pago_movil_accounts' );
             
-            foreach ($pago_movil_info as $key => $account) {
-                # code...
-                if ( $_POST[$inputs[1]] === strval($key) ) {
-                    $count_de_cuenta++;
-                }
-            }  
-            if ($count_de_cuenta === 0) {
-                wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class, 'error' );
-                $array_errors[] = false;
-            }
-        } else {
-            $transferencia_info = get_option( 'woocommerce_transferencia_accounts' );
+        //     foreach ($pago_movil_info as $key => $account) {
+        //         # code...
+        //         if ( $_POST[$inputs[1]] === strval($key) ) {
+        //             $count_de_cuenta++;
+        //         }
+        //     }  
+        //     if ($count_de_cuenta === 0) {
+        //         wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class, 'error' );
+        //         $array_errors[] = false;
+        //     }
+        // } else {
+        //     $transferencia_info = get_option( 'woocommerce_transferencia_accounts' );
     
-            foreach ($transferencia_info as $key => $account) {
-                # code...
+        //     foreach ($transferencia_info as $key => $account) {
+        //         # code...
                 
-                if ( $_POST[$inputs[1]] === strval($key) ) {
-                    $count_de_cuenta++;
-                }
-            } 
+        //         if ( $_POST[$inputs[1]] === strval($key) ) {
+        //             $count_de_cuenta++;
+        //         }
+        //     } 
     
-            if ($count_de_cuenta === 0) {
-                wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class , 'error' );
-                $array_errors[] = false;
-            }
-        }
+        //     if ($count_de_cuenta === 0) {
+        //         wc_add_notice(  'Error no es una de las cuentas disponibles de ' . $class , 'error' );
+        //         $array_errors[] = false;
+        //     }
+        // }
 
 
         if ( array_search($_POST[$inputs[2]],$bancos_value) === false ) {
