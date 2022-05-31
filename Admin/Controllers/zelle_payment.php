@@ -299,14 +299,7 @@ function wc_offline_gateway_init_zelle()
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
             $html .=  '<div class="form-row form-row-wide">
-            <label for="zelle_email">Correo Zelle <span class="required">*</span>
-                <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-            </label>
-            
-            <select class="offline-input" id="zelle_email" name="zelle-select" required>
-            <option value="" selected disabled hidden> 
-                Seleccionar 
-            </option> ';
+            ';
 
             $zelle_info = get_option('woocommerce_zelle_accounts');
 
@@ -315,13 +308,23 @@ function wc_offline_gateway_init_zelle()
                 $email_cuenta = esc_attr(wp_unslash($account['email_cuenta']));
                 $name_zelle = esc_attr(wp_unslash($account['name_zelle']));
                 $html .= '
-                    <option value="' . $key . '"> 
-                        ' . $email_cuenta . ' -- Nombre: ' . $name_zelle  . '
-                    </option> 
                 ';
             }
-            $html .=  '</select>
-                </div>
+            $html .=  '
+
+        <div class="form-row form-row-wide">
+            <label for="zelle_email">Correo Zelle <span class="required">*</span>
+                    <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+            </label>
+                <input type="text" readonly class="offline-input" id="zelle_email" value=' . $zelle_info[0]['email_cuenta'] . ' name="zelle_email" required>
+        </div>
+
+            <div class="form-row form-row-wide">
+                <label for="zelle_name">Titular <span class="required">*</span>
+                    <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                </label>
+                <input type="text" readonly class="offline-input" id="zelle_name" value=' . $zelle_info[0]['name_zelle'] . ' name="zelle-select" required>
+            </div>
                 <div class="form-row form-row-wide">
                     <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
                     <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
@@ -356,8 +359,14 @@ function wc_offline_gateway_init_zelle()
 
             $order = wc_get_order($order_id);
 
-            if (isset($_POST['zelle-select']) && isset($_POST['email_origen']) && isset($_POST['reference_number']) && isset($_POST['zelle_sender_name'])) {
-                $order->update_meta_data('zelle_seleccionado', $_POST['zelle-select']);
+            if (
+                isset($_POST['zelle_email']) &&
+                isset($_POST['zelle_name']) &&
+                isset($_POST['email_origen']) &&
+                isset($_POST['reference_number']) &&
+                isset($_POST['zelle_sender_name'])
+            ) {
+                // $order->update_meta_data('zelle_seleccionado', $_POST['zelle-select']);
                 $order->update_meta_data('email_origen', $_POST['email_origen']);
                 $order->update_meta_data('reference_number', $_POST['reference_number']);
                 $order->update_meta_data('zelle_sender_name', $_POST['zelle_sender_name']);

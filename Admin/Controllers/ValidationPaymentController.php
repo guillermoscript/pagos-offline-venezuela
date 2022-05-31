@@ -66,32 +66,32 @@ class ValidationPaymentController
     {
         # code...
         $array_errors = [];
-        $inputs = ['email_origen','zelle-select','reference_number','zelle_sender_name'];
+        $inputs = ['email_origen','reference_number','zelle_sender_name','zelle_email','zelle_name'];
         if (!isset($_POST[$inputs[0]]) && !empty($_POST[$inputs[0]])) {
             wc_add_notice(  '¡Error! El campo del correo esta vacio, por favor ingrese un correo.', 'error' );
             $array_errors[] = false;
         } 
-        if (!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) {
-            wc_add_notice(  '¡Error! No selecciono un correo zelle, por favor seleccione uno.', 'error' );
-            $array_errors[] = false;
-        } 
+        // if (!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) {
+        //     wc_add_notice(  '¡Error! No selecciono un correo zelle, por favor seleccione uno.', 'error' );
+        //     $array_errors[] = false;
+        // } 
 
-        if (!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) {
+        if (!isset($_POST[$inputs[1]]) && !empty($_POST[$inputs[1]])) {
             wc_add_notice(  '¡Error! No Coloco el numero de referencia, por favor seleccione uno.', 'error' );
             $array_errors[] = false;
         } 
         
-        if (!ctype_alnum($_POST[$inputs[2]])) {
+        if (!ctype_alnum($_POST[$inputs[1]])) {
             wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         } 
 
-        if (!isset($_POST[$inputs[3]]) && !empty($_POST[$inputs[3]])) {
+        if (!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) {
             wc_add_notice(  '¡Error! No Coloco el nombre, por favor seleccione uno.', 'error' );
             $array_errors[] = false;
         } 
 
-        if (!preg_match("/^([a-zA-Z' ]+)$/",$_POST[$inputs[3]])) {
+        if (!preg_match("/^([a-zA-Z']+)$/",$_POST[$inputs[2]])) {
             wc_add_notice(  '¡Error! El nombre de origen no es valido, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         }
@@ -102,18 +102,30 @@ class ValidationPaymentController
         }
 
         $count_de_cuenta = 0;
-        $zelle_info = get_option( 'woocommerce_zelle_accounts' );
+        // $zelle_info = get_option( 'woocommerce_zelle_accounts' );
+        // $email = $zelle_info[0]['email_cuenta'];
+        // $name = $zelle_info[0]['name_zelle'];
 
-        foreach ($zelle_info as $key => $account) {
-            # code...
-            if ( $_POST[$inputs[1]] === strval($key) ) {
-                $count_de_cuenta++;
-            }
-            if ($count_de_cuenta === 0) {
-                wc_add_notice('Error el email que selecciono no es uno de los mostrados', 'error' );
-                $array_errors[] = false;
-            }
-        }  
+        // if ($email !== $inputs[3]) {
+        //     wc_add_notice(  '¡Error! El correo destinatario no fue elegido, por favor ingrese uno valido.', 'error' );
+        //     $array_errors[] = false;
+        // }
+
+        // if ($name !== $inputs[4]) {
+        //     wc_add_notice(  '¡Error! El correo de origen no es valido, por favor ingrese uno valido.', 'error' );
+        //     $array_errors[] = false;
+        // }
+
+        // foreach ($zelle_info as $key => $account) {
+        //     # code...
+        //     if ( $_POST[$inputs[1]] === strval($key) ) {
+        //         $count_de_cuenta++;
+        //     }
+        //     if ($count_de_cuenta === 0) {
+        //         wc_add_notice('Error el email que selecciono no es uno de los mostrados', 'error' );
+        //         $array_errors[] = false;
+        //     }
+        // }  
 
         if (empty($array_errors)) {
             return true;
