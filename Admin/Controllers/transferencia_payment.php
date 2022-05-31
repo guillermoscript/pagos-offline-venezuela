@@ -397,35 +397,40 @@ function wc_offline_gateway_init_transferencia()
             do_action('woocommerce_transferencia_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide width-50">
-            <label for="info_transferencia">Datos bancarios<span class="required">*</span>
-            <img class="copy" data-id="info_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-            </label>
-            
-            <select id="info_transferencia" class="select-width" name="transferencia-select" required>
-                <option value="" selected disabled hidden> 
-                    Seleccionar 
-                </option> ';
+            $html .=  '';
 
             $transferencia_info = get_option('woocommerce_transferencia_accounts');
 
-            $html2 = '';
+            $full_name = $transferencia_info[0]['nombre'] . ' ' . $transferencia_info[0]['apellido'];
 
-            foreach ($transferencia_info as $key => $account) {
-                # code...
-                $nombre = esc_attr(wp_unslash($account['nombre']));
-                $apellido = esc_attr(wp_unslash($account['apellido']));
-                $cedula = esc_attr(wp_unslash($account['cedula']));
-                $banco = esc_attr(wp_unslash($account['banco']));
-                $cuenta = esc_attr(wp_unslash($account['cuenta']));
-                // $name_transferencia = esc_attr( wp_unslash( $account['name_transferencia'] ) );
-                $html .= '
-                    <option value="' . $key . '"> 
-                        ' . $nombre . ' |  ' . $apellido . ' | ' . $cuenta . ' | ' . $cedula . ' | ' . $banco . '
-                    </option> 
-                ';
-            }
-            $html .=  '</select>
+            $html .=  '
+
+                <div class="form-row form-row-last width-50">
+                    <label for="nombre_completo_transferencia">Nombre Completo <span class="required">*</span>
+                        <img class="copy" data-id="nombre_completo_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_transferencia" id="nombre_completo_transferencia" >
+                </div>
+
+                <div class="form-row form-row-last width-50">
+                    <label for="banco_a_pagar_transferencia">Banco Titular <span class="required">*</span>
+                        <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $transferencia_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="telefono_a_pagar_transferencia" >
+                </div>
+
+                <div class="form-row form-row-last width-50">
+                    <label for="cedula_a_pagar_transferencia">Cedula Titular <span class="required">*</span>
+                        <img class="copy" data-id="cedula_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $transferencia_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_transferencia" id="cedula_a_pagar_transferencia" >
+                </div>
+
+                <div class="form-row form-row-last width-50">
+                    <label for="banco_a_pagar_transferencia">Cuenta Titular <span class="required">*</span>
+                        <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $transferencia_info[0]['cuenta'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="banco_a_pagar_transferencia" >
                 </div>
                 <div class="form-row form-row-wide width-50">
                     <div class="input-group">

@@ -406,34 +406,40 @@ function wc_offline_gateway_init_pago_movil() {
             do_action( 'woocommerce_pago_movil_form_start', $this->id );
         
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide width-50">
-            <label for="info_pago_movil">Cuentas Pago Movil disponibles <span class="required">*</span>
-            <img class="copy" data-id="info_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-            </label>
-            
-            <select id="info_pago_movil" class="select-width" name="pago_movil_select" required>
-            <option value="" selected disabled hidden> 
-                Seleccionar 
-            </option> ';
+            $html .=  '';
 
             $pago_movil_info = get_option( 'woocommerce_pago_movil_accounts' );
-
-            foreach ($pago_movil_info as $key => $account) {
-                # code...
-                $nombre = esc_attr( wp_unslash( $account['nombre'] ) );
-                $apellido = esc_attr( wp_unslash( $account['apellido'] ) );
-                $telefono = esc_attr( wp_unslash( $account['telefono'] ) );
-                $cedula = esc_attr( wp_unslash( $account['cedula'] ) );
-                $banco = esc_attr( wp_unslash( $account['banco'] ) );
-                // $name_pago_movil = esc_attr( wp_unslash( $account['name_pago_movil'] ) );
-                $html .= '
-                    <option value="'.$key.'"> 
-                        '.$nombre.' |  '.$apellido.' | '.$telefono.' | '.$cedula.' | '.$banco.'
-                    </option> 
-                ';
-            }  
-            $html .=  '</select>
+            $full_name = $pago_movil_info[0]['nombre'] . ' ' . $pago_movil_info[0]['apellido'];
+            $html .=  '
+                <div class="form-row form-row-last width-50">
+                    <label for="nombre_completo_pago_movil">Nombre Completo <span class="required">*</span>
+                        <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_pago_movil" id="nombre_completo_pago_movil" >
                 </div>
+
+                <div class="form-row form-row-last width-50">
+                    <label for="telefono_a_pagar_pago_movil">Telefono Titular <span class="required">*</span>
+                        <img class="copy" data-id="telefono_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $pago_movil_info[0]['telefono'] .'" readonly  type="text" name="telefono_a_pagar_pago_movil" id="telefono_a_pagar_pago_movil" >
+                </div>
+
+                <div class="form-row form-row-last width-50">
+                    <label for="cedula_a_pagar_pago_movil">Cedula Titular <span class="required">*</span>
+                        <img class="copy" data-id="cedula_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $pago_movil_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_pago_movil" id="cedula_a_pagar_pago_movil" >
+                </div>
+
+
+                <div class="form-row form-row-last width-50">
+                    <label for="banco_a_pagar_pago_movil">Banco Titular <span class="required">*</span>
+                        <img class="copy" data-id="banco_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>                
+                    <input value="'. $pago_movil_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_pago_movil" id="banco_a_pagar_pago_movil" >
+                </div>
+
                 <div class="form-row form-row-wide width-50">
                     <label class="label-file" for="comprobante_pago_movil">
                         Adjuntar Comprobante
@@ -484,7 +490,8 @@ function wc_offline_gateway_init_pago_movil() {
             if ( is_checkout() && ! ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) )  {
                 ValidationPaymentController::validate_fields();
                 ValidationPaymentController::validate_pago_movil();
-                ValidationPaymentController::validate_pago_or_transaction('Pago movil',['id-pago-movil-capture','pago_movil_select','pago_movil_banco_select','numero_recibo_movil']);
+                ValidationPaymentController::validate_pago_or_transaction('Pago movil',
+                ['id-pago-movil-capture','pago_movil_select','pago_movil_banco_select','numero_recibo_movil']);
             } 
         }
 
@@ -518,14 +525,16 @@ function wc_offline_gateway_init_pago_movil() {
             
             $order = wc_get_order( $order_id );
             
-            if ( isset($_POST['id-pago-movil-capture']) && isset($_POST['pago_movil_select']) 
+            if ( isset($_POST['id-pago-movil-capture']) 
+            // && isset($_POST['pago_movil_select']) 
             // && isset($_POST['fecha-pago-movil']) 
             && isset($_POST['telefono_movil']) 
-            && isset($_POST['numero_recibo_movil']) && isset($_POST['pago_movil_banco_select']) ) {
+            && isset($_POST['numero_recibo_movil']) 
+            && isset($_POST['pago_movil_banco_select']) ) {
 
                 $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
                 $order->update_meta_data( '_thumbnail_id', $_POST['id-pago-movil-capture'] );
-                $order->update_meta_data( 'pago_movil_seleccionado', $_POST['pago_movil_select'] );
+                // $order->update_meta_data( 'pago_movil_seleccionado', $_POST['pago_movil_select'] );
                 $order->update_meta_data( 'numero_recibo_movil', $_POST['numero_recibo_movil'] );
                 $order->update_meta_data( 'pago_movil_banco_select', $_POST['pago_movil_banco_select'] );
                 // $order->update_meta_data( 'fecha-pago-movil', $_POST['fecha-pago-movil'] );
