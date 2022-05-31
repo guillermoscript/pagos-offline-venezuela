@@ -15,7 +15,7 @@
 /* ---------------------------------------------------------                    -------------------------------------------------------------------- */
  
  
-#bararea, #bararea{
+#bararea, #bararea2, #bararea3, #bararea4{
 	width:100%;
 	height:20px;
     border:2px solid #FFFFFF;
@@ -24,10 +24,16 @@
     align-items: center;
 }
  
-#bar, #bar2{
+#bar, #bar2,#bar3, #bar4{
 	width:1%;
 	height:8px;
 	background-color:#32797e;
+}
+
+.copy {
+    padding-left: 10px !important;
+    height: 18px;
+    cursor: pointer;
 }
 
 .jpg-p {

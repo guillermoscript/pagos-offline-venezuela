@@ -152,6 +152,25 @@ function validacionOtros(id) {
     // if (/(\w)|(\s)|([\.,\,,\(,\)])/ig.test(input.value)) return input.value
 }
 
+function validationCapture(id) {
+
+	const fileInput = document.getElementById(id);
+	const filePath = fileInput.value;
+	const allowedExtensions = /(\.jpg|\.jpeg|\.pdf|\.png|\.gif)$/i;
+    
+	if (fileInput.value === "") {
+		return 'no hay nada'
+	}
+	
+
+	if (!allowedExtensions.test(filePath)) {
+        return 'no es una extension valida';
+	}
+
+	if (jQuery("#" + id)[0].files[0].size > 3000000) {
+        return 'el archivo es muy grande';
+	}
+}
 
 function validationEmail(id) {
     let correo = document.getElementById(id);
@@ -191,5 +210,6 @@ export {
     validationName,
     validacionNumeroDeCuenta,
     validationNumberOfTransfer,
+    validationCapture,
     validacionOtros
 }

@@ -1,6 +1,6 @@
 import { stopIt, removeAllHtmlWithThisClass, showError } from "./utils.js";
 
-import { validatePagoMovil, validationCheckout, validationOfSpecialInputsInForm, validationZelle } from "./guardianFunctions.js";
+import { validatePagoMovil, validationBinance, validationCheckout, validationOfSpecialInputsInForm, validationReserve, validationZelle } from "./guardianFunctions.js";
 
 /**
  * Adds the name of the file to the file input wrapper so the user
@@ -26,19 +26,27 @@ function addTextToInputFileWhenUserClick() {
  */
 function sendImage(nonce) {
 	let btnCheckOut = document.getElementById("place_order");
-	let pagoMovilCheckBox = document.getElementById("payment_method_pago_movil");
+	let pagoMovilCheckBox = document.getElementById("payment_method_pago_movil") ? document.getElementById("payment_method_pago_movil") : null;
 	let transferenciaCheckBox = document.getElementById(
 		"payment_method_transferencia"
-	);
+	) ? document.getElementById("payment_method_transferencia") : null;
+	let reserveCheckBox = document.getElementById("payment_method_reserve") ? document.getElementById("payment_method_reserve") : null;
+	let binanceCheckBox = document.getElementById("payment_method_binance") ? document.getElementById("payment_method_binance") : null;
 	let clase = "";
 	let num = "";
 
-	if (pagoMovilCheckBox.checked === true) {
+	if (pagoMovilCheckBox !== null && pagoMovilCheckBox.checked === true) {
 		clase = "comprobante_pago_movil";
 		num = "2";
-	} else if (transferenciaCheckBox.checked === true) {
+	} else if (transferenciaCheckBox !== null && transferenciaCheckBox.checked === true) {
 		clase = "comprobante_transferencia";
 		num = "1";
+	} else if (reserveCheckBox !== null && reserveCheckBox.checked === true) {
+		clase = "comprobante_reserve";
+		num = "3";
+	} else if (binanceCheckBox !== null && binanceCheckBox.checked === true) {
+		clase = "comprobante_binance";
+		num = "4";
 	}
 
 	let fdata = new FormData();
@@ -103,20 +111,42 @@ function sendImage(nonce) {
  */
 function validationContainer(nonce) {
 	let btnCheckOut = document.getElementById("place_order");
-	let pagoMovilCheckBox = document.getElementById("payment_method_pago_movil");
+	let pagoMovilCheckBox = document.getElementById("payment_method_pago_movil") ? document.getElementById("payment_method_pago_movil") : null;
+	let reserveCheckBox = document.getElementById("payment_method_reserve") ? document.getElementById("payment_method_reserve") : null;
+	let binanceCheckBox = document.getElementById("payment_method_binance") ? document.getElementById("payment_method_binance") : null;
 	let transferenciaCheckBox = document.getElementById(
 		"payment_method_transferencia"
-	);
-	let zelleCheckBox = document.getElementById("payment_method_zelle");
+	) ? document.getElementById("payment_method_transferencia") : null;
+	let zelleCheckBox = document.getElementById("payment_method_zelle") ? document.getElementById("payment_method_zelle") : null;
 	let claseToValidate = "";
 
 	removeAllHtmlWithThisClass("woocommerce-NoticeGroup");
 
-	if (pagoMovilCheckBox.checked === true) {
+	if (reserveCheckBox !== null && reserveCheckBox.checked === true) {
+		console.log('reserveCheckBox');
+		if (validationReserve()) {
+			sendImage(nonce);
+			return true;
+		} else {
+			return;
+		}
+	}
+
+	if (binanceCheckBox !== null && binanceCheckBox.checked === true) {
+		console.log('binanceCheckBox');
+		if (validationBinance()) {
+			sendImage(nonce);
+			return true;
+		} else {
+			return;
+		}
+	}
+
+	if (pagoMovilCheckBox !== null && pagoMovilCheckBox.checked === true) {
 		claseToValidate = "pago_movil";
-	} else if (transferenciaCheckBox.checked === true) {
+	} else if (transferenciaCheckBox !== null && transferenciaCheckBox.checked === true) {
 		claseToValidate = "transferencia";
-	} else if (zelleCheckBox.checked === true) {
+	} else if (zelleCheckBox !== null && zelleCheckBox.checked === true) {
 		if (validationZelle() === true) {
 			btnCheckOut.removeEventListener("click", stopIt);
 			btnCheckOut.click();
@@ -124,15 +154,14 @@ function validationContainer(nonce) {
 		}
 	}
 
-	// probando 2
-	if (validationOfSpecialInputsInForm(claseToValidate) === true) {
+	if (claseToValidate !== "" && validationOfSpecialInputsInForm(claseToValidate) === true) {
 		if (claseToValidate === "pago_movil") {
 			if (validatePagoMovil() === false) {
 				return;
 			}
 		}
+		// btnCheckOut.addEventListener('click', enviarImagen );
 		sendImage(nonce);
-		return true;
 	} else {
 		return;
 	}

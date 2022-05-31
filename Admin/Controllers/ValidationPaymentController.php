@@ -122,6 +122,61 @@ class ValidationPaymentController
         }
     }
 
+    public static function validate_reserve()
+    {
+        if (!isset($_POST['id-comprobante_binance'])) {
+        
+            wc_add_notice(  '¡Error! El campo del capture esta vacio, por favor ingrese su comprobante.', 'error' );
+            $array_errors[] = false;
+        }
+
+        if (!isset($_POST['reserve_select'] )) {
+
+            wc_add_notice(  '¡Error! El campo de cuenta de reserve esta vacio, por favor ingrese uno.', 'error' );
+            $array_errors[] = false;
+        }
+
+        if (!isset($_POST['reserve_sender_user'])) {
+
+            wc_add_notice(  '¡Error! El campo de su usuario Reserve esta vacio, por favor ingrese uno.', 'error' );
+            $array_errors[] = false;
+        }
+        if (empty($array_errors)) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+    public static function validate_binance()
+    {
+        if (!isset($_POST['id-comprobante_binance'])) {
+        
+            wc_add_notice(  '¡Error! El campo del capture esta vacio, por favor ingrese su comprobante.', 'error' );
+            $array_errors[] = false;
+        }
+
+        if (!isset($_POST['binance_select'] )) {
+
+            wc_add_notice(  '¡Error! El campo de cuenta de Binance esta vacio, por favor ingrese uno.', 'error' );
+            $array_errors[] = false;
+        }
+
+        if (!isset($_POST['binance_sender_user'])) {
+
+            wc_add_notice(  '¡Error! El campo de su usuario Binance esta vacio, por favor ingrese uno.', 'error' );
+            $array_errors[] = false;
+        }
+        if (empty($array_errors)) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+
     public static function validate_pago_movil()
     {
         $array_errors = [];

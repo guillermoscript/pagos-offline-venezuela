@@ -39,5 +39,15 @@ export const errors = {
         'no hay nada': '¡Error! Agrege un correo, por favor.',
         'no aceptado': '¡Error! Agrege un correo valido, por favor.',
     },
+    reserve: {
+        'no hay nada sender_user': '¡Error! Agrege un Usuario de Reserve, por favor.',
+        'no hay nada selected_user': '¡Error! Seleccione una Cuenta de Reserve, por favor.',
+        'same_user': '¡Error! La cuenta de envio es la misma a la seleccionada, por favor seleccione otra.',
+    },
+    binance: {
+        'no hay nada sender_user': '¡Error! Agrege un Usuario de Binance, por favor.',
+        'no hay nada selected_user': '¡Error! Seleccione una Cuenta de Binance, por favor.',
+        'same_user': '¡Error! La cuenta de envio es la misma a la seleccionada, por favor seleccione otra.',
+    },
 
 }
