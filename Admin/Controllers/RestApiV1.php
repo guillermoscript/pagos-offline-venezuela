@@ -74,6 +74,10 @@ class RestApiV1 {
                     return $node->text()."\n";
                 });
                 $rate_in_bolivares =  $helper[0];
+                // $rate = "4,77050000 ";
+                // $rate = str_replace(',','.',$rate);
+                $rate_in_bolivares = str_replace(',','.',$rate_in_bolivares);
+                $rate_in_bolivares = floatval($rate_in_bolivares);
             } catch (\Throwable $th) {
                 //throw $th;
                 $rate_in_bolivares = get_option( 'rate_of_dolar_title' );
