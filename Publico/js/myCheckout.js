@@ -1,8 +1,9 @@
 import {
     stopIt,
-    changeImageIfUSerSelectOtherQr,
-    changeImageIfUSerSelectOtherQrBinance,
-    copyToClipboart
+    // changeImageIfUSerSelectOtherQr,
+    // changeImageIfUSerSelectOtherQrBinance,
+    copyToClipboart,
+    showQR
 } from './utils.js';
 
 import {
@@ -21,14 +22,15 @@ jQuery(document).ready(() => {
     jQuery('body').on('updated_checkout', () => {
         addEventsToCheckoutButon()
         addTextToInputFileWhenUserClick()
-        if (document.querySelector('#reserve_qr_img img')) {
-            changeImageIfUSerSelectOtherQr()
-        }
-        if (document.querySelector('#binance_qr_img img')) {
-            changeImageIfUSerSelectOtherQrBinance()
-        }
+        // if (document.querySelector('#reserve_qr_img img')) {
+        //     // changeImageIfUSerSelectOtherQr()
+        // }
+        // if (document.querySelector('#binance_qr_img img')) {
+        //     // changeImageIfUSerSelectOtherQrBinance()
+        // }
 
-
+        document.getElementById('reserve').addEventListener('click',showQR)
+        document.getElementById('binance').addEventListener('click',showQR)
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
     })
     // showTotalInBs()

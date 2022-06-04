@@ -301,32 +301,18 @@ function wc_offline_gateway_init_reserve()
             do_action('woocommerce_reserve_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-first width-50">
-            <label for="info_reserve">Cuentas Reserve disponibles <span class="required">*</span>
-
-            <img class="copy" id="info_reserve_copy" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-            </label>
-            
-            <select id="info_reserve" class="select-width" name="reserve_select" required>
-                <option value="" selected disabled hidden> 
-                    Seleccionar 
-                </option> ';
+            $html .=  '';
 
             $reserve_info = get_option('woocommerce_reserve_accounts');
 
-            foreach ($reserve_info as $key => $account) {
-                # code...
-                $nombre = esc_attr(wp_unslash($account['reserve_nombre_de_usuario']));
-                $qr = esc_attr(wp_unslash($account['reserve_qr']));
-                $html .= '
-                     <option data-qr="' . $qr . '" value="' . $key . '"> 
-                         ' . $nombre . '
-                     </option> 
-                 ';
-            }
-            $html .=  '</select>
-                </div>
+            $html .=  '
 
+                <div class="form-row form-row-first width-50">
+                    <label for="cuenta_reserve">Cuenta Titular <span class="required">*</span>
+                        <img class="copy" data-id="cuenta_reserve" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>      
+                    <input value="'.$reserve_info[0]['reserve_nombre_de_usuario'].'" readonly  type="text" name="cuenta_reserve" id="cuenta_reserve" >
+                </div>
 
                 <div class="form-row form-row-last width-50">
                     <label for="reserve_sender_user">Nombre de tu Usuario <span class="required">*</span></label>
@@ -334,7 +320,12 @@ function wc_offline_gateway_init_reserve()
                 </div>
 
                 <div class="form-row form-row-wide" id="reserve_qr_img" style="display: none;">
-                        <img src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
+                        <img src="'.$reserve_info[0]['reserve_qr'].'" alt="QR" width="100" height="100" style="width: 100%;">
+                </div>
+
+
+                <div class="form-row form-row-wide width-50">
+                    <input type="Button" value="Ver QR" name="reserve" id="reserve" >
                 </div>
 
                 <div class="form-row form-row-wide width-50">

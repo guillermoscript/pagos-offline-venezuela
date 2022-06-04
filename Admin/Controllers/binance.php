@@ -307,16 +307,7 @@ function wc_offline_gateway_init_binance()
             do_action('woocommerce_binance_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-first width-50">
-            <label for="info_binance">Cuentas Binance disponibles <span class="required">*</span>
-            <img class="copy" data-id="info_binance" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-
-            </label>
-            
-            <select id="info_binance" class="select-width" name="binance_select" required>
-                <option value="" selected disabled hidden> 
-                    Seleccionar 
-                </option> ';
+            $html .=  '';
 
             $binance_info = get_option('woocommerce_binance_accounts');
 
@@ -325,15 +316,23 @@ function wc_offline_gateway_init_binance()
                 $nombre = esc_attr(wp_unslash($account['binance_nombre_de_usuario']));
                 $qr = esc_attr(wp_unslash($account['binance_qr']));
                 $binance_coin = esc_attr(wp_unslash($account['binance_coin']));
-                $html .= '
-                     <option data-qr="' . $qr . '" value="' . $key . '"> 
-                         ' . $nombre . ' - ' . $binance_coin . '
-                     </option> 
-                 ';
             }
-            $html .=  '</select>
-                </div>
+            $html .=  '
 
+                
+                <div class="form-row form-row-first width-50">
+                    <label for="cuenta_binance">Cuenta Titular <span class="required">*</span>
+                        <img class="copy" data-id="cuenta_binance" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>      
+                    <input value="'.$binance_info[0]['binance_nombre_de_usuario'].'" readonly  type="text" name="cuenta_binance" id="cuenta_binance" >
+                </div>
+                
+                <div class="form-row form-row-last width-50">
+                    <label for="cuenta_binance_token">Moneda/Token <span class="required">*</span>
+                        <img class="copy" data-id="cuenta_binance_token" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </label>      
+                    <input value="'.$binance_info[0]['binance_coin'].'" readonly  type="text" name="cuenta_binance_token" id="cuenta_binance_token" >
+                </div>
 
                 <div class="form-row form-row-last width-50">
                     <label for="binance_sender_user">Nombre de tu Usuario <span class="required">*</span></label>
@@ -341,7 +340,11 @@ function wc_offline_gateway_init_binance()
                 </div>
 
                 <div class="form-row form-row-wide" id="binance_qr_img" style="display: none;">
-                        <img src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
+                        <img src="'.$binance_info[0]['binance_qr'].'" alt="QR" width="100" height="100" style="width: 100%;">
+                </div>
+
+                <div class="form-row form-row-wide width-50">
+                    <input  type="Button" value="Ver QR" name="binance" id="binance" >
                 </div>
 
                 <div class="form-row form-row-wide width-50">
@@ -390,12 +393,12 @@ function wc_offline_gateway_init_binance()
 
             if (
                 isset($_POST['id-comprobante_binance'])
-                && isset($_POST['binance_select'])
+                // && isset($_POST['binance_select'])
                 && isset($_POST['binance_sender_user'])
             ) {
 
                 $order->update_meta_data('_thumbnail_id', $_POST['id-comprobante_binance']);
-                $order->update_meta_data('binance_seleccionado', $_POST['binance_select']);
+                // $order->update_meta_data('binance_seleccionado', $_POST['binance_select']);
                 $order->update_meta_data('binance_sender_user', $_POST['binance_sender_user']);
             }
 

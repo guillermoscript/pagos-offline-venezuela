@@ -7,8 +7,8 @@ import {
 
 import {
     stopIt,
-    changeImageIfUSerSelectOtherQr,
-    changeImageIfUSerSelectOtherQrBinance,
+    // changeImageIfUSerSelectOtherQr,
+    // changeImageIfUSerSelectOtherQrBinance,
     copyToClipboart
     // removeAllHtmlWithThisClass,
     // showError,
@@ -25,12 +25,12 @@ jQuery(document).ready(() => {
 
         addEventsToCheckoutButton()
         addTextToInputFileWhenUserClick()
-        if (document.querySelector('#reserve_qr_img img')) {
-            changeImageIfUSerSelectOtherQr()
-        }
-        if (document.querySelector('#binance_qr_img img')) {
-            changeImageIfUSerSelectOtherQrBinance()
-        }
+        // if (document.querySelector('#reserve_qr_img img')) {
+        //     changeImageIfUSerSelectOtherQr()
+        // }
+        // if (document.querySelector('#binance_qr_img img')) {
+        //     changeImageIfUSerSelectOtherQrBinance()
+        // }
 
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click',copyToClipboart))
 

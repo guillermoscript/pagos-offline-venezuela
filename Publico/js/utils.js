@@ -37,6 +37,12 @@ function changeImageIfUSerSelectOtherQr() {
     });
 }
 
+function showQR(e) {
+    let target = e.target.id ;
+    let qr = document.querySelector(`#${target}_qr_img img`)
+    qr.parentElement.style.display = 'block'
+}
+
 function changeImageIfUSerSelectOtherQrBinance() {
     let qr = document.querySelector('#binance_qr_img img')
     let selectInput = document.querySelector('#info_binance')
@@ -62,8 +68,9 @@ function copyToClipboart(e) {
 export {
     stopIt,
     removeAllHtmlWithThisClass,
-    changeImageIfUSerSelectOtherQr,
-    changeImageIfUSerSelectOtherQrBinance,
+    // changeImageIfUSerSelectOtherQr,
+    // changeImageIfUSerSelectOtherQrBinance,
     copyToClipboart,
     showError,
+    showQR
 }

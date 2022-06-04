@@ -81,10 +81,10 @@ class ValidationPaymentController
             $array_errors[] = false;
         } 
         
-        if (!ctype_alnum($_POST[$inputs[1]])) {
-            wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
-            $array_errors[] = false;
-        } 
+        // if (!ctype_alnum($_POST[$inputs[1]])) {
+        //     wc_add_notice(  '¡Error! El numero de referencia no es valido, por favor ingrese uno valido.', 'error' );
+        //     $array_errors[] = false;
+        // } 
 
         if (!isset($_POST[$inputs[2]]) && !empty($_POST[$inputs[2]])) {
             wc_add_notice(  '¡Error! No Coloco el nombre, por favor seleccione uno.', 'error' );
@@ -142,11 +142,11 @@ class ValidationPaymentController
             $array_errors[] = false;
         }
 
-        if (!isset($_POST['reserve_select'] )) {
+        // if (!isset($_POST['reserve_select'] )) {
 
-            wc_add_notice(  '¡Error! El campo de cuenta de reserve esta vacio, por favor ingrese uno.', 'error' );
-            $array_errors[] = false;
-        }
+        //     wc_add_notice(  '¡Error! El campo de cuenta de reserve esta vacio, por favor ingrese uno.', 'error' );
+        //     $array_errors[] = false;
+        // }
 
         if (!isset($_POST['reserve_sender_user'])) {
 
@@ -169,11 +169,11 @@ class ValidationPaymentController
             $array_errors[] = false;
         }
 
-        if (!isset($_POST['binance_select'] )) {
+        // if (!isset($_POST['binance_select'] )) {
 
-            wc_add_notice(  '¡Error! El campo de cuenta de Binance esta vacio, por favor ingrese uno.', 'error' );
-            $array_errors[] = false;
-        }
+        //     wc_add_notice(  '¡Error! El campo de cuenta de Binance esta vacio, por favor ingrese uno.', 'error' );
+        //     $array_errors[] = false;
+        // }
 
         if (!isset($_POST['binance_sender_user'])) {
 

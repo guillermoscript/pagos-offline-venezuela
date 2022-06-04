@@ -189,6 +189,23 @@ form.checkout > .blockUI {
     color: #57bf6d;
 }
 
+ /* ----------------------------- HOME AND BELLE ----------------------------- */
+
+#reserve, 
+#binance {
+    color: white !important;
+    border-radius: 10px;
+    background-color: var(--accent-color) !important;
+    padding: 0.6em 2.5em !important;
+    font-size: 0.9375em !important;
+    font-weight: 500 !important;
+    margin: 20px auto !important;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    text-transform: capitalize;
+    display: flex;
+}
+
+
 @media only screen and (max-width: 767px) {
     .woocommerce-page.woocommerce-checkout form #order_review_heading, .woocommerce-page.woocommerce-checkout form #order_review , .woocommerce-page.woocommerce-checkout form #customer_details.col2-set{
         width: 100% !important;
