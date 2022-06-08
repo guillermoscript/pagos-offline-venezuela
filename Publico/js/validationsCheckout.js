@@ -191,9 +191,9 @@ function validationReferenceNumberZelle(id) {
 
     if (input.value === '') return 'no hay nada';
 
-    if (/^\w+$/ig.test(input.value)) {
-        return 'no aceptado'
-    }
+    // if (/^\w+$/ig.test(input.value)) {
+    //     return 'no aceptado'
+    // }
 }
 
 

@@ -141,9 +141,9 @@ export function validationZelle() {
 	) {
 		arrayOfErrors.push(errors.zelle['referencia vacio']);
 	}
-	if (validationReferenceNumberZelle("reference_number") === "no aceptado") {
-		arrayOfErrors.push(errors.zelle['no aceptado']);
-	}
+	// if (validationReferenceNumberZelle("reference_number") === "no aceptado") {
+	// 	arrayOfErrors.push(errors.zelle['no aceptado']);
+	// }
 	if (validationName("zelle_sender_name") === "no hay nada") {
 		arrayOfErrors.push(errors.zelle['no hay nada']);
 	}
