@@ -191,6 +191,10 @@ form.checkout > .blockUI {
 
  /* ----------------------------- HOME AND BELLE ----------------------------- */
 
+form input[readonly] {
+    background-color: unset !important;
+}
+
 #reserve, 
 #binance {
     color: white !important;
