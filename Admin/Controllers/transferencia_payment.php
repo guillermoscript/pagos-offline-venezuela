@@ -406,28 +406,28 @@ function wc_offline_gateway_init_transferencia()
             $html .=  '
 
                 <div class="form-row form-row-last width-50">
-                    <label for="nombre_completo_transferencia">Nombre Completo <span class="required">*</span>
+                    <label for="nombre_completo_transferencia">Nombre del beneficiario <span class="required">*</span>
                         <img class="copy" data-id="nombre_completo_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_transferencia" id="nombre_completo_transferencia" >
                 </div>
 
                 <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_transferencia">Banco Titular <span class="required">*</span>
+                    <label for="banco_a_pagar_transferencia">Banco del Titular <span class="required">*</span>
                         <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $transferencia_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="telefono_a_pagar_transferencia" >
                 </div>
 
                 <div class="form-row form-row-last width-50">
-                    <label for="cedula_a_pagar_transferencia">Cedula Titular <span class="required">*</span>
+                    <label for="cedula_a_pagar_transferencia">Cedula del Titular <span class="required">*</span>
                         <img class="copy" data-id="cedula_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $transferencia_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_transferencia" id="cedula_a_pagar_transferencia" >
                 </div>
 
                 <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_transferencia">Cuenta Titular <span class="required">*</span>
+                    <label for="banco_a_pagar_transferencia">Cuenta del Titular <span class="required">*</span>
                         <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $transferencia_info[0]['cuenta'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="banco_a_pagar_transferencia" >
@@ -457,10 +457,10 @@ function wc_offline_gateway_init_transferencia()
                         Seleccionar 
                     </option> ';
 
-            foreach ($bancos_value as $key => $value) {
-                # code...
-                $html .= '<option value=' . $bancos_value[$key] . '>' . $bancos[$key] . '</option>';
-            }
+                    foreach ($bancos_value as $key => $value) {
+                        # code...
+                        $html .= '<option value=' . $bancos_value[$key] . '>' . $bancos[$key] . '</option>';
+                    }
 
             $html .= '
                     </select>

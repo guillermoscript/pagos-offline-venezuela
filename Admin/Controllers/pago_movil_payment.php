@@ -411,22 +411,23 @@ function wc_offline_gateway_init_pago_movil() {
             $pago_movil_info = get_option( 'woocommerce_pago_movil_accounts' );
             $full_name = $pago_movil_info[0]['nombre'] . ' ' . $pago_movil_info[0]['apellido'];
             $html .=  '
+
                 <div class="form-row form-row-last width-50">
-                    <label for="nombre_completo_pago_movil">Nombre Completo <span class="required">*</span>
+                    <label for="nombre_completo_pago_movil">Nombre del Beneficiario <span class="required">*</span>
                         <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_pago_movil" id="nombre_completo_pago_movil" >
                 </div>
 
                 <div class="form-row form-row-last width-50">
-                    <label for="telefono_a_pagar_pago_movil">Telefono Titular <span class="required">*</span>
+                    <label for="telefono_a_pagar_pago_movil">Telefono del beneficiario <span class="required">*</span>
                         <img class="copy" data-id="telefono_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $pago_movil_info[0]['telefono'] .'" readonly  type="text" name="telefono_a_pagar_pago_movil" id="telefono_a_pagar_pago_movil" >
                 </div>
 
                 <div class="form-row form-row-last width-50">
-                    <label for="cedula_a_pagar_pago_movil">Cedula Titular <span class="required">*</span>
+                    <label for="cedula_a_pagar_pago_movil">Cedula del Titular <span class="required">*</span>
                         <img class="copy" data-id="cedula_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $pago_movil_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_pago_movil" id="cedula_a_pagar_pago_movil" >
@@ -434,10 +435,19 @@ function wc_offline_gateway_init_pago_movil() {
 
 
                 <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_pago_movil">Banco Titular <span class="required">*</span>
+                    <label for="banco_a_pagar_pago_movil">Banco del Titular <span class="required">*</span>
                         <img class="copy" data-id="banco_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </label>                
                     <input value="'. $pago_movil_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_pago_movil" id="banco_a_pagar_pago_movil" >
+                </div>
+
+                <div class="form-row form-row-first width-50">
+                    <label for="telefono_pago_movil">Número del Titular <span class="required">*</span></label>
+                    <input type="tel" name="telefono_movil" id="telefono_pago_movil" >
+                </div>
+                <div class="form-row form-row-last width-50">
+                    <label for="numero_recibo_pago_movil">Número del Recibo <span class="required">*</span></label>
+                    <input  min="1" type="number" name="numero_recibo_movil" id="numero_recibo_pago_movil" >
                 </div>
 
                 <div class="form-row form-row-wide width-50">
@@ -451,14 +461,6 @@ function wc_offline_gateway_init_pago_movil() {
                         </div>
                         <input id="comprobante_pago_movil" required class="input-pago-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
                     </label>
-                </div>
-                <div class="form-row form-row-first width-50">
-                    <label for="telefono_pago_movil">Número de telefono <span class="required">*</span></label>
-                    <input type="tel" name="telefono_movil" id="telefono_pago_movil" >
-                </div>
-                <div class="form-row form-row-last width-50">
-                    <label for="numero_recibo_pago_movil">Número del Recibo <span class="required">*</span></label>
-                    <input  min="1" type="number" name="numero_recibo_movil" id="numero_recibo_pago_movil" >
                 </div>
                 <div class="form-row form-row-wide width-50">
                     <label for="bancos_pago_movil">Banco Origen <span class="required">*</span></label>

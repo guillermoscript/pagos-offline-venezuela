@@ -312,31 +312,34 @@ function wc_offline_gateway_init_zelle()
             }
             $html .=  '
 
-        <div class="form-row form-row-wide">
-            <label for="zelle_email">Correo Zelle <span class="required">*</span>
-                    <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-            </label>
-                <input type="text" readonly class="offline-input" id="zelle_email" value=' . $zelle_info[0]['email_cuenta'] . ' name="zelle_email" required>
-        </div>
 
             <div class="form-row form-row-wide">
-                <label for="zelle_name">Titular <span class="required">*</span>
+                <label for="zelle_name">Nombre del Titular<span class="required">*</span>
                     <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                 </label>
                 <input type="text" readonly class="offline-input" id="zelle_name" value=' . $zelle_info[0]['name_zelle'] . ' name="zelle-select" required>
             </div>
-                <div class="form-row form-row-wide">
-                    <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
-                    <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
-                </div>
-                <div class="form-row form-row-wide">
-                    <label for="email-origen">Correo origen<span class="required">*</span></label>
-                    <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
-                </div>
-                <div class="form-row form-row-wide">
-                    <label for="reference_number">Número de Referencia<span class="required">*</span></label>
-                    <input type="text" name="reference_number" id="reference_number" required>
-                </div>
+            <div class="form-row form-row-wide">
+                <label for="zelle_email">Correo del Titular <span class="required">*</span>
+                        <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                </label>
+                    <input type="text" readonly class="offline-input" id="zelle_email" value=' . $zelle_info[0]['email_cuenta'] . ' name="zelle_email" required>
+            </div>
+
+
+            <div class="form-row form-row-wide">
+                <label for="zelle_sender_name">Nombre Beneficiario<span class="required">*</span></label>
+                <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
+            </div>
+            <div class="form-row form-row-wide">
+                <label for="email-origen">Correo Beneficiario<span class="required">*</span></label>
+                <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
+            </div>
+
+            <div class="form-row form-row-wide">
+                <label for="reference_number">Número de Referencia<span class="required">*</span></label>
+                <input type="text" name="reference_number" id="reference_number" required>
+            </div>
             
                 <div class="clear"></div>';
 
