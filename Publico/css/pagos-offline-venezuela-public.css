@@ -175,6 +175,16 @@ form.checkout > .blockUI {
     padding-top: 4%;
 }
 
+.woocommerce-checkout #payment ul.payment_methods li img {
+    width: 25px !important;
+}
+
+.woocommerce-checkout #payment ul.payment_methods li img.qr-img {
+    width: 80% !important;
+    display: flex;
+    margin: 0 auto;
+}
+
 #fecha_transferencia {
     width: 100%;
     height: 50px;

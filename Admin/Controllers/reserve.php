@@ -319,10 +319,10 @@ function wc_offline_gateway_init_reserve()
                 $nombre = esc_attr(wp_unslash($account['reserve_nombre_de_usuario']));
                 $qr = esc_attr(wp_unslash($account['reserve_qr']));
                 $html .= '
-                     <option data-qr="' . $qr . '" value="' . $key . '"> 
-                         ' . $nombre . '
-                     </option> 
-                 ';
+                    <option data-qr="' . $qr . '" value="' . $key . '"> 
+                        ' . $nombre . '
+                    </option> 
+                ';
             }
             $html .=  '</select>
                 </div>
@@ -334,7 +334,7 @@ function wc_offline_gateway_init_reserve()
                 </div>
 
                 <div class="form-row form-row-wide" id="reserve_qr_img" style="display: none;">
-                        <img src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
+                        <img class="qr-img" src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
                 </div>
 
                 <div class="form-row form-row-wide width-50">

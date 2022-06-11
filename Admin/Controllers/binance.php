@@ -341,7 +341,7 @@ function wc_offline_gateway_init_binance()
                 </div>
 
                 <div class="form-row form-row-wide" id="binance_qr_img" style="display: none;">
-                        <img src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
+                        <img class="qr-img" src="/wp-content/plugins/woocommerce/assets/images/placeholder.png" alt="QR" width="100" height="100" style="width: 100%;">
                 </div>
 
                 <div class="form-row form-row-wide width-50">
