@@ -39,7 +39,8 @@ jQuery(document).ready(() => {
 function finishCheckout() {
     if (!validationCheckout()) return;
     if (validationContainer(ajax_var)) {
-        document.getElementById('place_order').removeEventListener('click', finishCheckout)
+            // setTimeout(() => document.getElementById('place_order').click(), 100)
+            document.getElementById('place_order').removeEventListener('click', finishCheckout)
     }
 }
 

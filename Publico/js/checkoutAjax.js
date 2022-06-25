@@ -162,6 +162,7 @@ function validationContainer(nonce) {
 		}
 		// btnCheckOut.addEventListener('click', enviarImagen );
 		sendImage(nonce);
+		return true;
 	} else {
 		return false;
 	}
