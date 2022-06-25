@@ -307,12 +307,18 @@ function wc_offline_gateway_init_reserve()
 
             $html .=  '
 
-                <div class="form-row form-row-first width-50">
-                    <label for="cuenta_reserve">Cuenta Titular <span class="required">*</span>
-                        <img class="copy" data-id="cuenta_reserve" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>      
-                    <input value="'.$reserve_info[0]['reserve_nombre_de_usuario'].'" readonly  type="text" name="cuenta_reserve" id="cuenta_reserve" >
-                </div>
+
+                <div class="form-row form-row-wide">
+                    <h4 class="account-title">Datos de la cuenta</h4>
+                    <div class="account-data">                        
+                        <label for="cuenta_reserve">Nombre del Beneficiario <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="cuenta_reserve" class="copy-text">'.$reserve_info[0]['reserve_nombre_de_usuario'].'</span>
+                            <img class="copy" data-id="cuenta_reserve" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                </div>            
 
                 <div class="form-row form-row-last width-50">
                     <label for="reserve_sender_user">Nombre de tu Usuario <span class="required">*</span></label>

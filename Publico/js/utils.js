@@ -53,15 +53,27 @@ function changeImageIfUSerSelectOtherQrBinance() {
     });
 }
 
+const copyToClipboard = str => {
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+      return navigator.clipboard.writeText(str);
+    return Promise.reject('The Clipboard API is not available.');
+  };
+
 function copyToClipboart(e) {
     const idToCopy = e.target.getAttribute('data-id');
     const htmlInput = document.getElementById(idToCopy)
     // const value = htmlInput.options[htmlInput.selectedIndex].innerText.trim()
-    const value = htmlInput.value.trim()
+    const value = htmlInput.innerText.trim()
     // htmlInput.select();
     // htmlInput.setSelectionRange(0, 99999); /* For mobile devices */
     /* Copy selected text into clipboard */
-    navigator.clipboard.writeText(value);
+    copyToClipboard(value)
+    .then(() => {
+        alert('texto copiado');
+    })
+    .catch(err => {
+        alert(err);
+    });
 }
 
 

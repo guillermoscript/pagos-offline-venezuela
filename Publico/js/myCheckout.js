@@ -29,8 +29,8 @@ jQuery(document).ready(() => {
         //     // changeImageIfUSerSelectOtherQrBinance()
         // }
 
-        document.getElementById('reserve').addEventListener('click',showQR)
-        document.getElementById('binance').addEventListener('click',showQR)
+        document.getElementById('reserve') ? document.getElementById('reserve').addEventListener('click',showQR) : null
+        document.getElementById('binance') ? document.getElementById('binance').addEventListener('click',showQR) : null
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
     })
     // showTotalInBs()

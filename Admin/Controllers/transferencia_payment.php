@@ -405,51 +405,62 @@ function wc_offline_gateway_init_transferencia()
 
             $html .=  '
 
-                <div class="form-row form-row-last width-50">
-                    <label for="nombre_completo_transferencia">Nombre del beneficiario <span class="required">*</span>
-                        <img class="copy" data-id="nombre_completo_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_transferencia" id="nombre_completo_transferencia" >
-                </div>
-
-                <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_transferencia">Banco del Titular <span class="required">*</span>
-                        <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $transferencia_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="telefono_a_pagar_transferencia" >
-                </div>
-
-                <div class="form-row form-row-last width-50">
-                    <label for="cedula_a_pagar_transferencia">Cedula del Titular <span class="required">*</span>
-                        <img class="copy" data-id="cedula_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $transferencia_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_transferencia" id="cedula_a_pagar_transferencia" >
-                </div>
-
-                <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_transferencia">Cuenta del Titular <span class="required">*</span>
-                        <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $transferencia_info[0]['cuenta'] .'" readonly  type="text" name="banco_a_pagar_transferencia" id="banco_a_pagar_transferencia" >
-                </div>
-                <div class="form-row form-row-wide width-50">
-                    <div class="input-group">
-                        <label class="label-file" for="comprobante_transferencia">
-                            Adjuntar Comprobante
-                            <div class="jpg-p">
-                                <p class="text-file">jpg,png,pdf</p>
-                                <div id="bararea" class="non2">
-                                    <div id="bar"></div>
-                                </div>
-                            </div>
-                            <input id="comprobante_transferencia" required class="input-pago-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
+                <div >
+                    <h4 class="account-title">Datos de la cuenta</h4>
+                    <div class="account-data">                        
+                        <label for="nombre_completo_transferencia">Nombre  <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="nombre_completo_transferencia" class="copy-text">'. $full_name. '</span>
+                            <img class="copy" data-id="nombre_completo_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">
+                        <label for="banco_a_pagar_transferencia">Banco  <span class="required">*</span>
                         </label>
+                        <div>
+                            <span id="banco_a_pagar_transferencia" class="copy-text">'. $transferencia_info[0]['banco'] .'</span>
+                            <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">
+                        <label for="cedula_a_pagar_transferencia">Cédula  <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="cedula_a_pagar_transferencia" class="copy-text">'. $transferencia_info[0]['cedula'] .'</span>
+                            <img class="copy" data-id="cedula_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>                        
+                    </div>
+                    <div class="account-data">
+                        <label for="banco_a_pagar_transferencia">Número de cuenta  <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="banco_a_pagar_transferencia" class="copy-text">'. $transferencia_info[0]['cuenta'] .'</span>
+                            <img class="copy" data-id="banco_a_pagar_transferencia" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>    
                     </div>
                 </div>
-                <div class="form-row form-row-wide width-50">
-                    <label for="numero_recibo_transferencia">Número del Recibo <span class="required">*</span></label>
-                    <input  min="1" type="number" name="numero_recibo_transferencia" id="numero_recibo_transferencia" >
-                </div>
+                
+                <div>
+                    <h4 class="account-title">Datos del pago</h4>
+                    <div class="form-row form-row-wide width-50">
+                        <div class="input-group">
+                            <label class="label-file" for="comprobante_transferencia">
+                                Adjuntar Comprobante (Max 3MB)
+                                <div class="jpg-p">
+                                    <p class="text-file">jpg,png,pdf</p>
+                                    <div id="bararea" class="non2">
+                                        <div id="bar"></div>
+                                    </div>
+                                </div>
+                                <input id="comprobante_transferencia" required class="input-pago-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row form-row-wide width-50">
+                        <label for="numero_recibo_transferencia">Número del Recibo <span class="required">*</span></label>
+                        <input  min="1" type="number" name="numero_recibo_transferencia" id="numero_recibo_transferencia" >
+                    </div>                
                 <div class="form-row form-row-wide width-50">
                     <label for="bancos_transferencia">Banco Origen <span class="required">*</span></label>
                     <select id="bancos_transferencia" class="select-width" name="transferencia_banco_select" required>
@@ -469,7 +480,9 @@ function wc_offline_gateway_init_transferencia()
 
             do_action('woocommerce_transferencia_form_end', $this->id);
 
-            $html .=  '<div class="clear"></div></fieldset>';
+            $html .=  '
+            </div>
+            <div class="clear"></div></fieldset>';
             echo $html;
         }
 

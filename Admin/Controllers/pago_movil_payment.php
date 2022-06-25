@@ -412,34 +412,45 @@ function wc_offline_gateway_init_pago_movil() {
             $full_name = $pago_movil_info[0]['nombre'] . ' ' . $pago_movil_info[0]['apellido'];
             $html .=  '
 
-                <div class="form-row form-row-last width-50">
-                    <label for="nombre_completo_pago_movil">Nombre del Beneficiario <span class="required">*</span>
-                        <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $full_name. '" readonly  type="text" name="nombre_completo_pago_movil" id="nombre_completo_pago_movil" >
+                <div >
+                    <h4 class="account-title">Datos de la cuenta</h4>
+                    <div class="account-data">                        
+                        <label for="nombre_completo_pago_movil">Nombre <span class="required">*</span>
+                        </label>                                        
+                        <div>
+                            <span id="nombre_completo_pago_movil" class="copy-text">'. $full_name. '</span>
+                            <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">
+                        <label for="telefono_a_pagar_pago_movil">Teléfono <span class="required">*</span>
+                        </label>
+                        <div>
+                            <span id="telefono_a_pagar_pago_movil" class="copy-text">'. $pago_movil_info[0]['telefono'] .'</span>
+                            <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">
+                        <label for="cedula_a_pagar_pago_movil">Cédula <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="cedula_a_pagar_pago_movil" class="copy-text">'. $pago_movil_info[0]['cedula'] .'</span>
+                            <img class="copy" data-id="cedula_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">
+                        <label for="banco_a_pagar_pago_movil">Banco <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="banco_a_pagar_pago_movil" class="copy-text">'. $pago_movil_info[0]['banco'] .'</span>
+                            <img class="copy" data-id="banco_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-row form-row-last width-50">
-                    <label for="telefono_a_pagar_pago_movil">Telefono del beneficiario <span class="required">*</span>
-                        <img class="copy" data-id="telefono_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $pago_movil_info[0]['telefono'] .'" readonly  type="text" name="telefono_a_pagar_pago_movil" id="telefono_a_pagar_pago_movil" >
-                </div>
-
-                <div class="form-row form-row-last width-50">
-                    <label for="cedula_a_pagar_pago_movil">Cedula del Titular <span class="required">*</span>
-                        <img class="copy" data-id="cedula_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $pago_movil_info[0]['cedula'] .'" readonly  type="text" name="cedula_a_pagar_pago_movil" id="cedula_a_pagar_pago_movil" >
-                </div>
-
-
-                <div class="form-row form-row-last width-50">
-                    <label for="banco_a_pagar_pago_movil">Banco del Titular <span class="required">*</span>
-                        <img class="copy" data-id="banco_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                    </label>                
-                    <input value="'. $pago_movil_info[0]['banco'] .'" readonly  type="text" name="banco_a_pagar_pago_movil" id="banco_a_pagar_pago_movil" >
-                </div>
+        
+                <div>
+                    <h4 class="account-title">Datos de pago</h4>
+                
 
                 <div class="form-row form-row-first width-50">
                     <label for="telefono_pago_movil">Número del Titular <span class="required">*</span></label>
@@ -452,7 +463,7 @@ function wc_offline_gateway_init_pago_movil() {
 
                 <div class="form-row form-row-wide width-50">
                     <label class="label-file" for="comprobante_pago_movil">
-                        Adjuntar Comprobante
+                        Adjuntar Comprobante (Max 3MB)
                         <div class="jpg-p">
                             <p class="text-file">jpg,png,pdf</p>
                             <div id="bararea2" class="non2">
@@ -478,7 +489,9 @@ function wc_offline_gateway_init_pago_movil() {
                     </select>
                 </div>
                 <input type="hidden" id="capture-comprobante_pago_movil" name="id-pago-movil-capture">
-                <div class="clear"></div>';
+                </div>
+                <div class="clear">
+                </div>';
         
             do_action( 'woocommerce_pago_movil_form_end', $this->id );
         

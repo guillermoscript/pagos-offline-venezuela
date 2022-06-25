@@ -312,33 +312,42 @@ function wc_offline_gateway_init_zelle()
             }
             $html .=  '
 
-
-            <div class="form-row form-row-wide">
-                <label for="zelle_name">Nombre del Titular<span class="required">*</span>
-                    <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                </label>
-                <input type="text" readonly class="offline-input" id="zelle_name" value=' . $zelle_info[0]['name_zelle'] . ' name="zelle-select" required>
-            </div>
-            <div class="form-row form-row-wide">
-                <label for="zelle_email">Correo del Titular <span class="required">*</span>
-                        <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
-                </label>
-                    <input type="text" readonly class="offline-input" id="zelle_email" value=' . $zelle_info[0]['email_cuenta'] . ' name="zelle_email" required>
-            </div>
-
-
-            <div class="form-row form-row-wide">
-                <label for="zelle_sender_name">Nombre Beneficiario<span class="required">*</span></label>
-                <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
-            </div>
-            <div class="form-row form-row-wide">
-                <label for="email-origen">Correo Beneficiario<span class="required">*</span></label>
-                <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
+            <div >
+                <h4 class="account-title">Datos de la cuenta</h4>
+                <div class="account-data">
+                    <label for="zelle_name">Nombre del Titular<span class="required">*</span>
+                    </label>
+                    <div>
+                        <span id="zelle_name" class="copy-text">' . $zelle_info[0]['name_zelle'] . '</span>
+                        <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </div>
+                </div>
+                <div class="account-data">
+                    <label for="zelle_email">Correo del Titular <span class="required">*</span>
+                    </label>
+                    <div>                   
+                        <span id="zelle_email" class="copy-text">' . $zelle_info[0]['email_cuenta'] . '</span>
+                        <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                    </div>
+                </div>
             </div>
 
-            <div class="form-row form-row-wide">
-                <label for="reference_number">Número de Referencia<span class="required">*</span></label>
-                <input type="text" name="reference_number" id="reference_number" required>
+            <div class="account-payment">
+                <h4 class="account-title">Datos de pago</h4>
+                <div class="form-row form-row-wide">
+                    <label for="zelle_sender_name">Nombre <span class="required">*</span></label>
+                    <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
+                </div>
+
+                <div class="form-row form-row-wide">
+                    <label for="email-origen">Correo <span class="required">*</span></label>
+                    <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
+                </div>
+
+                <div class="form-row form-row-wide">
+                    <label for="reference_number">Número de Referencia<span class="required">*</span></label>
+                    <input type="text" name="reference_number" id="reference_number" required>
+                </div>
             </div>
             
                 <div class="clear"></div>';

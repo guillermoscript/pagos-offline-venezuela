@@ -319,6 +319,25 @@ function wc_offline_gateway_init_binance()
             }
             $html .=  '
 
+                <div class="form-row form-row-wide">
+                    <h4 class="account-title">Datos de la cuenta</h4>
+                    <div class="account-data">                        
+                        <label for="cuenta_binance">Nombre del Beneficiario <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="cuenta_binance" class="copy-text">'.$binance_info[0]['binance_nombre_de_usuario'].'</span>
+                            <img class="copy" data-id="cuenta_binance" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                    <div class="account-data">                        
+                        <label for="binance_qr_img">Nombre del Beneficiario <span class="required">*</span>
+                        </label>                
+                        <div>
+                            <span id="binance_qr_img" class="copy-text">'.$binance_info[0]['binance_coin'].'</span>
+                            <img class="copy" data-id="binance_qr_img" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        </div>
+                    </div>
+                </div>            
                 
                 <div class="form-row form-row-first width-50">
                     <label for="cuenta_binance">Cuenta Titular <span class="required">*</span>

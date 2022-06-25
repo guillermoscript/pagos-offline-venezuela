@@ -38,10 +38,11 @@
 
 .jpg-p {
     cursor: pointer;
-    padding: 5% 8%;
+    padding: 1% 2%;
     border-radius: 10px;
     background-color: #E6E6E6 !important;
     margin: 0px;
+    width: 170px;
     background: url(https://test.hoteljupiterve.com/wp-content/uploads/2020/05/Path-143-1.png) no-repeat scroll 95% 55%;
     background-color: rgba(0, 0, 0, 0);
 }
@@ -187,6 +188,27 @@ form.checkout > .blockUI {
 
 #precio-total {
     color: #57bf6d;
+}
+
+.account-title {
+    padding-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+
+.account-data {
+    padding-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.account-data label {
+    padding-bottom: 7px;
+}
+
+.account-data div img {
+    float: none !important;
 }
 
  /* ----------------------------- HOME AND BELLE ----------------------------- */
