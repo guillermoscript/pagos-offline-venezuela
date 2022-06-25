@@ -61,7 +61,7 @@ function wc_offline_gateway_init_reserve()
 
 
             // Display field value on the order edit page
-            add_action('woocommerce_admin_order_data_after_billing_address', array($this, 'reserve_my_custom_checkout_field_display_admin_order_meta'), 10, 1);
+            // add_action('woocommerce_admin_order_data_after_billing_address', array($this, 'reserve_my_custom_checkout_field_display_admin_order_meta'), 10, 1);
 
             // add_action( 'woocommerce_order_details_after_order_table', [$this,'tasa_in_order_page'] );
 
