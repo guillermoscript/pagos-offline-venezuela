@@ -91,7 +91,7 @@ function sendImage(nonce) {
 					console.log(response.type);
 				}
 				showError(response.error);
-				return;
+				return false;
 			}
 			btnCheckOut.removeEventListener("click", stopIt);
 			// btnCheckOut.removeEventListener('click',sendImage )
@@ -128,7 +128,7 @@ function validationContainer(nonce) {
 			sendImage(nonce);
 			return true;
 		} else {
-			return;
+			return false;
 		}
 	}
 
@@ -138,7 +138,7 @@ function validationContainer(nonce) {
 			sendImage(nonce);
 			return true;
 		} else {
-			return;
+			return false;
 		}
 	}
 
@@ -157,13 +157,13 @@ function validationContainer(nonce) {
 	if (claseToValidate !== "" && validationOfSpecialInputsInForm(claseToValidate) === true) {
 		if (claseToValidate === "pago_movil") {
 			if (validatePagoMovil() === false) {
-				return;
+				return false;
 			}
 		}
 		// btnCheckOut.addEventListener('click', enviarImagen );
 		sendImage(nonce);
 	} else {
-		return;
+		return false;
 	}
 }
 

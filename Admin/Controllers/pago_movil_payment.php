@@ -612,7 +612,7 @@ function wc_offline_gateway_init_pago_movil() {
                 echo $styles . $html_output;
             }
         }
-       
+
         public function pago_movil_my_custom_checkout_field_display_admin_order_meta( $order ) {
             if( $tasa = $order->get_meta('tasa-bolivares') ) {
                 echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';

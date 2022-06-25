@@ -372,8 +372,8 @@ function wc_offline_gateway_init_zelle()
             $order = wc_get_order($order_id);
 
             if (
-                isset($_POST['zelle_email']) &&
-                isset($_POST['zelle_name']) &&
+                // isset($_POST['zelle_email']) &&
+                // isset($_POST['zelle_name']) &&
                 isset($_POST['email_origen']) &&
                 isset($_POST['reference_number']) &&
                 isset($_POST['zelle_sender_name'])

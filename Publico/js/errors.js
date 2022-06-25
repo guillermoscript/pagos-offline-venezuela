@@ -9,7 +9,7 @@ export const errors = {
         'no estan en los bancos': '¡Error! Seleccione el banco de origen, por favor.',
     },
     file: {
-        'no hay nada': '¡Error! Seleccione un archivo, por favor.',
+        'no hay nada': '¡Error! Adjunte un comprobante de pago por favor.',
         false: '¡Error! El archivo no es valido, por favor use un con alguna de las extenciones: .jpg|.jpeg|.pdf|.png|.gif',
         3000000: '¡Error! El archivo es muy pesado, por favor use un archivo menor a 3MB.',
     },
@@ -19,7 +19,7 @@ export const errors = {
         'hay una letra': '¡Error! Agrege solo numeros en la cédula, por favor.',
     },
     validacionCellphone: {
-        'no es un numero valido': '¡Error! Agrege un numero valido, por favor.',
+        'no es un numero valido': '¡Error! Agregue un número telefónico valido por favor.',
     },
     validationName: {
         'no hay nada': '¡Error! Agrege un nombre, por favor.',
