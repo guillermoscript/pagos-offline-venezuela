@@ -1,8 +1,9 @@
 import {
     stopIt,
-    changeImageIfUSerSelectOtherQr,
-    changeImageIfUSerSelectOtherQrBinance,
-    copyToClipboart
+    // changeImageIfUSerSelectOtherQr,
+    // changeImageIfUSerSelectOtherQrBinance,
+    copyToClipboart,
+    showQR
 } from './utils.js';
 
 import {
@@ -21,14 +22,15 @@ jQuery(document).ready(() => {
     jQuery('body').on('updated_checkout', () => {
         addEventsToCheckoutButon()
         addTextToInputFileWhenUserClick()
-        if (document.querySelector('#reserve_qr_img img')) {
-            changeImageIfUSerSelectOtherQr()
-        }
-        if (document.querySelector('#binance_qr_img img')) {
-            changeImageIfUSerSelectOtherQrBinance()
-        }
+        // if (document.querySelector('#reserve_qr_img img')) {
+        //     // changeImageIfUSerSelectOtherQr()
+        // }
+        // if (document.querySelector('#binance_qr_img img')) {
+        //     // changeImageIfUSerSelectOtherQrBinance()
+        // }
 
-
+        document.getElementById('reserve') ? document.getElementById('reserve').addEventListener('click',showQR) : null
+        document.getElementById('binance') ? document.getElementById('binance').addEventListener('click',showQR) : null
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
     })
     // showTotalInBs()
@@ -37,7 +39,8 @@ jQuery(document).ready(() => {
 function finishCheckout() {
     if (!validationCheckout()) return;
     if (validationContainer(ajax_var)) {
-        document.getElementById('place_order').removeEventListener('click', finishCheckout)
+            // setTimeout(() => document.getElementById('place_order').click(), 100)
+            document.getElementById('place_order').removeEventListener('click', finishCheckout)
     }
 }
 
