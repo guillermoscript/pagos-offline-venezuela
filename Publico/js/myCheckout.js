@@ -3,7 +3,6 @@ import {
     // changeImageIfUSerSelectOtherQr,
     // changeImageIfUSerSelectOtherQrBinance,
     copyToClipboart,
-    showQR
 } from './utils.js';
 
 import {
@@ -28,9 +27,6 @@ jQuery(document).ready(() => {
         // if (document.querySelector('#binance_qr_img img')) {
         //     // changeImageIfUSerSelectOtherQrBinance()
         // }
-
-        document.getElementById('reserve') ? document.getElementById('reserve').addEventListener('click',showQR) : null
-        document.getElementById('binance') ? document.getElementById('binance').addEventListener('click',showQR) : null
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
     })
     // showTotalInBs()

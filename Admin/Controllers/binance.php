@@ -11,7 +11,7 @@ function wc_offline_gateway_init_binance()
         {
             // The meat and potatoes of our gateway will go here
             $this->id = 'binance'; // payment gateway plugin ID
-            $this->icon = home_url( ) .( "/wp-content/plugins/pagos-offline-venezuela/assets/binance.png" ); // URL of the icon that will be displayed on checkout page near your gateway name
+            $this->icon = home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/binance.png"); // URL of the icon that will be displayed on checkout page near your gateway name
             $this->has_fields = true; // in case you need a custom credit card form
             $this->method_title = 'Binance Payment';
             $this->method_description = 'Pagos con Binance'; // will be displayed on the options page
