@@ -23,6 +23,7 @@ jQuery(document).ready(() => {
     */
     jQuery('body').on('updated_checkout', () => {
 
+        addEventIfRadioOfPaymentMethod()
         addEventsToCheckoutButton()
         addTextToInputFileWhenUserClick()
         // if (document.querySelector('#reserve_qr_img img')) {
@@ -33,7 +34,8 @@ jQuery(document).ready(() => {
         // }
 
         document.querySelectorAll('.copy').forEach(el => el.addEventListener('click',copyToClipboart))
-
+        document.getElementById('reserve') ? document.getElementById('reserve').addEventListener('click', showQR) : null
+        document.getElementById('binance') ? document.getElementById('binance').addEventListener('click', showQR) : null
     })
 })
 
@@ -51,4 +53,26 @@ function addEventsToCheckoutButton() {
     btnCheckOut.addEventListener('click', stopIt)
     btnCheckOut.addEventListener('click', getNonceAndRunValidation)
 
+}
+
+
+function removeEventsToCheckoutButon() {
+    let btnCheckOut = document.getElementById('place_order');
+    btnCheckOut.removeEventListener('click', stopIt)
+    btnCheckOut.removeEventListener('click', finishCheckout)
+}
+
+function addEventIfRadioOfPaymentMethod() {
+    let radioPaymentMethod = document.querySelectorAll('.payment_methods input[type="radio"]');
+    const paymentMethods = ['pago_movil', 'transferencia', 'zelle', 'reserve', 'binance'];
+    radioPaymentMethod.forEach(el => {
+
+        el.addEventListener('change', () => {
+            if (paymentMethods.includes(el.value) ) {
+                addEventsToCheckoutButon()
+            } else {
+                removeEventsToCheckoutButon()
+            }
+        })
+    })
 }
