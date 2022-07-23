@@ -304,7 +304,7 @@ function wc_offline_gateway_init_reserve()
             $html .=  '<div class="form-row form-row-first width-50">
             <label for="info_reserve">Cuentas Reserve disponibles <span class="required">*</span>
 
-            <img class="copy" id="info_reserve_copy" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+            <img data-id="info_reserve" class="copy" id="info_reserve_copy" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
             </label>
             
             <select id="info_reserve" class="select-width" name="reserve_select" required>
