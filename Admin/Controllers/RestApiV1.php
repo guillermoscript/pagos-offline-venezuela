@@ -31,7 +31,7 @@ class RestApiV1 {
     static function get_rate_of_bf($sub_total_in_dolars, $taxes) {
         # code...
         
-        $currency = 'Bs.S';
+        $currency = 'Bs';
         
         $rate_in_bolivares = RestApiV1::get_tasa();
         
