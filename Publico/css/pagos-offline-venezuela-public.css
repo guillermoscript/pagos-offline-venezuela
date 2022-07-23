@@ -80,9 +80,13 @@
 form.checkout > .blockUI {
     position: fixed !important;
 }
-
+/* 
 .woocommerce-page.woocommerce-checkout form #order_review_heading, .woocommerce-page.woocommerce-checkout form #order_review {
     width: 49% !important;
+} */
+
+.payment_box fieldset > div {
+    margin-bottom: 15px;
 }
 
 .woocommerce-page.woocommerce-checkout form #customer_details.col2-set {
