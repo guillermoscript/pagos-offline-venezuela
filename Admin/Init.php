@@ -38,8 +38,6 @@ final class Init
         /* ========================= ZELLE ======================================= */
 
 
-        add_action( 'template_redirect', 'define_default_payment_gateway' );
-        
 
         add_filter( 'woocommerce_payment_gateways', array($this,'add_zelle_class') );
         add_action( 'plugins_loaded', 'wc_offline_gateway_init_zelle', 11 );
