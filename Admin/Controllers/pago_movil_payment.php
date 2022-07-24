@@ -593,6 +593,9 @@ function wc_offline_gateway_init_pago_movil() {
             if( $tasa = $order->get_meta('tasa-bolivares') ) {
                 echo '<p><strong>'.__('Total en bolivares').'</strong> ' . $tasa . '</p>';
             }
+            if( $tasa = $order->get_meta('rate_of_dolar') ) {
+                echo '<p><strong>'.__('tasa del bcv').'</strong> ' . $tasa . '</p>';
+            }
         }
 
         public function tasa_in_order_page($order) {

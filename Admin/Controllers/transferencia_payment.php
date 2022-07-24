@@ -560,9 +560,12 @@ function wc_offline_gateway_init_transferencia()
 
         public function transferencia_my_custom_checkout_field_display_admin_order_meta($order)
         {
-            if ($tasa = $order->get_meta('tasa-bolivares')) {
-                echo '<p><strong>' . __('Total en bolivares') . '</strong> ' . $tasa . '</p>';
-            }
+            // if ($tasa = $order->get_meta('tasa-bolivares')) {
+            //     echo '<p><strong>' . __('Total en bolivares') . '</strong> ' . $tasa . '</p>';
+            // }
+            // if( $tasa = $order->get_meta('rate_of_dolar') ) {
+            //     echo '<p><strong>'.__('tasa del bcv').'</strong> ' . $tasa . '</p>';
+            // }
         }
 
         public function total_in_bolivares_in_order_table($total_rows, $order)
