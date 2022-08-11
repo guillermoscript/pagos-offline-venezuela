@@ -38,7 +38,7 @@ function changeImageIfUSerSelectOtherQr() {
 }
 
 function showQR(e) {
-    let target = e.target.id ;
+    let target = e.target.id;
     let qr = document.querySelector(`#${target}_qr_img img`)
     qr.parentElement.style.display = 'block'
 }
@@ -55,11 +55,32 @@ function changeImageIfUSerSelectOtherQrBinance() {
 
 const copyToClipboard = str => {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-      return navigator.clipboard.writeText(str);
+        return navigator.clipboard.writeText(str);
     return Promise.reject('The Clipboard API is not available.');
-  };
+};
 
 function copyToClipboart(e) {
+    /* Get the text field */
+
+    console.log(e.target.getAttribute('data-id'))
+    const idToCopy = e.target.getAttribute('data-id');
+    const htmlInput = document.getElementById(idToCopy)
+    // const value = htmlInput.options[htmlInput.selectedIndex].innerText.trim()
+    const value = htmlInput.innerText.trim()
+    // let copyText = document.getElementById("myInput");
+
+    /* Select the text field */
+    // htmlInput.select();
+    // htmlInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(value);
+
+    /* Alert the copied text */
+    alert("Texto copiado: " + value);
+}
+
+function myFunction() {
     const idToCopy = e.target.getAttribute('data-id');
     const htmlInput = document.getElementById(idToCopy)
     // const value = htmlInput.options[htmlInput.selectedIndex].innerText.trim()
@@ -68,12 +89,12 @@ function copyToClipboart(e) {
     // htmlInput.setSelectionRange(0, 99999); /* For mobile devices */
     /* Copy selected text into clipboard */
     copyToClipboard(value)
-    .then(() => {
-        alert('texto copiado');
-    })
-    .catch(err => {
-        alert(err);
-    });
+        .then(() => {
+            alert('texto copiado');
+        })
+        .catch(err => {
+            alert(err);
+        });
 }
 
 
