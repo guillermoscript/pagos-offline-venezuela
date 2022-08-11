@@ -91,8 +91,8 @@ class ValidationPaymentController
             $array_errors[] = false;
         } 
 
-        if (!preg_match("/^([a-zA-Z']+)$/",$_POST[$inputs[2]])) {
-            wc_add_notice(  '¡Error! El nombre de origen no es valido, por favor ingrese uno valido.', 'error' );
+        if (!preg_match("/^([a-zA-Z\s']+)$/",$_POST[$inputs[2]])) {
+            wc_add_notice(  '¡Error! El nombre del zelle tiene caracteres no validos, por favor ingrese uno valido.', 'error' );
             $array_errors[] = false;
         }
 
