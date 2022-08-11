@@ -18,7 +18,7 @@ function debounce_add_jscript_checkout() {
             </div>
             <div class="montos">
                 <p class="flex-abajo">IVA  16%</p>
-                <p><?php  echo $info_de_los_pago['percentage_of_iva'] ?> Bs.S</p>
+                <p id="iva-total"><?php  echo $info_de_los_pago['percentage_of_iva'] ?> Bs.S</p>
             </div>                 
             <div class="montos dolares">
                 <p>Tasa de cambio - BCV</p>
@@ -27,6 +27,11 @@ function debounce_add_jscript_checkout() {
             <div class="total-factura">
                 <h4>TOTAL</h4>
                 <h4 id="precio-total"><?php  echo $info_de_los_pago['total'] ?> Bs.S</h4>
+            </div>
+
+            <div class="montos">
+                <p>Dolar</p>
+                <p><?php  echo  $info_de_los_pago['sub_total_in_dolars'] ?> Bs.S</p>
             </div>
         </div>
     </div>
