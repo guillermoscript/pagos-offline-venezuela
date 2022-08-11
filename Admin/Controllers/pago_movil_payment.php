@@ -427,7 +427,7 @@ function wc_offline_gateway_init_pago_movil() {
                         </label>
                         <div>
                             <span id="telefono_a_pagar_pago_movil" class="copy-text">'. $pago_movil_info[0]['telefono'] .'</span>
-                            <img class="copy" data-id="nombre_completo_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                            <img class="copy" data-id="telefono_a_pagar_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                         </div>
                     </div>
                     <div class="account-data">

@@ -327,7 +327,7 @@ function wc_offline_gateway_init_zelle()
                     </label>
                     <div>                   
                         <span id="zelle_email" class="copy-text">' . $zelle_info[0]['email_cuenta'] . '</span>
-                        <img class="copy" data-id="zelle_name" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+                        <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
                     </div>
                 </div>
             </div>
