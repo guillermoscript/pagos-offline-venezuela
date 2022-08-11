@@ -43,17 +43,19 @@ class RestApiV1 {
 
         $price_in_bolivares = $sub_total_in_dolars * floatval($rate_in_bolivares['rate_of_dolar']);
 
-        $price_without_iva = floatval($price_in_bolivares / 1.16);
-        $percentage_of_iva = floatval($price_in_bolivares - $price_without_iva);
+        // $price_without_iva = floatval($price_in_bolivares / 1.16);
+        $percentage_of_iva = floatval($price_in_bolivares * 0.16);
+        // $percentage_of_iva = floatval($price_in_bolivares - $price_with_iva);
+        // $percentage_of_iva = floatval($price_in_bolivares - $price_without_iva);
 
-        $total = $price_in_bolivares;
+        $total = $price_in_bolivares + $percentage_of_iva;
 
         return array(
             'total' => number_format($total,2,',','.'),
             'currency' => $currency,
             'rate_of_dolar' => $rate_in_bolivares['rate_of_dolar'],
             'sub_total_in_dolars' => $sub_total_in_dolars,
-            'price_without_iva' => number_format($price_without_iva,2,',','.'),
+            'price_without_iva' => number_format($price_in_bolivares,2,',','.'),
             'percentage_of_iva' => number_format($percentage_of_iva,2,',','.')
         );
     }
