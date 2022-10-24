@@ -406,12 +406,11 @@ function wc_offline_gateway_init_pago_movil() {
             do_action( 'woocommerce_pago_movil_form_start', $this->id );
         
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide width-50">
+            $html .=  '<div class="form-group col-md-12">
             <label for="info_pago_movil">Cuentas Pago Movil disponibles <span class="required">*</span>
-            <img class="copy" data-id="info_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
             </label>
-            
-            <select id="info_pago_movil" class="select-width" name="pago_movil_select" required>
+            <img class="copy" data-id="info_pago_movil" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
+        <select id="info_pago_movil" class="offline-input pago_movil required custom-form-control" name="pago_movil_select" >
             <option value="" selected disabled hidden> 
                 Seleccionar 
             </option> ';
@@ -432,44 +431,45 @@ function wc_offline_gateway_init_pago_movil() {
                     </option> 
                 ';
             }  
-            $html .=  '</select>
-                </div>
-                <div class="form-row form-row-wide width-50">
-                    <label class="label-file" for="comprobante_pago_movil">
-                        Adjuntar Comprobante
-                        <div class="jpg-p">
-                            <p class="text-file">jpg,png,pdf</p>
-                            <div id="bararea2" class="non2">
-                                <div id="bar2"></div>
-                            </div>
+            $html .=  '
+            </select>
+        </div>
+            <div class="form-group col-md-12">
+                <label class="label-file" for="comprobante_pago_movil">
+                    Adjuntar Comprobante
+                    <div class="jpg-p">
+                        <p class="text-file">jpg,png,pdf</p>
+                        <div id="bararea2" class="non2">
+                            <div id="bar2"></div>
                         </div>
-                        <input id="comprobante_pago_movil" required class="input-pago-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
-                    </label>
-                </div>
-                <div class="form-row form-row-first width-50">
-                    <label for="telefono_pago_movil">Número de telefono <span class="required">*</span></label>
-                    <input type="tel" name="telefono_movil" id="telefono_pago_movil" >
-                </div>
-                <div class="form-row form-row-last width-50">
-                    <label for="numero_recibo_pago_movil">Número del Recibo <span class="required">*</span></label>
-                    <input  min="1" type="number" name="numero_recibo_movil" id="numero_recibo_pago_movil" >
-                </div>
-                <div class="form-row form-row-wide width-50">
-                    <label for="bancos_pago_movil">Banco Origen <span class="required">*</span></label>
-                    <select id="bancos_pago_movil" class="select-width" name="pago_movil_banco_select" required>
+                    </div>
+                    <input id="comprobante_pago_movil" required class="input-pago-file upload-file" type="file" accept="application/pdf,image/png,image/jpeg,image/jpg ,image/jpe,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12" name="capture" >
+                    <img class="preview-img" data-id="comprobante_pago_movil"/>
+                </label>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="telefono_pago_movil">Número de telefono <span class="required">*</span></label>
+                <input type="tel" name="telefono_movil" data-validate="phone" pattern="[0-9\s]+" class="offline-input pago_movil form-control required" id="telefono_pago_movil" >
+            </div>
+            <div class="form-group col-md-12">
+                <label for="numero_recibo_pago_movil">Número del Recibo <span class="required">*</span></label>
+                <input class="offline-input pago_movil form-control required" data-validate="numbers" pago_movil pattern="[0-9\s]+" min="1" type="number" name="numero_recibo_movil" id="numero_recibo_pago_movil" >
+            </div>
+            <div class="form-group col-md-12">
+                <label for="bancos_pago_movil">Banco Origen <span class="required">*</span></label>
+                <select id="bancos_pago_movil" class="offline-input pago_movil form-control required" name="pago_movil_banco_select" >
                     <option value="" selected disabled hidden> 
                         Seleccionar 
-                    </option> ';
+                    </option>  ';
 
                 foreach ($bancos_value as $key => $value) {
                     # code...
                     $html .= '<option value='.$bancos_value[$key].'>'.$bancos[$key].'</option>';
                 }
 
-                $html .= '
-                    </select>
+                $html .= '</select>
                 </div>
-                <input type="hidden" id="capture-comprobante_pago_movil" name="id-pago-movil-capture">
+                <input type="hidden" class="pago_movil offline-input" id="capture-comprobante_pago_movil" name="id-pago-movil-capture">
                 <div class="clear"></div>';
         
             do_action( 'woocommerce_pago_movil_form_end', $this->id );
@@ -532,6 +532,8 @@ function wc_offline_gateway_init_pago_movil() {
                 $order->update_meta_data( 'telefono_movil', $_POST['telefono_movil'] );
                 $order->update_meta_data( 'tasa-bolivares', $total_en_bolivares['total'] );
                 $order->update_meta_data('rate_of_dolar', $total_en_bolivares['rate_of_dolar']);
+                $order_data['admin_comission'] = 0.07;
+                $order->update_meta_data('admin_comission', $order_data['admin_comission']);
             }
                     
             // Mark as on-hold (we're awaiting the payment)
