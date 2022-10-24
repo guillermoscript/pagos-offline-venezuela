@@ -4,7 +4,19 @@ use Admin\Controllers\RestApiV1;
 
 function debounce_add_jscript_checkout() {
 
-    $info_de_los_pago = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(),WC()->cart->get_taxes());
+    $uri = $_SERVER['REQUEST_URI'];
+    // get order id from url
+    $order_id = preg_match('/order-pay/',$uri) ? explode('order-pay/', $uri)[1] : null;
+    // $order = wc_get_order(  );
+    if ($order_id) {
+        $order = wc_get_order(explode('/', $order_id)[0]);
+        $sub_total_in_dolars = $order->get_subtotal();
+        $taxes = $order->get_taxes();
+    } else {
+        $sub_total_in_dolars = WC()->cart->get_cart_contents_total();
+        $taxes = WC()->cart->get_taxes();
+    }
+    $info_de_los_pago = RestApiV1::get_rate_of_bf($sub_total_in_dolars, $taxes);
 
     ?>
     <div class="caja-con-facturacion">
