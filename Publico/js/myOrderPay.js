@@ -1,5 +1,4 @@
 import {
-    addTextToInputFileWhenUserClick,
     validationContainer,
     // observerWrapper,
 } from './checkoutAjax.js';
@@ -9,10 +8,17 @@ import {
     stopIt,
     changeImageIfUSerSelectOtherQr,
     changeImageIfUSerSelectOtherQrBinance,
-    copyToClipboart
+    copyToClipboart,
+    showPreviewOfImageUploaded,
+    addTextToInputFileWhenUserClick
     // removeAllHtmlWithThisClass,
     // showError,
 } from './utils.js';
+
+
+import {
+    sanitizeMethods
+} from './validationsCheckout.js';
 
 jQuery(document).ready(() => {
 
@@ -23,8 +29,6 @@ jQuery(document).ready(() => {
     */
     jQuery('body').on('updated_checkout', () => {
 
-        addEventsToCheckoutButton()
-        addTextToInputFileWhenUserClick()
         if (document.querySelector('#reserve_qr_img img')) {
             changeImageIfUSerSelectOtherQr()
         }
@@ -32,13 +36,34 @@ jQuery(document).ready(() => {
             changeImageIfUSerSelectOtherQrBinance()
         }
 
-        document.querySelectorAll('.copy').forEach(el => el.addEventListener('click',copyToClipboart))
-
+        runFunctionAfterUpdate()
     })
+
+    runFunctionAfterUpdate()
 })
 
+function runFunctionAfterUpdate() {
+
+    document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
+    const inputFiles = document.querySelectorAll(".upload-file");
+    inputFiles.forEach(input => {
+        input.addEventListener("change", showPreviewOfImageUploaded);
+    });
+    addTextToInputFileWhenUserClick()
+    addEventsToCheckoutButton()
+
+    const namesInputs = document.querySelectorAll("[data-validate='names']");
+    const emailInputs = document.querySelectorAll("[data-validate='email']");
+    const phoneInputs = document.querySelectorAll("[data-validate='phone']");
+    const numbersInputs = document.querySelectorAll("[data-validate='numbers']");
+
+    sanitizeMethods.names(...namesInputs);
+    sanitizeMethods.email(...emailInputs);
+    sanitizeMethods.phone(...phoneInputs);
+    sanitizeMethods.numbers(...numbersInputs);
+}
+
 function getNonceAndRunValidation() {
-    if (!validationCheckout()) return;
     if (validationContainer(ajax_var2)) {
         document.getElementById('place_order').removeEventListener('click', finishCheckout)
     }
