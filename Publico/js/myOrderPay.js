@@ -65,7 +65,7 @@ function runFunctionAfterUpdate() {
 
 function getNonceAndRunValidation() {
     if (validationContainer(ajax_var2)) {
-        document.getElementById('place_order').removeEventListener('click', finishCheckout)
+        document.getElementById('place_order').removeEventListener('click', getNonceAndRunValidation)
     }
     // validationContainer(ajax_var2)
 }
