@@ -5,13 +5,21 @@ import {
     copyToClipboart,
     changeImageIfUSerSelectOtherQrBinance,
     changeImageIfUSerSelectOtherQr,
+    showPreviewOfImageUploaded,
+    addTextToInputFileWhenUserClick
 } from './utils.js';
 
 import {
-    addTextToInputFileWhenUserClick,
     validationContainer,
-    validationCheckout,
 } from './checkoutAjax.js';
+
+import {
+    validationCheckout
+} from './guardianFunctions.js';
+
+import {
+    sanitizeMethods
+} from './validationsCheckout.js';
 
 jQuery(document).ready(() => {
 
@@ -21,18 +29,40 @@ jQuery(document).ready(() => {
     * 
     */
     jQuery('body').on('updated_checkout', () => {
-        addEventsToCheckoutButon()
-        addTextToInputFileWhenUserClick()
         if (document.querySelector('#reserve_qr_img img')) {
             changeImageIfUSerSelectOtherQr()
         }
         if (document.querySelector('#binance_qr_img img')) {
             changeImageIfUSerSelectOtherQrBinance()
         }
-        document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
+
+        runFunctionAfterUpdate()
     })
     // showTotalInBs()
+
+    runFunctionAfterUpdate()
 })
+
+function runFunctionAfterUpdate() {
+
+    document.querySelectorAll('.copy').forEach(el => el.addEventListener('click', copyToClipboart))
+    const inputFiles = document.querySelectorAll(".upload-file");
+    inputFiles.forEach(input => {
+        input.addEventListener("change", showPreviewOfImageUploaded);
+    });
+    addTextToInputFileWhenUserClick()
+    addEventsToCheckoutButon()
+
+    const namesInputs = document.querySelectorAll("[data-validate='names']");
+    const emailInputs = document.querySelectorAll("[data-validate='email']");
+    const phoneInputs = document.querySelectorAll("[data-validate='phone']");
+    const numbersInputs = document.querySelectorAll("[data-validate='numbers']");
+
+    sanitizeMethods.names(...namesInputs);
+    sanitizeMethods.email(...emailInputs);
+    sanitizeMethods.phone(...phoneInputs);
+    sanitizeMethods.numbers(...numbersInputs);
+}
 
 function finishCheckout() {
     if (!validationCheckout()) return;

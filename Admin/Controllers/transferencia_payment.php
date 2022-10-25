@@ -487,7 +487,9 @@ function wc_offline_gateway_init_transferencia()
                 && isset($_POST['numero_recibo_transferencia']) && isset($_POST['transferencia_banco_select'])
             ) {
 
-                $total_en_bolivares = RestApiV1::get_rate_of_bf(WC()->cart->get_cart_contents_total(), WC()->cart->get_taxes());
+                $sub_total_in_dolars = $order->get_subtotal();
+                $taxes = $order->get_taxes();
+                $total_en_bolivares = RestApiV1::get_rate_of_bf($sub_total_in_dolars, $taxes);
                 $order->update_meta_data('_thumbnail_id', $_POST['id-transferencia-capture']);
                 $order->update_meta_data('transferencia_seleccionado', $_POST['transferencia-select']);
                 $order->update_meta_data('numero_recibo_transferencia', $_POST['numero_recibo_transferencia']);

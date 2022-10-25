@@ -13,6 +13,69 @@ function validationDate(id) {
     }
 }
 
+// Restricts input for the given textbox to the given inputFilter function.
+function setInputFilter(textbox, inputFilter, errMsg) {
+    ["input", "keydown", "keyup", "focusout"].forEach(function (event) {
+        textbox.addEventListener(event, function (e) {
+            if (inputFilter(this.value) || this.value === "") {
+                // Accepted value
+                if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+                    this.classList.remove("error");
+                    this.setCustomValidity("");
+                }
+                // if (this.classList.contains("invalid")) {
+                //     this.classList.remove("invalid");
+                //     this.setCustomValidity("");
+                // }
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                // Rejected value - restore the previous one
+                this.classList.add("error");
+                this.setCustomValidity(errMsg);
+                this.reportValidity();
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                // Rejected value - nothing to restore
+                this.value = "";
+            }
+        });
+    });
+}
+
+// restrict inputs depending on the type of input
+const sanitizeMethods = {
+    names: (...inputs) => {
+        inputs.forEach(input => {
+            setInputFilter(input, function (value) {
+                return /^[a-zA-Z\s]*$/.test(value);
+            }, "Solo se permiten letras");
+        });
+    },
+    email: (...inputs) => {
+        inputs.forEach(input => {
+            setInputFilter(input, function (value) {
+                return /^[a-zA-Z0-9.@_-]+$/.test(value);
+            }, "No se permiten caracteres especiales");
+        });
+    },
+    phone: (...inputs) => {
+        inputs.forEach(input => {
+            setInputFilter(input, function (value) {
+                return /^[0-9-()\s]*$/.test(value);
+            }, "Solo se permiten números");
+        });
+    },
+    numbers: (...inputs) => {
+        inputs.forEach(input => {
+            setInputFilter(input, function (value) {
+                return /^[0-9\s]*$/.test(value);
+            }, "Solo se permiten números");
+        });
+    }
+}
 
 function validationDateTrans(id) {
 
@@ -191,9 +254,9 @@ function validationReferenceNumberZelle(id) {
 
     if (input.value === '') return 'no hay nada';
 
-    if (/^\w+$/ig.test(input.value)) {
-        return 'no aceptado'
-    }
+    // if (/^\w+$/ig.test(input.value)) {
+    //     return 'no aceptado'
+    // }
 }
 
 
@@ -208,6 +271,8 @@ export {
     validationReferenceNumberZelle,
     // validationDateTrans,
     validationName,
+    setInputFilter,
+    sanitizeMethods,
     validacionNumeroDeCuenta,
     validationNumberOfTransfer,
     validationCapture,
