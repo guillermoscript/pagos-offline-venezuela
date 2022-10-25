@@ -194,4 +194,4 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'pagos-offline-venezuela'
 );
 
-$myUpdateChecker->setBranch('dokly');
+$myUpdateChecker->setBranch('main');
