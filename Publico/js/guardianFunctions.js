@@ -65,8 +65,7 @@ export function validationCheckout() {
 	}
 }
 
-export 
-function validationOfSpecialInputsInForm(claseToValidate) {
+export function validationOfSpecialInputsInForm(claseToValidate) {
 	let arrayOfErrors = [];
 	let id = "";
 	// let num = "";
@@ -126,13 +125,13 @@ function validationOfSpecialInputsInForm(claseToValidate) {
 export function validationZelle() {
 	let arrayOfErrors = [];
 
-	if (validationEmail("email-origen") === "no hay nada") {
+	if (validationEmail("email_origen") === "no hay nada") {
 		arrayOfErrors.push(errors.validationEmail['no hay nada']);
 	}
 	if (document.getElementById("zelle_email").value === "") {
 		arrayOfErrors.push(errors.zelle['correo zelle']);
 	}
-	if (validationEmail("email-origen") === "no aceptado") {
+	if (validationEmail("email_origen") === "no aceptado") {
 		arrayOfErrors.push(errors.validationEmail['no aceptado']);
 	}
 	if (

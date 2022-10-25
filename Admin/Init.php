@@ -81,6 +81,7 @@ final class Init
 
         /* ===================================== tabla de la tasa =================================================*/
         add_action('woocommerce_after_checkout_form', 'debounce_add_jscript_checkout');
+        add_action('before_woocommerce_pay', 'debounce_add_jscript_checkout');
         /* ===================================== tabla de la tasa =================================================*/
 
 
@@ -249,6 +250,34 @@ final class Init
                     <a href="<?php echo esc_html( $url ) ?>">
                         <img src="<?php echo esc_html( $url ) ?>" alt="" srcset="">
                     </a>
+                </p>
+            <?php
+        } else if ($payment_method === 'zelle_doctor') {
+            ?>
+                <p class="form-row">
+                    <strong>Correo de Cuenta:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'zelle_email', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Nombre completo de Cuenta:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'zelle_full_name', true ) ) ?></span>
+                </p>
+            <?php
+        } else if ($payment_method === 'pago_movil_doctor') {
+
+
+            ?>
+                <p class="form-row">
+                    <strong>Cedula de Cuenta:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'cedula_pago_movil', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Telefono de Cuenta:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'phone_pago_movil', true ) ) ?></span>
+                </p>
+                <p class="form-row">
+                    <strong>Banco de Cuenta:</strong>
+                    <span><?php echo esc_html( get_post_meta( $post->ID, 'bancos_pago_movil', true ) ) ?></span>
                 </p>
             <?php
         }

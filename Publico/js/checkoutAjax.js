@@ -1,21 +1,6 @@
 import { stopIt, removeAllHtmlWithThisClass, showError } from "./utils.js";
 
-import { validatePagoMovil, validationBinance, validationCheckout, validationOfSpecialInputsInForm, validationReserve, validationZelle } from "./guardianFunctions.js";
-
-/**
- * Adds the name of the file to the file input wrapper so the user
- * can see that the file is ready to be uplodade.
- */
-function addTextToInputFileWhenUserClick() {
-	document.querySelectorAll(".label-file").forEach((el) => {
-		el.addEventListener("change", function () {
-			this.children[0].children[0].innerText = this.children[1].value.replace(
-				"C:\\fakepath\\",
-				""
-			);
-		});
-	});
-}
+import { validatePagoMovil, validationBinance, validationOfSpecialInputsInForm, validationReserve, validationZelle } from "./guardianFunctions.js";
 
 /**
  * this function let the client upload the capture of the payment
@@ -169,7 +154,5 @@ function validationContainer(nonce) {
 }
 
 export {
-	addTextToInputFileWhenUserClick,
-	validationCheckout,
 	validationContainer,
 };

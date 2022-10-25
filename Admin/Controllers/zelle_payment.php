@@ -298,12 +298,12 @@ function wc_offline_gateway_init_zelle()
             do_action('woocommerce_zelle_form_start', $this->id);
 
             // I recommend to use inique IDs, because other gateways could already use #ccNo, #expdate, #cvc
-            $html .=  '<div class="form-row form-row-wide">
+            $html .=  '<div class="form-group col-md-12">
             <label for="zelle_email">Correo Zelle <span class="required">*</span>
                 <img class="copy" data-id="zelle_email" src=" ' . home_url() . ("/wp-content/plugins/pagos-offline-venezuela/assets/copy-to-clipboard.png") . ' " alt="Copiar">
             </label>
             
-            <select class="offline-input" id="zelle_email" name="zelle-select" required>
+            <select class="offline-input zelle form-control required" id="zelle_email" name="zelle_select" >
             <option value="" selected disabled hidden> 
                 Seleccionar 
             </option> ';
@@ -320,22 +320,22 @@ function wc_offline_gateway_init_zelle()
                     </option> 
                 ';
             }
-            $html .=  '</select>
-                </div>
-                <div class="form-row form-row-wide">
-                    <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
-                    <input type="text" class="offline-input" name="zelle_sender_name" id="zelle_sender_name" required>
-                </div>
-                <div class="form-row form-row-wide">
-                    <label for="email-origen">Correo origen<span class="required">*</span></label>
-                    <input type="email" class="offline-input" name="email_origen" id="email-origen" required>
-                </div>
-                <div class="form-row form-row-wide">
-                    <label for="reference_number">Número de Referencia<span class="required">*</span></label>
-                    <input type="text" name="reference_number" id="reference_number" required>
-                </div>
-            
-                <div class="clear"></div>';
+            $html .=  ' </select>
+            </div>
+                        <div class="form-group col-md-12">
+                            <label for="zelle_sender_name">Nombre del titular<span class="required">*</span></label>
+                            <input type="text" data-validate="names" pattern="[a-zA-Z\s]+" class="offline-input zelle form-control required" name="zelle_sender_name" id="zelle_sender_name" >
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="email_origen">Correo de quien envia<span class="required">*</span></label>
+                            <input type="email" data-validate="email" pattern="^[a-zA-Z0-9.@_-]+$" class="offline-input zelle form-control required" name="email_origen" id="email_origen" >
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="reference_number">Número de Referencia<span class="required">*</span></label>
+                            <input type="text" data-validate="numbers" pattern="[0-9\s]+" class="offline-input zelle form-control required" name="reference_number" id="reference_number" >
+                        </div>
+                    
+                        <div class="clear"></div>';
 
             do_action('woocommerce_zelle_form_end', $this->id);
 
@@ -361,6 +361,9 @@ function wc_offline_gateway_init_zelle()
                 $order->update_meta_data('email_origen', $_POST['email_origen']);
                 $order->update_meta_data('reference_number', $_POST['reference_number']);
                 $order->update_meta_data('zelle_sender_name', $_POST['zelle_sender_name']);
+                // TODO CAMBIAR COMISIOJN
+                $order_data['admin_comission'] = 0.05;
+                $order->update_meta_data('admin_comission', $order_data['admin_comission']);
             }
 
             // Mark as on-hold (we're awaiting the payment)
