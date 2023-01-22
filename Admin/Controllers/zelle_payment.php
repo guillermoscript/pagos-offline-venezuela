@@ -356,8 +356,8 @@ function wc_offline_gateway_init_zelle()
 
             $order = wc_get_order($order_id);
 
-            if (isset($_POST['zelle-select']) && isset($_POST['email_origen']) && isset($_POST['reference_number']) && isset($_POST['zelle_sender_name'])) {
-                $order->update_meta_data('zelle_seleccionado', $_POST['zelle-select']);
+            if (isset($_POST['zelle_select']) && isset($_POST['email_origen']) && isset($_POST['reference_number']) && isset($_POST['zelle_sender_name'])) {
+                $order->update_meta_data('zelle_seleccionado', $_POST['zelle_select']);
                 $order->update_meta_data('email_origen', $_POST['email_origen']);
                 $order->update_meta_data('reference_number', $_POST['reference_number']);
                 $order->update_meta_data('zelle_sender_name', $_POST['zelle_sender_name']);
